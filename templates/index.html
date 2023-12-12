@@ -5,10 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>帳務總覽</title> 
     {% load static %}
-    <link  href="{% static '/css/style.css'%}" rel="stylesheet" type="text/css"/>
+    <link  href="{% static '/style.css'%}" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+}
+  
+  .container {
+    display: flex;
+  }
+  
+  .left-box {
+    width: 30%; /* 调整左侧框的宽度 */
+    /*background-color: #ccc; /* 设置左侧框的背景颜色 */
+    align-items: stretch
+  }
+  
+  .right-text {
+    width: 70%; /* 调整右侧文字区域的宽度 */
+    padding: 20px; /* 添加一些内边距，使文字内容不紧贴边缘 */
+  }
+  
+    </style>
 </head>
 <body>
     <div class="container">
+        <div class="left-box">fuck you</div>
+        <div class="right-text">
     <h1>帳務總覽</h1>
     
         收入：{{ income }} &nbsp;&nbsp;
@@ -41,6 +65,7 @@
     </tr>
     {% endfor %}
     </table>
+    </div>
 </div>
 </body>
 </html>

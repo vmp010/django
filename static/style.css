@@ -1,3 +1,20 @@
-leftbox{
-    
+body {
+    margin: 0;
+    padding: 0;
 }
+  
+  .container {
+    display: flex;
+  }
+  
+  .left-box {
+    width: 30%; /* 调整左侧框的宽度 */
+    height: 200px; /* 调整左侧框的高度 */
+    background-color: #ccc; /* 设置左侧框的背景颜色 */
+  }
+  
+  .right-text {
+    width: 70%; /* 调整右侧文字区域的宽度 */
+    padding: 20px; /* 添加一些内边距，使文字内容不紧贴边缘 */
+  }
+  
