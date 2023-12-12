@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from projectapp.models import RecordE,RecordR,CategoryE,CategoryR
+from projectapp.forms import addcategoryF
 # Create your views here.
 def recordall_and_cashflow(request):
     recordE=RecordE.objects.all()
@@ -14,3 +15,16 @@ def recordall_and_cashflow(request):
 
     net = income -outcome
     return render(request,'index.html',locals())
+def addcategory(request):
+    if request.method == 'POST':
+        addform=addcategoryF(request.POST)
+        if addform.is_valid():   
+            categoryR=addform.cleaned_data['addcategoryR']
+            categoryE=addform.cleaned_data['addcategoryE']
+            unitR=CategoryR.objects.get_or_create(category=categoryR)
+            # unitR.save() get_otcreate 會自動儲存
+            unitE=CategoryE.objects.get_or_create(category=categoryE)
+            # unitE.save() get_otcreate 會自動儲存
+            return redirect('/index')
+    return render(request,'addcategory.html',locals())
+        
