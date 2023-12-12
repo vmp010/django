@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from projectapp.models import RecordE,RecordR,CategoryE,CategoryR
 # Create your views here.
-def recordall(request):
+def recordall_and_cashflow(request):
     recordE=RecordE.objects.all()
     recordR=RecordR.objects.all()
     

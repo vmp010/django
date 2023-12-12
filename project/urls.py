@@ -19,5 +19,5 @@ from django.urls import path
 from projectapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/',views.recordall),
+    path('index/',views.recordall_and_cashflow),
 ]
