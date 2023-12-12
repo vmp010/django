@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>帳務總覽</title> 
-    <link rel="stylesheet" href="style.css">
+    {% load static %}
+    <link  href="{% static '/css/style.css'%}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+    <div class="container">
     <h1>帳務總覽</h1>
     
         收入：{{ income }} &nbsp;&nbsp;
@@ -15,29 +17,30 @@
     
 
     <h2>帳務紀錄</h2>
-<table>
-    <th>日期</th>
-    <th>描述</th>
-    <th>種類</th>
-    <th>金額</th>
+    <table>
+        <th>日期</th>
+        <th>描述</th>
+        <th>種類</th>
+        <th>金額</th>
     
-    {% for record in recordE %}
-<tr>
+        {% for record in recordE %}
+    <tr>
+        <td>{{ record.date }}</td>
+        <td>{{ record.description }}</td>
+        <td>{{ record.categoryE }}</td>
+        <td>{{ record.cash }}</td>
+    </tr>
+    {% endfor %}
+
+    {% for record in recordR %}
+    <tr>
     <td>{{ record.date }}</td>
     <td>{{ record.description }}</td>
-    <td>{{ record.categoryE }}</td>
+    <td>{{ record.categoryR }}</td>
     <td>{{ record.cash }}</td>
-</tr>
-{% endfor %}
-
-{% for record in recordR %}
-<tr>
-<td>{{ record.date }}</td>
-<td>{{ record.description }}</td>
-<td>{{ record.categoryR }}</td>
-<td>{{ record.cash }}</td>
-</tr>
-{% endfor %}
-</table>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
 </body>
 </html>
