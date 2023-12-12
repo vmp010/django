@@ -7,6 +7,29 @@
 </head>
 <body>
     <h1>帳務紀錄</h1>
-    <th></th>
+<table>
+    <th>日期</th>
+    <th>描述</th>
+    <th>種類</th>
+    <th>金額</th>
+    
+    {% for record in recordE %}
+<tr>
+    <td>{{ record.date }}</td>
+    <td>{{ record.description }}</td>
+    <td>{{ record.categoryE }}</td>
+    <td>{{ record.cash }}</td>
+</tr>
+{% endfor %}
+
+{% for record in recordR %}
+<tr>
+<td>{{ record.date }}</td>
+<td>{{ record.description }}</td>
+<td>{{ record.categoryR }}</td>
+<td>{{ record.cash }}</td>
+</tr>
+{% endfor %}
+</table>
 </body>
 </html>
