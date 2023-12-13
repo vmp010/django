@@ -1,8 +1,10 @@
 from django import forms
-
+from projectapp.models import CategoryE,CategoryR
 class addcategoryF(forms.Form):
     addcategoryR=forms.CharField(max_length=20,required=True)
     addcategoryE=forms.CharField(max_length=20,required=True)
-class delcheckbox(forms.Form):
-    delcheckboxR=forms.BooleanField(required=False)
-    delcheckboxE=forms.BooleanField(required=False)
+class delselect(forms.Form):
+    delR_cat_option=CategoryR.objects.all()
+    delselectR=forms.ModelChoiceField(queryset=delR_cat_option)
+    delE_cat_option=CategoryE.objects.all()
+    delselectE=forms.ModelChoiceField(queryset=delE_cat_option)

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from projectapp.models import RecordE,RecordR,CategoryE,CategoryR
-from projectapp.forms import addcategoryF
+from projectapp.forms import addcategoryF,delselect
 # Create your views here.
 def recordall_and_cashflow(request):
     recordE=RecordE.objects.all()
@@ -27,4 +27,24 @@ def addcategory(request):
             # unitE.save() get_otcreate 會自動儲存
             return redirect('/index')
     return render(request,'addcategory.html',locals())
+def get_category_option(request):
+    categoryR=CategoryR.objects.all()
+    categoryE=CategoryE.objects.all()
+    # return render(request,'delcategory.html',locals())
         
+def delcategory(request):
+    categoryR=CategoryR.objects.all()
+    categoryE=CategoryE.objects.all()
+    if request.method =='POST':
+        delR=request.POST['delR']
+        delE=request.POST['delE']
+    try:
+        unitR=CategoryR.objects.get(category=delR)
+        unitR.delete()
+        unitE=CategoryE.objects.get(category=delE)
+        unitE.delete()
+        return redirect('/index')
+    except:
+        messange='未接收資料'
+    return render(request,'delcategory.html',locals())
+
