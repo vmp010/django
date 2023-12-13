@@ -9,11 +9,11 @@ class RecordRAdmin(admin.ModelAdmin):
     search_fields=('categoryR','date')
     ordering=('date',)
 class RecordEAdmin(admin.ModelAdmin):
-    list_filter=('categoryE')
+    list_filter=('categoryE',)
     search_fields=('categoryE','date')
     ordering=('date',)
 
-admin.site.register(RecordE)
+admin.site.register(RecordE,RecordEAdmin)
 admin.site.register(CategoryE)
 admin.site.register(RecordR,RecordRAdmin)
 admin.site.register(CategoryR)
