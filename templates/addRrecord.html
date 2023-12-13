@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增支出紀錄</title>
+</head>
+<body>
+    <h1>新增支出紀錄</h1>
+    <form action="."method='post' name="form1">
+        {% csrf_token %}
+        <table>
+        <tr>
+            <th>日期</th><td><input type="date" name="date" id="date"></td>
+        </tr>
+        <tr>
+            <th>備註</th><td><input type="text" name="description" id="description"></td>
+        </tr>
+        <tr>
+            <th>種類</th><td><select name="categoryR" id="categoryR">
+            {% for aCR in cRselect %}
+            <option value="{{aCR}}">{{aCR}}</option>
+            {% endfor %}
+            </select></td>
+        </tr>
+        <tr>
+            <th>金額</th><td><input type="number" name="cash" id="cash"></td>
+        </tr>
+        <tr>
+            <th colspan="2" align="center">
+        <input type="submit" value="送出" name="buttom" id="buttom">
+        <input type="submit" value="重設" name="buttom" id="buttom2">
+    </th>
+    </tr>
+    </table>
+    </form>
+</body>
+</html>

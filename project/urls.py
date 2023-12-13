@@ -22,4 +22,6 @@ urlpatterns = [
     path('index/',views.recordall_and_cashflow),
     path('addcategory/',views.addcategory),
     path('delcategory/',views.delcategory),
+    path('addErecord/',views.addErecord),
+    path('addRrecord/',views.addRrecord),
 ]

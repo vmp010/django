@@ -3,8 +3,8 @@ from projectapp.models import RecordE,RecordR,CategoryE,CategoryR
 from projectapp.forms import addcategoryF,delselect
 # Create your views here.
 def recordall_and_cashflow(request):
-    recordE=RecordE.objects.all()
-    recordR=RecordR.objects.all()
+    recordE=RecordE.objects.all().order_by('date')
+    recordR=RecordR.objects.all().order_by('date')
     
     recordAllE=RecordE.objects.filter()
     recordAllR=RecordR.objects.filter()
@@ -47,4 +47,25 @@ def delcategory(request):
     except:
         messange='未接收資料'
     return render(request,'delcategory.html',locals())
-
+def addErecord(request):
+    cEselect=RecordE.objects.filter('categoryE')
+    if request.method=='POST':
+        date=request.POST['date']
+        description=request.POST['description']
+        categoryE=request.POST['categoryE']
+        cash=request.POST['cash']
+        unit=RecordE.objects.create(date=date,description=description,categoryE=categoryE,cash=cash)
+        unit.save()#寫入資料庫
+        return redirect('/index')
+    return render(request,'addErecord.html',locals())
+def addRrecord(request):
+    cRselect=RecordR.objects.filter(bkname='categoryR')
+    if request.method=='POST':
+        date=request.POST['date']
+        description=request.POST['description']
+        categoryR=request.POST['categoryR']
+        cash=request.POST['cash']
+        unit=RecordR.objects.create(date=date,description=description,categoryE=categoryR,cash=cash)
+        unit.save()#寫入資料庫
+        return redirect('/index')
+    return render(request,'addErecord.html',locals())
