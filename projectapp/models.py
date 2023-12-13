@@ -35,3 +35,8 @@ class RecordR(models.Model):
     cash 	= IntegerField()
     def __str__(self) :
             return self.description
+class login(models.Model):
+     cName= CharField(max_length=8,null=False)
+     password=CharField(max_length=50,null=False)
+     def __str__(self):
+          return self.cName

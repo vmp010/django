@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from projectapp.models import RecordE,RecordR,CategoryE,CategoryR
-from projectapp.forms import addcategoryF,delselect
+from projectapp.models import RecordE,RecordR,CategoryE,CategoryR,login
+from projectapp.forms import addcategoryF,delselect,loginF
 # Create your views here.
 def recordall_and_cashflow(request):
     recordE=RecordE.objects.all().order_by('date')
@@ -27,6 +27,7 @@ def addcategory(request):
             # unitE.save() get_otcreate 會自動儲存
             return redirect('/index')
     return render(request,'addcategory.html',locals())
+
 def get_category_option(request):
     categoryR=CategoryR.objects.all()
     categoryE=CategoryE.objects.all()
@@ -47,6 +48,7 @@ def delcategory(request):
     except:
         messange='未接收資料'
     return render(request,'delcategory.html',locals())
+
 def addErecord(request):
     cEselect=RecordE.objects.filter('categoryE')
     if request.method=='POST':
@@ -58,6 +60,7 @@ def addErecord(request):
         unit.save()#寫入資料庫
         return redirect('/index')
     return render(request,'addErecord.html',locals())
+
 def addRrecord(request):
     cRselect=RecordR.objects.filter(bkname='categoryR')
     if request.method=='POST':
@@ -69,3 +72,24 @@ def addRrecord(request):
         unit.save()#寫入資料庫
         return redirect('/index')
     return render(request,'addErecord.html',locals())
+
+def loginpage(request):
+    getdatabase=login.objects.all()
+    if request.method =='POST':
+        loginform=loginF(request.POST)
+        if loginform.is_valid():
+            cName=loginform.cleaned_data['cName']
+            password=loginform.cleaned_data['password']
+            for check in getdatabase:
+                if check.cName == cName and check.password == password:
+                    messages='帳號密碼正確'
+                    return redirect('/index')
+                else:
+                    messages='帳號密碼錯誤'
+    else:
+        loginform=loginF()
+        messages='請輸入帳號密碼'
+    return render(request,'login.html',locals())
+
+                
+

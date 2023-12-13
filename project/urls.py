@@ -24,4 +24,5 @@ urlpatterns = [
     path('delcategory/',views.delcategory),
     path('addErecord/',views.addErecord),
     path('addRrecord/',views.addRrecord),
+    path('',views.loginpage),
 ]

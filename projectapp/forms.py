@@ -8,3 +8,7 @@ class delselect(forms.Form):
     delselectR=forms.ModelChoiceField(queryset=delR_cat_option)
     delE_cat_option=CategoryE.objects.all()
     delselectE=forms.ModelChoiceField(queryset=delE_cat_option)
+class loginF(forms.Form):
+    cName=forms.CharField(max_length=20,required=True)
+    password=forms.CharField(max_length=32, widget=forms.PasswordInput)
+    
