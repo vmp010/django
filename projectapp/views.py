@@ -74,7 +74,7 @@ def addRrecord(request):
     return render(request,'addErecord.html',locals())
 
 def loginpage(request):
-    getdatabase=login.objects.all()
+    getdatabase=login_1.objects.all()
     if request.method =='POST':
         loginform=loginF(request.POST)
         if loginform.is_valid():
