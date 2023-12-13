@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from projectapp.models import RecordE,RecordR,CategoryE,CategoryR,login
+from projectapp.models import RecordE,RecordR,CategoryE,CategoryR,login_1
 from projectapp.forms import addcategoryF,delselect,loginF
 # Create your views here.
 def recordall_and_cashflow(request):

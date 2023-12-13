@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from django.db import models
 
-from django.db.models import CharField,DateField,ForeignKey,IntegerField
+from django.db.models import CharField,DateField,ForeignKey,IntegerField,EmailField
 
 # Create your models here.
 # BALANCE_TYPE = ((u'收入',u'收入'),(u'支出',u'支出'))	#元組 tuple：可以視為不可改變的串列 ((key,value),(key,value))
@@ -35,8 +35,9 @@ class RecordR(models.Model):
     cash 	= IntegerField()
     def __str__(self) :
             return self.description
-class login(models.Model):
+class login_1(models.Model):
      cName= CharField(max_length=8,null=False)
      password=CharField(max_length=50,null=False)
+     cEmail=EmailField(max_length=100)
      def __str__(self):
           return self.cName
