@@ -18,6 +18,7 @@
     <div class="box">
     <form action="." method="post" name="form1">
         {% csrf_token %}
+        <h1>{{messages}}</h1>
         <table>
             <tr>
                 <th>用戶名</th><td><input type="text" name="cName" id="cName"></td>
