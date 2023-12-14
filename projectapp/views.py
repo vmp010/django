@@ -1,13 +1,13 @@
 from django.shortcuts import render,redirect
-from projectapp.models import RecordE,RecordR,CategoryE,CategoryR,login_1
-from projectapp.forms import addcategoryF,delselect,loginF
+from projectapp.models import Record_E,Record_R,CategoryE,CategoryR,login_1
+from projectapp.forms import addcategoryF,delselect,loginF,addrecordF
 # Create your views here.
 def recordall_and_cashflow(request):
-    recordE=RecordE.objects.all().order_by('date')
-    recordR=RecordR.objects.all().order_by('date')
+    recordE=Record_E.objects.all().order_by('date')
+    recordR=Record_R.objects.all().order_by('date')
     
-    recordAllE=RecordE.objects.filter()
-    recordAllR=RecordR.objects.filter()
+    recordAllE=Record_E.objects.filter()
+    recordAllR=Record_R.objects.filter()
     income_list=[record.cash for record in recordAllR]
     outcome_list=[record.cash for record in recordAllE]
     income=sum(income_list) if len(income_list)!=0 else 0
@@ -50,28 +50,38 @@ def delcategory(request):
     return render(request,'delcategory.html',locals())
 
 def addErecord(request):
-    cEselect=RecordE.objects.filter('categoryE')
+    cEselect=CategoryE.objects.all()
     if request.method=='POST':
-        date=request.POST['date']
-        description=request.POST['description']
-        categoryE=request.POST['categoryE']
-        cash=request.POST['cash']
-        unit=RecordE.objects.create(date=date,description=description,categoryE=categoryE,cash=cash)
-        unit.save()#寫入資料庫
-        return redirect('/index')
+        addrecord=addrecordF(request.POST)
+        if addrecord.is_valid():
+            date=request.POST['date']
+            description=request.POST['description']
+            categoryE=request.POST['categoryE']
+            cash=request.POST['cash']
+            unit=Record_E.objects.create(date=date,description=description,categoryE=categoryE,cash=cash)
+            unit.save()#寫入資料庫
+            return redirect('/index')
+    else:
+        addrecord=addrecordF()
+        messages='新增收入紀錄'
     return render(request,'addErecord.html',locals())
 
 def addRrecord(request):
-    cRselect=RecordR.objects.filter(bkname='categoryR')
+    cRselect=CategoryR.objects.all()
     if request.method=='POST':
-        date=request.POST['date']
-        description=request.POST['description']
-        categoryR=request.POST['categoryR']
-        cash=request.POST['cash']
-        unit=RecordR.objects.create(date=date,description=description,categoryE=categoryR,cash=cash)
-        unit.save()#寫入資料庫
-        return redirect('/index')
-    return render(request,'addErecord.html',locals())
+        addrecord=addrecordF(request.POST)
+        if addrecord.is_valid():
+            date=request.POST['date']
+            description=request.POST['description']
+            categoryR=request.POST['categoryR']
+            cash=request.POST['cash']
+            unit=Record_R.objects.create(date=date,description=description,categoryR=categoryR,cash=cash)
+            unit.save()#寫入資料庫
+            return redirect('/index')
+    else:
+        addrecord=addrecordF()
+        messages='新增收入紀錄'
+    return render(request,'addRrecord.html',locals())
 
 def loginpage(request):
     getdatabase=login_1.objects.all()

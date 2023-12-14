@@ -21,17 +21,17 @@ class CategoryR(models.Model):
     def __str__(self) :
         return self.category
 
-class RecordE(models.Model):
+class Record_E(models.Model):
     date 	= DateField()
     description = CharField(max_length=300,null=True)
-    categoryE 	= ForeignKey(CategoryE,on_delete=models.SET_NULL,null=True)	#外來鍵是一個(或數個)指向另外一個表格主鍵的欄位。
+    categoryE 	= CharField(max_length=50)	#外來鍵是一個(或數個)指向另外一個表格主鍵的欄位。
     cash 	= IntegerField()
     def __str__(self) :
             return self.description
-class RecordR(models.Model):
+class Record_R(models.Model):
     date 	= DateField()
     description = CharField(max_length=300,null=True)
-    categoryR 	= ForeignKey(CategoryR,on_delete=models.SET_NULL,null=True)	#外來鍵是一個(或數個)指向另外一個表格主鍵的欄位。
+    categoryR 	= CharField(max_length=50)#外來鍵是一個(或數個)指向另外一個表格主鍵的欄位。
     cash 	= IntegerField()
     def __str__(self) :
             return self.description
