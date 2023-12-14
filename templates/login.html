@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登入</title>
+    <style>
+    .box {width: 600px;
+          min-height: 200px;
+          margin: 10px auto;
+          border: 2px solid black;
+          text-align: center;
+          padding-bottom: 20px;
+          background-color: rgb(250, 249, 182);}   
+    </style>
 </head>
 <body>
+    <div class="box">
     <form action="." method="post" name="form1">
         {% csrf_token %}
         <table>
@@ -19,5 +29,6 @@
             <tr><td>{{messages}}</td></tr>
         </table>
     </form>
+    </div>
 </body>
 </html>
