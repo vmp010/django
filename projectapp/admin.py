@@ -5,11 +5,13 @@ from .models import Record_E, CategoryE,Record_R,CategoryR,login_1
 
 # Register your models here.
 class RecordRAdmin(admin.ModelAdmin):
+    list_display=('id','description')
     list_filter=('categoryR',)
     search_fields=('categoryR','date')
     ordering=('date',)
 
 class RecordEAdmin(admin.ModelAdmin):
+    list_display=('id','description')
     list_filter=('categoryE',)
     search_fields=('categoryE','date')
     ordering=('date',)

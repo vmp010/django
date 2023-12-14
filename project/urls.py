@@ -26,4 +26,6 @@ urlpatterns = [
     path('addRrecord/',views.addRrecord),
     path('',views.loginpage,name='login'),
     path('regist/',views.regist),
+    path('delRrecord/',views.delRrecord),
+    path('delRrecord/<str:mode>',views.delRrecord),
 ]
