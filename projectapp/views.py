@@ -100,6 +100,24 @@ def loginpage(request):
         loginform=loginF()
         messages='請輸入帳號密碼'
     return render(request,'login.html',locals())
-
-                
+def regist(request):
+    getdatabase=login_1.objects.all()
+    if request.method =='POST':
+        cName=request.POST['cName']
+        cEmail=request.POST['cEmail']
+        password=request.POST['password']
+       
+        for check in getdatabase:
+            if check.cName == cName and check.password == password :
+                messages='已註冊過帳號' 
+            elif check.cEmail == cEmail:
+                messages='已註冊過此email'
+        else:
+            unit=login_1.objects.create(cName=cName,cEmail=cEmail,password=password)
+            unit.save()
+        return redirect('login')
+        
+    else:
+        messages='請輸入用戶名、密碼及email'
+    return render(request,'regist.html',locals())
 
