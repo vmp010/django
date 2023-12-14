@@ -11,4 +11,8 @@ class delselect(forms.Form):
 class loginF(forms.Form):
     cName=forms.CharField(max_length=20,required=True)
     password=forms.CharField(max_length=32, widget=forms.PasswordInput)
-    
+class addrecordF(forms.Form):
+    date=forms.DateField()
+    description=forms.CharField(max_length=50,required=False)
+    category=forms.Select()
+    cash=forms.NumberInput()
