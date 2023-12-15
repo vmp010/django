@@ -12,17 +12,24 @@
   
   .container {
     display: flex;
+    width: 100%;
+    height: 100%;
   }
   
   .left-box {
     width: 30%; /* 调整左侧框的宽度 */
-    /*background-color: #ccc; /* 设置左侧框的背景颜色 */
+    background-color: #fff5f5; /* 设置左侧框的背景颜色 */
     align-items: stretch
   }
   
   .right-text {
     width: 70%; /* 调整右侧文字区域的宽度 */
     padding: 20px; /* 添加一些内边距，使文字内容不紧贴边缘 */
+  }
+  .incomeEP{
+    color:black;
+    background-color: lightblue;
+    
   }
   
     </style>
@@ -33,13 +40,13 @@
           <p>fuck you</p>
           <p>回到葉面</p>
         </div>
-        <div class="right-text">
-    <h1>帳務總覽</h1>
-    
+      <div class="right-text">
+        <h1>帳務總覽</h1>
+        <div class="incomeEP">
         收入：{{ income }} &nbsp;&nbsp;
         支出:{{ outcome }} &nbsp;&nbsp;
         淨額：{{ net }}
-    
+        </div>
 
     <h2>帳務紀錄</h2>
     <table>
@@ -72,6 +79,6 @@
     {% endfor %}
     </table>
     </div>
-</div>
+  </div> <!-- containter-->
 </body>
 </html>
