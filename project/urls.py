@@ -30,4 +30,6 @@ urlpatterns = [
     path('delRrecord/<int:id>/<str:mode>',views.delRrecord),
     path('delErecord/<int:id>/',views.delErecord),
     path('delErecord/<int:id>/<str:mode>',views.delErecord),
+    path('editRrecord/<int:id>/',views.editRrecord),
+    path('editRrecord/<int:id>/<str:mode>',views.editRrecord),
 ]

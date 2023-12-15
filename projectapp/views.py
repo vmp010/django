@@ -122,29 +122,25 @@ def regist(request):
     return render(request,'regist.html',locals())
 
 def delRrecord(request,mode=None,id=None):
-    delform=delRrecordF(request)
-    if delform.is_valid():
-        if mode=='del': #按按鈕
-            unit=Record_R.objects.get(id=id)
-            unit.date=delform.cleaned_data.get['date']
-            unit.description=delform.cleaned_data.get['description']
-            unit.categoryR=delform.cleaned_data.get['categoryR']
-            unit.cash=delform.cleaned_data.get['cash']
-            unit.delete()
-            messages='已刪除'
-            return redirect('/index')
-        else:   #網址
-            try:
-                unit=Record_R.objects.get(id=id)
-                strdata=str(unit.date)
-                strdata2=strdata.replace("年","-")
-                strdata2=strdata.replace('月',"-")
-                strdata2=strdata.replace('日',"-")
-                unit.date=strdata2
-            except:
-                messages='此紀錄不存在'
-    else:
-        delform=delRrecordF()
+    if mode=='del': #按按鈕
+        unit=Record_R.objects.get(id=id)
+        unit.date=request.GET['date']
+        unit.description=request.GET['description']
+        unit.categoryE=request.GET['categoryR']
+        unit.cash=request.GET['cash']
+        unit.delete()
+        messages='已刪除'
+        return redirect('/index')
+    else:   #網址
+        try:
+            unit=Record_E.objects.get(id=id)
+            strdata=str(unit.date)
+            strdata2=strdata.replace("年","-")
+            strdata2=strdata.replace('月',"-")
+            strdata2=strdata.replace('日',"-")
+            unit.date=strdata2
+        except:
+            messages='此紀錄不存在'
     return render(request,'delRrecord.html',locals())
 
 def delErecord(request,mode=None,id=None):
@@ -168,5 +164,46 @@ def delErecord(request,mode=None,id=None):
         except:
             messages='此紀錄不存在'
     return render(request,'delErecord.html',locals())
-
+def editRrecord(request,mode=None,id=None):
+    if mode=='edit': #按按鈕
+        unit=Record_R.objects.get(id=id)
+        unit.date=request.GET['date']
+        unit.description=request.GET['description']
+        unit.categoryR=request.GET['categoryR']
+        unit.cash=request.GET['cash']
+        unit.save()
+        messages='已儲存資料'
+        return redirect('/index')
+    else:   #網址
+        try:
+            unit=Record_R.objects.get(id=id)
+            strdata=str(unit.date)
+            strdata2=strdata.replace("年","-")
+            strdata2=strdata.replace('月',"-")
+            strdata2=strdata.replace('日',"-")
+            unit.date=strdata2
+        except:
+            messages='此紀錄不存在'
+    return render(request,'editRrecord.html',locals())
+def editRrecord(request,mode=None,id=None):
+    if mode=='edit': #按按鈕
+        unit=Record_E.objects.get(id=id)
+        unit.date=request.GET['date']
+        unit.description=request.GET['description']
+        unit.categoryE=request.GET['categoryE']
+        unit.cash=request.GET['cash']
+        unit.save()
+        messages='已儲存資料'
+        return redirect('/index')
+    else:   #網址
+        try:
+            unit=Record_E.objects.get(id=id)
+            strdata=str(unit.date)
+            strdata2=strdata.replace("年","-")
+            strdata2=strdata.replace('月',"-")
+            strdata2=strdata.replace('日',"-")
+            unit.date=strdata2
+        except:
+            messages='此紀錄不存在'
+    return render(request,'editErecord.html',locals())
 
