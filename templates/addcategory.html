@@ -4,8 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>添加種類</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /*background-color: rgba(100, 100, 225, 0.719);*/
+            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
 </head>
 <body>
+    <div>
     <form action="." method="post" name="form1">
         {% csrf_token %} <!--啟動csrf防護，否則會error -->
         <table cellspacing="1">
@@ -15,5 +26,6 @@
         <td><input type="reset" value="重設" name="buttom2" id="buttom2"></td></tr>
     </table>
     </form>
+</div>
 </body>
 </html>
