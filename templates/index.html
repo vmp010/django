@@ -49,20 +49,24 @@
     
         {% for record in recordE %}
     <tr>
+        <td hidden="hidden">{{record.id}}</td>
         <td>{{ record.date }}</td>
         <td>{{ record.description }}</td>
         <td>{{ record.categoryE }}</td>
         <td>{{ record.cash }}</td>
+        <td><a href="/delErecord/{{record.id}}/">刪除</a></td>
     </tr>
     {% endfor %}
 
     {% for record in recordR %}
     <tr>
+    
+    <td hidden="hidden">{{record.id}}</td>
     <td>{{ record.date }}</td>
     <td>{{ record.description }}</td>
     <td>{{ record.categoryR }}</td>
     <td>{{ record.cash }}</td>
-    <td><a href="/delRrecord">刪除</a></td>
+    <td><a href="/delRrecord/{{record.id}}/">刪除</a></td>
     </tr>
     {% endfor %}
     </table>

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from projectapp.models import Record_E,Record_R,CategoryE,CategoryR,login_1
-from projectapp.forms import addcategoryF,delselect,loginF,addrecordF
+from projectapp.forms import addcategoryF,delselect,loginF,addrecordF,delRrecordF
 # Create your views here.
 def recordall_and_cashflow(request):
     recordE=Record_E.objects.all().order_by('date')
@@ -122,18 +122,44 @@ def regist(request):
     return render(request,'regist.html',locals())
 
 def delRrecord(request,mode=None,id=None):
+    delform=delRrecordF(request)
+    if delform.is_valid():
+        if mode=='del': #按按鈕
+            unit=Record_R.objects.get(id=id)
+            unit.date=delform.cleaned_data.get['date']
+            unit.description=delform.cleaned_data.get['description']
+            unit.categoryR=delform.cleaned_data.get['categoryR']
+            unit.cash=delform.cleaned_data.get['cash']
+            unit.delete()
+            messages='已刪除'
+            return redirect('/index')
+        else:   #網址
+            try:
+                unit=Record_R.objects.get(id=id)
+                strdata=str(unit.date)
+                strdata2=strdata.replace("年","-")
+                strdata2=strdata.replace('月',"-")
+                strdata2=strdata.replace('日',"-")
+                unit.date=strdata2
+            except:
+                messages='此紀錄不存在'
+    else:
+        delform=delRrecordF()
+    return render(request,'delRrecord.html',locals())
+
+def delErecord(request,mode=None,id=None):
     if mode=='del': #按按鈕
-        unit=Record_R.objects.get(id=id)
+        unit=Record_E.objects.get(id=id)
         unit.date=request.GET['date']
         unit.description=request.GET['description']
-        unit.categoryR=request.GET['categoryR']
+        unit.categoryE=request.GET['categoryE']
         unit.cash=request.GET['cash']
         unit.delete()
         messages='已刪除'
         return redirect('/index')
     else:   #網址
         try:
-            unit=Record_R.objects.get(id=id)
+            unit=Record_E.objects.get(id=id)
             strdata=str(unit.date)
             strdata2=strdata.replace("年","-")
             strdata2=strdata.replace('月',"-")
@@ -141,7 +167,6 @@ def delRrecord(request,mode=None,id=None):
             unit.date=strdata2
         except:
             messages='此紀錄不存在'
-    return render(request,'delRrecord.html',locals())
-
+    return render(request,'delErecord.html',locals())
 
 
