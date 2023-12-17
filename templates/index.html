@@ -3,52 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/index.css"> 
     <title>帳務總覽</title> 
-    <style>
-        body {
-    margin: 0;
-    padding: 0;
-}
-  /*整個框架*/
-  .container {
-    display: flex;
-    width: 100vw; /* 使用 viewport width 代替百分比，以便讓左側框延伸到整個頁面 */
-    height: 100vh; 
-  }
-  /*左邊的框框*/
-  .left-box {
-    display: flex;
-    width: 30%; /* 调整左侧框的宽度 */
-    flex-direction:column;
-
-    background-color: #fff5f5; /* 设置左侧框的背景颜色 */
-    align-items: center; /*不知道可以幹嘛*/
-    justify-content: space-between;
-  }
-  
-  .right-text {
-    width: 70%; /* 调整右侧文字区域的宽度 */
-    padding: 20px; /* 添加一些内边距，使文字内容不紧贴边缘 */
-    overflow-y: auto; /*這也不知道可以幹嘛*/
-  }
-  /*帳務總攬*/
-  .incomeEP{
-    color:black;
-    background-color: lightblue;
-    /*可能還要加東西 讓他更好看*/
-    
-  }
-  .table{
-    display:flex;
-    justify-content: space-around; /*左右放 但沒有很完美*/
-  }
-
-    </style>
 </head>
 <body>
   <!--主要-->
   
-    <img  src="static/img/cash.svg" alt="找不到">
+    <img  src="../static/img/cash.svg" alt="找不到">
   
     <div class="container">
       <div class="left-box">
