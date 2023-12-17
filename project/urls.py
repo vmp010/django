@@ -25,15 +25,15 @@ urlpatterns = [
     path('addErecord/',views.addErecord),
     path('addRrecord/',views.addRrecord),
     path('',views.loginpage,name='login'),
-    path('delRrecord/<int:id>/',views.delRrecord),
-    path('delRrecord/<int:id>/<str:mode>',views.delRrecord),
-    path('delErecord/<int:id>/',views.delErecord),
-    path('delErecord/<int:id>/<str:mode>',views.delErecord),
-    path('editRrecord/<int:id>/',views.editRrecord),
-    path('editRrecord/<int:id>/<str:mode>',views.editRrecord),
+    path('delRrecord/<int:c_id>/',views.delRrecord),
+    path('delRrecord/<int:c_id>/<str:mode>',views.delRrecord),
+    path('delErecord/<int:c_id>/',views.delErecord),
+    path('delErecord/<int:c_id>/<str:mode>',views.delErecord),
+    path('editRrecord/<int:c_id>/',views.editRrecord),
+    path('editRrecord/<int:c_id>/<str:mode>',views.editRrecord),
     path('registe/',views.registe),
-    path('editErecord/<int:id>/',views.editErecord),
-    path('editErecord/<int:id>/<str:mode>',views.editErecord),
+    path('editErecord/<int:c_id>/',views.editErecord),
+    path('editErecord/<int:c_id>/<str:mode>',views.editErecord),
 
 
 ]

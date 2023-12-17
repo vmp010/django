@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>刪除收入紀錄</h1>
-    <form action="/delRrecord/{{unit.id}}/del"method='post' name="form1">
+    <form action="/delRrecord/{{unit.id}}/del"method='get' name="form1" enctype="multipart/form-data">
         {% csrf_token %}
         
         <table>

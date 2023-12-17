@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>編輯收入紀錄</h1>
-    <form action="/editRrecord/{{unit.id}}/editR"method='post' name="form1">
+    <form action="/editRrecord/{{unit.id}}/editR"method='get' name="form1" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
         <tr>

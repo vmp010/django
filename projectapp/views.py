@@ -101,11 +101,11 @@ def loginpage(request):
         messages='請輸入帳號密碼'
     return render(request,'login.html',locals())
 
-def delRrecord(request,mode=None,id=None):
+def delRrecord(request,mode=None,c_id=None):
     if mode=='del': #按按鈕
-        if request.method =='POST':
-            unit=Record_R.objects.get(id=id)
-            delF=delrecordRF(request.POST,instance=unit)
+        if request.method =='GET':
+            unit=Record_R.objects.get(id=c_id)
+            delF=delrecordRF(request.GET,instance=unit)
             if delF.is_valid():
                 unit.date=delF.cleaned_data['date']
                 unit.description=delF.cleaned_data['description']
@@ -118,7 +118,7 @@ def delRrecord(request,mode=None,id=None):
                 messages='未接收資料'
     else:   #網址
         try:
-            unit=Record_E.objects.get(id=id)
+            unit=Record_E.objects.get(id=c_id)
             strdata=str(unit.date)
             strdata2=strdata.replace("年","-")
             strdata2=strdata.replace('月',"-")
@@ -128,11 +128,11 @@ def delRrecord(request,mode=None,id=None):
             messages='此紀錄不存在'
     return render(request,'delRrecord.html',locals())
 
-def delErecord(request,mode=None,id=None):
+def delErecord(request,mode=None,c_id=None):
     if mode=='del': #按按鈕
-        if request.method =='POST':
-            unit=Record_E.objects.get(id=id)
-            delF=delrecordEF(request.POST,instance=unit)
+        if request.method =='GET':
+            unit=Record_E.objects.get(id=c_id)
+            delF=delrecordEF(request.GET,instance=unit)
             if delF.is_valid():
                 unit.date=delF.cleaned_data['date']
                 unit.description=delF.cleaned_data['description']
@@ -144,7 +144,7 @@ def delErecord(request,mode=None,id=None):
                 delF=delrecordEF()
                 messages='未接收資料'
         try:
-            unit=Record_E.objects.get(id=id)
+            unit=Record_E.objects.get(id=c_id)
             strdata=str(unit.date)
             strdata2=strdata.replace("年","-")
             strdata2=strdata.replace('月',"-")
@@ -154,11 +154,11 @@ def delErecord(request,mode=None,id=None):
             messages='此紀錄不存在'
     return render(request,'delErecord.html',locals())
 
-def editRrecord(request,mode=None,id=None):
+def editRrecord(request,mode=None,c_id=None):
     if mode=='editR': #按按鈕
-        if request.method =='POST':
-            unit=Record_R.objects.get(id=id)
-            editF=editRrecordF(request.POST,instance=unit)
+        if request.method =='GET':
+            unit=Record_R.objects.get(id=c_id)
+            editF=editRrecordF(request.GET,instance=unit)
             if editF.is_valid():
                 unit.date=editF.cleaned_data['date']
                 unit.description=editF.cleaned_data['description']
@@ -172,7 +172,7 @@ def editRrecord(request,mode=None,id=None):
         
     else:   #網址
         try:
-            unit=Record_E.objects.get(id=id)
+            unit=Record_E.objects.get(id=c_id)
             strdata=str(unit.date)
             strdata2=strdata.replace("年","-")
             strdata2=strdata.replace('月',"-")
@@ -181,11 +181,11 @@ def editRrecord(request,mode=None,id=None):
         except:
             messages='此紀錄不存在'
     return render(request,'editRrecord.html',locals())
-def editErecord(request,mode=None,id=None):
+def editErecord(request,mode=None,c_id=None):
     if mode=='editE': #按按鈕
-        if request.method =='POST':
-            unit=Record_E.objects.get(id=id)
-            editF=editErecordF(request.POST,instance=unit)
+        if request.method =='GET':
+            unit=Record_E.objects.get(id=c_id)
+            editF=editErecordF(request.GET,instance=unit)
             if editF.is_valid():
                 unit.date=editF.cleaned_data['date']
                 unit.description=editF.cleaned_data['description']
@@ -200,7 +200,7 @@ def editErecord(request,mode=None,id=None):
         
     else:   #網址
         try:
-            unit=Record_E.objects.get(id=id)
+            unit=Record_E.objects.get(id=c_id)
             strdata=str(unit.date)
             strdata2=strdata.replace("年","-")
             strdata2=strdata.replace('月',"-")

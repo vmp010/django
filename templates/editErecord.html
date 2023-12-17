@@ -7,10 +7,8 @@
 </head>
 <body>
     <h1>編輯支出紀錄</h1>
-    <form action="/editErecord/{{unit.id}}/editE"method='post' name="form1">
-        {% csrf_token %}
-        
-        
+    <form action="/editErecord/{{unit.id}}/editE"method='get' name="form1">
+
         <table>
         <tr>
             <th>日期</th><td><input type="text" name="date" id="date" value="{{ unit.date }}"></td>
