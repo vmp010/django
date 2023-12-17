@@ -7,7 +7,9 @@
 </head>
 <body>
     <h1>編輯支出紀錄</h1>
-    <form action="/editErecord/{{unit.id}}/edit"method='get' name="form1">
+    <form action="/editErecord/{{unit.id}}/editE"method='post' name="form1">
+        {% csrf_token %}
+        
         
         <table>
         <tr>
@@ -17,7 +19,7 @@
             <th>描述</th><td><input type="text" name="description" id="description" value="{{ unit.description }}"></td>
         </tr>
         <tr>
-            <th>種類</th><td><input type="text" name="categoryR" id="categoryR" value="{{ unit.categoryE }}"></td>
+            <th>種類</th><td><input type="text" name="categoryE" id="categoryE" value="{{ unit.categoryE }}"></td>
         </tr>
         <tr>
             <th>金額</th><td><input type="number" name="cash" id="cash" value="{{ unit.cash }}"></td>

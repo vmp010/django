@@ -25,11 +25,15 @@ urlpatterns = [
     path('addErecord/',views.addErecord),
     path('addRrecord/',views.addRrecord),
     path('',views.loginpage,name='login'),
-    path('regist/',views.regist),
     path('delRrecord/<int:id>/',views.delRrecord),
     path('delRrecord/<int:id>/<str:mode>',views.delRrecord),
     path('delErecord/<int:id>/',views.delErecord),
     path('delErecord/<int:id>/<str:mode>',views.delErecord),
     path('editRrecord/<int:id>/',views.editRrecord),
     path('editRrecord/<int:id>/<str:mode>',views.editRrecord),
+    path('registe/',views.registe),
+    path('editErecord/<int:id>/',views.editErecord),
+    path('editErecord/<int:id>/<str:mode>',views.editErecord),
+
+
 ]

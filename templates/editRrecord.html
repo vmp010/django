@@ -6,9 +6,9 @@
     <title>編輯收入紀錄</title>
 </head>
 <body>
-    <h1>刪除收入紀錄</h1>
-    <form action="/editRrecord/{{unit.id}}/edit"method='get' name="form1">
-        
+    <h1>編輯收入紀錄</h1>
+    <form action="/editRrecord/{{unit.id}}/editR"method='post' name="form1">
+        {% csrf_token %}
         <table>
         <tr>
             <th>日期</th><td><input type="text" name="date" id="date" value="{{ unit.date }}"></td>

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from projectapp.models import Record_E,Record_R,CategoryE,CategoryR,login_1
-from projectapp.forms import addcategoryF,delselect,loginF,addrecordF,delRrecordF
+from projectapp.forms import addcategoryF,delselect,loginF,addrecordF,delrecordEF,registF,delrecordRF,editRrecordF,editErecordF
 # Create your views here.
 def recordall_and_cashflow(request):
     recordE=Record_E.objects.all().order_by('date')
@@ -100,37 +100,22 @@ def loginpage(request):
         loginform=loginF()
         messages='請輸入帳號密碼'
     return render(request,'login.html',locals())
-def regist(request):
-    getdatabase=login_1.objects.all()
-    if request.method =='POST':
-        cName=request.POST['cName']
-        cEmail=request.POST['cEmail']
-        password=request.POST['password']
-       
-        for check in getdatabase:
-            if check.cName == cName and check.password == password :
-                messages='已註冊過帳號' 
-            elif check.cEmail == cEmail:
-                messages='已註冊過此email'
-        else:
-            unit=login_1.objects.create(cName=cName,cEmail=cEmail,password=password)
-            unit.save()
-        return redirect('login')
-        
-    else:
-        messages='請輸入用戶名、密碼及email'
-    return render(request,'regist.html',locals())
 
 def delRrecord(request,mode=None,id=None):
     if mode=='del': #按按鈕
-        unit=Record_R.objects.get(id=id)
-        unit.date=request.GET['date']
-        unit.description=request.GET['description']
-        unit.categoryE=request.GET['categoryR']
-        unit.cash=request.GET['cash']
-        unit.delete()
-        messages='已刪除'
-        return redirect('/index')
+        if request.method =='POST':
+            unit=Record_R.objects.get(id=id)
+            delF=delrecordRF(request.POST,instance=unit)
+            if delF.is_valid():
+                unit.date=delF.cleaned_data['date']
+                unit.description=delF.cleaned_data['description']
+                unit.categoryR=delF.cleaned_data['categoryR']
+                unit.cash=delF.cleaned_data['cash']
+                unit.delete()
+                return redirect('/index')
+            else:
+                delF=delrecordRF()
+                messages='未接收資料'
     else:   #網址
         try:
             unit=Record_E.objects.get(id=id)
@@ -145,15 +130,19 @@ def delRrecord(request,mode=None,id=None):
 
 def delErecord(request,mode=None,id=None):
     if mode=='del': #按按鈕
-        unit=Record_E.objects.get(id=id)
-        unit.date=request.GET['date']
-        unit.description=request.GET['description']
-        unit.categoryE=request.GET['categoryE']
-        unit.cash=request.GET['cash']
-        unit.delete()
-        messages='已刪除'
-        return redirect('/index')
-    else:   #網址
+        if request.method =='POST':
+            unit=Record_E.objects.get(id=id)
+            delF=delrecordEF(request.POST,instance=unit)
+            if delF.is_valid():
+                unit.date=delF.cleaned_data['date']
+                unit.description=delF.cleaned_data['description']
+                unit.categoryE=delF.cleaned_data['categoryE']
+                unit.cash=delF.cleaned_data['cash']
+                unit.delete()
+                return redirect('/index')
+            else:
+                delF=delrecordEF()
+                messages='未接收資料'
         try:
             unit=Record_E.objects.get(id=id)
             strdata=str(unit.date)
@@ -164,19 +153,26 @@ def delErecord(request,mode=None,id=None):
         except:
             messages='此紀錄不存在'
     return render(request,'delErecord.html',locals())
+
 def editRrecord(request,mode=None,id=None):
-    if mode=='edit': #按按鈕
-        unit=Record_R.objects.get(id=id)
-        unit.date=request.GET['date']
-        unit.description=request.GET['description']
-        unit.categoryR=request.GET['categoryR']
-        unit.cash=request.GET['cash']
-        unit.save()
-        messages='已儲存資料'
-        return redirect('/index')
+    if mode=='editR': #按按鈕
+        if request.method =='POST':
+            unit=Record_R.objects.get(id=id)
+            editF=editRrecordF(request.POST,instance=unit)
+            if editF.is_valid():
+                unit.date=editF.cleaned_data['date']
+                unit.description=editF.cleaned_data['description']
+                unit.categoryR=editF.cleaned_data['categoryR']
+                unit.cash=editF.cleaned_data['cash']
+                unit.save()
+                return redirect('/index')
+            else:
+                editF=editRrecordF()
+                messages='未接收資料'
+        
     else:   #網址
         try:
-            unit=Record_R.objects.get(id=id)
+            unit=Record_E.objects.get(id=id)
             strdata=str(unit.date)
             strdata2=strdata.replace("年","-")
             strdata2=strdata.replace('月',"-")
@@ -185,16 +181,23 @@ def editRrecord(request,mode=None,id=None):
         except:
             messages='此紀錄不存在'
     return render(request,'editRrecord.html',locals())
-def editRrecord(request,mode=None,id=None):
-    if mode=='edit': #按按鈕
-        unit=Record_E.objects.get(id=id)
-        unit.date=request.GET['date']
-        unit.description=request.GET['description']
-        unit.categoryE=request.GET['categoryE']
-        unit.cash=request.GET['cash']
-        unit.save()
-        messages='已儲存資料'
-        return redirect('/index')
+def editErecord(request,mode=None,id=None):
+    if mode=='editE': #按按鈕
+        if request.method =='POST':
+            unit=Record_E.objects.get(id=id)
+            editF=editErecordF(request.POST,instance=unit)
+            if editF.is_valid():
+                unit.date=editF.cleaned_data['date']
+                unit.description=editF.cleaned_data['description']
+                unit.categoryE=editF.cleaned_data['categoryE']
+                unit.cash=editF.cleaned_data['cash']
+                unit.save()
+                messages='修改成功'
+                return redirect('/index')
+            else:
+                editF=editErecordF()
+                messages='未接收資料'
+        
     else:   #網址
         try:
             unit=Record_E.objects.get(id=id)
@@ -206,4 +209,26 @@ def editRrecord(request,mode=None,id=None):
         except:
             messages='此紀錄不存在'
     return render(request,'editErecord.html',locals())
+def registe(request):
+    if request.method =='POST':
+        registerform=registF(request.POST)
+        if registerform.is_valid():
+            cName=registerform.cleaned_data['cName']
+            password=registerform.cleaned_data['password']
+            cEmail=registerform.cleaned_data['cEmail']
+            if login_1.objects.filter(cName=cName).exists():
+                messages='已註冊過帳號'
+            elif login_1.objects.filter(cEmail=cEmail).exists():
+                messages='已註冊過此email'
+            else:   
+                unit=login_1.objects.create(cName=cName,cEmail=cEmail,password=password)
+                unit.save()
+                return redirect('login')
+    else:
+        registerform=registF()
+        messages='請輸入帳號密碼'
+    return render(request,'regist.html',locals())
+
+  
+
 
