@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>刪除支出紀錄</h1>
-    <form action="/delErecord/{{unit.id}}/del"method='get' name="form1">
+    <form action="/delErecord/{{unit.id}}/del"method='post' name="form1">
         {% csrf_token %}
         <table>
         <tr>

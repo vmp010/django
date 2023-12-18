@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刪除測試</title>
+</head>
+<body>
+    <h3>是否確定刪除{{ expense.name }}?</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="btn btn-success" type="submit" value="確定" />
+    <a class="btn btn-warning" href="{% url 'Index' %}">取消</a>
+</form>
+</body>
+</html>

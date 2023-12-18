@@ -103,9 +103,9 @@ def loginpage(request):
 
 def delRrecord(request,mode=None,c_id=None):
     if mode=='del': #按按鈕
-        if request.method =='GET':
+        if request.method =='POST':
             unit=Record_R.objects.get(id=c_id)
-            delF=delrecordRF(request.GET,instance=unit)
+            delF=delrecordRF(request.POST,instance=unit)
             if delF.is_valid():
                 unit.date=delF.cleaned_data['date']
                 unit.description=delF.cleaned_data['description']
@@ -130,9 +130,9 @@ def delRrecord(request,mode=None,c_id=None):
 
 def delErecord(request,mode=None,c_id=None):
     if mode=='del': #按按鈕
-        if request.method =='GET':
+        if request.method =='POST':
             unit=Record_E.objects.get(id=c_id)
-            delF=delrecordEF(request.GET,instance=unit)
+            delF=delrecordEF(request.POST,instance=unit)
             if delF.is_valid():
                 unit.date=delF.cleaned_data['date']
                 unit.description=delF.cleaned_data['description']
@@ -158,7 +158,7 @@ def editRrecord(request,mode=None,c_id=None):
     if mode=='editR': #按按鈕
         if request.method =='GET':
             unit=Record_R.objects.get(id=c_id)
-            editF=editRrecordF(request.GET,instance=unit)
+            editF=editRrecordF(request.POST,instance=unit)
             if editF.is_valid():
                 unit.date=editF.cleaned_data['date']
                 unit.description=editF.cleaned_data['description']
@@ -183,9 +183,9 @@ def editRrecord(request,mode=None,c_id=None):
     return render(request,'editRrecord.html',locals())
 def editErecord(request,mode=None,c_id=None):
     if mode=='editE': #按按鈕
-        if request.method =='GET':
+        if request.method =='POST':
             unit=Record_E.objects.get(id=c_id)
-            editF=editErecordF(request.GET,instance=unit)
+            editF=editErecordF(request.POST,instance=unit)
             if editF.is_valid():
                 unit.date=editF.cleaned_data['date']
                 unit.description=editF.cleaned_data['description']
@@ -228,6 +228,14 @@ def registe(request):
         registerform=registF()
         messages='請輸入帳號密碼'
     return render(request,'regist.html',locals())
+
+def deltest(request,pk):
+    expense=Record_E.objects.get(id=pk)
+    if request.method =='POST':
+        expense.delete()
+        return redirect('/index')
+    context={'expense':expense}
+    return render(request,'deltest.html',context)
 
   
 

@@ -71,6 +71,7 @@
                 <td>{{ record.cash }}</td>
                 <td><a href="/delRrecord/{{record.id}}/">刪除</a></td>
                 <td><a href="/editRrecord/{{record.id}}/">編輯</a></td>
+                <!-- <td><a href="{% url 'deletetest' record.id %}">刪除測試</a></td> -->
                 </tr>
                 {% endfor %}
         </table>

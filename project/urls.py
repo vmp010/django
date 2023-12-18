@@ -36,4 +36,7 @@ urlpatterns = [
     path('editErecord/<int:c_id>/<str:mode>',views.editErecord),
 
 
+    path('deltest/<str:pk>',views.deltest,name='deltest'),
+
+
 ]
