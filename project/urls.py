@@ -25,15 +25,14 @@ urlpatterns = [
     path('addErecord/',views.addErecord),
     path('addRrecord/',views.addRrecord),
     path('',views.loginpage,name='login'),
-    path('editRrecord/<int:c_id>/',views.editRrecord),
-    path('editRrecord/<int:c_id>/<str:mode>',views.editRrecord),
     path('registe/',views.registe),
-    path('editErecord/<int:c_id>/',views.editErecord),
-    path('editErecord/<int:c_id>/<str:mode>',views.editErecord),
+   
 
 
     path('delRr/<int:pk>',views.delRr,name='delRr'), #刪除收入紀錄
     path('delEr/<int:pk>',views.delEr,name='delEr'), #刪除支出紀錄
+    path('editRr/<int:pk>',views.editRr,name='editRr'), #編輯收入紀錄
+    path('editEr/<int:pk>',views.editEr,name='editEr'), #編輯支出紀錄
 
 
 ]

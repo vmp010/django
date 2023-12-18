@@ -193,6 +193,27 @@ def delEr(request,pk=None):
     context={'expense':expense}
     return render(request,'delEr.html',context)
 
+def editRr(request,pk=None):
+    revenue=Record_R.objects.get(id=pk)
+    form=editRrecordF(instance=revenue)
+    if request.method =='POST':
+        form=editRrecordF(request.POST,instance=revenue)
+        if form.is_valid():
+            form.save()
+            return redirect('/index')
+    context={'form':form}
+    return render(request,'editRr.html',context)
+def editEr(request,pk=None):
+    expense=Record_E.objects.get(id=pk)
+    form=editErecordF(instance=expense)
+    if request.method =='POST':
+        form=editErecordF(request.POST,instance=expense)
+        if form.is_valid():
+            form.save()
+            return redirect('/index')
+    context={'form':form}
+    return render(request,'editEr.html',context)
+
   
 
 

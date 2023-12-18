@@ -52,7 +52,7 @@
               <td>{{ record.categoryE }}</td>
               <td>{{ record.cash }}</td>
              
-              <td><a href="/editErecord/{{record.id}}/">編輯</a></td>
+              <td><a href="{% url 'editEr' record.id %}">編輯</a></td>
               <td><a href="{% url 'delEr' record.id %}">刪除</a></td>
             </tr>
             {% endfor %}
@@ -70,9 +70,10 @@
                 <td>{{ record.description }}</td>
                 <td>{{ record.categoryR }}</td>
                 <td>{{ record.cash }}</td>
-                
-                <td><a  class="button-link-submit" href="/editRrecord/{{record.id}}/">編輯</a></td>
+
+                <td><a href="{% url 'editRr' record.id %}">編輯</a></td>
                 <td><a class="button-link-del" href="{% url 'delRr' record.id %}" >刪除</a></td>
+                
                 </tr>
                 {% endfor %}
         </table>

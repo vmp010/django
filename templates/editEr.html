@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>編輯支出紀錄</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+       {{ form }}
+        <input type="submit" value="確定" />
+        <a href="{% url 'index' %}">取消</a>
+    </form>
+</body>
+</html>
