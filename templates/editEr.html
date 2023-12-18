@@ -10,7 +10,11 @@
 <body>
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form|crispy }}
+        {{ form.date|as_crispy_field }}
+        {{ form.description|as_crispy_field }}
+        {{ form.categoryE|as_crispy_field }}
+        {{ form.cash|as_crispy_field }}
+        
         <input type="submit" value="確定" />
         <a href="{% url 'index' %}">取消</a>
     </form>
