@@ -43,16 +43,17 @@ class editRrecordF(forms.ModelForm):
         fields='date','description','categoryR','cash'
         wigits={'date':forms.TextInput(attrs={'class':'form-control'}),
                 'description':forms.TextInput(attrs={'class':'form-control'}),
-                'categoryR':forms.Select(attrs={'class':'form-control'}),
+                'categoryR':forms.Select(attrs={'class':'form-select'}),
                 'cash':forms.NumberInput(attrs={'class':'form-control'})}
         labels={'date':'日期','description':'說明','categoryR':'類別','cash':'金額'}
 class editErecordF(forms.ModelForm):
     class Meta:
+        Choice=CategoryE.objects.all()
         model=Record_E
         fields='date','description','categoryE','cash'
         wigits={'date':forms.TextInput(attrs={'class':'form-control'}),
                 'description':forms.TextInput(attrs={'class':'form-control'}),
-                'categoryE':forms.Select(attrs={'class':'form-control'}),
+                'categoryE':forms.Select(choices=Choice,attrs={'class':'form-select'}),
                 'cash':forms.NumberInput(attrs={'class':'form-control'})}
         labels={'date':'日期','description':'說明','categoryE':'類別','cash':'金額'}
 class registF(forms.Form):
