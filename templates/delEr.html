@@ -7,12 +7,16 @@
     <link rel="stylesheet" href="/static/css/delE.css">
 </head>
 <body>
+    <div class="wrapper">
+        <div class="box">
     <h3>是否確定刪除{{ expense.description }}?</h3>
 
     <form action="" method="POST">
         {% csrf_token %}
-        <input class="btn btn-success" type="submit" value="確定" />
-        <a class="btn btn-warning" href="{% url 'index' %}">取消</a>
+        <input class="confirm-button" type="submit" value="確定" />
+        <a class="button-link" href="{% url 'index' %}">取消</a>
     </form>
+</div>
+    </div>
 </body>
 </html>
