@@ -103,61 +103,8 @@ def loginpage(request):
 
 
 
-def editRrecord(request,mode=None,c_id=None):
-    if mode=='editR': #按按鈕
-        if request.method =='GET':
-            unit=Record_R.objects.get(id=c_id)
-            editF=editRrecordF(request.POST,instance=unit)
-            if editF.is_valid():
-                unit.date=editF.cleaned_data['date']
-                unit.description=editF.cleaned_data['description']
-                unit.categoryR=editF.cleaned_data['categoryR']
-                unit.cash=editF.cleaned_data['cash']
-                unit.save()
-                return redirect('/index')
-            else:
-                editF=editRrecordF()
-                messages='未接收資料'
-        
-    else:   #網址
-        try:
-            unit=Record_E.objects.get(id=c_id)
-            strdata=str(unit.date)
-            strdata2=strdata.replace("年","-")
-            strdata2=strdata.replace('月',"-")
-            strdata2=strdata.replace('日',"-")
-            unit.date=strdata2
-        except:
-            messages='此紀錄不存在'
-    return render(request,'editRrecord.html',locals())
-def editErecord(request,mode=None,c_id=None):
-    if mode=='editE': #按按鈕
-        if request.method =='POST':
-            unit=Record_E.objects.get(id=c_id)
-            editF=editErecordF(request.POST,instance=unit)
-            if editF.is_valid():
-                unit.date=editF.cleaned_data['date']
-                unit.description=editF.cleaned_data['description']
-                unit.categoryE=editF.cleaned_data['categoryE']
-                unit.cash=editF.cleaned_data['cash']
-                unit.save()
-                messages='修改成功'
-                return redirect('/index')
-            else:
-                editF=editErecordF()
-                messages='未接收資料'
-        
-    else:   #網址
-        try:
-            unit=Record_E.objects.get(id=c_id)
-            strdata=str(unit.date)
-            strdata2=strdata.replace("年","-")
-            strdata2=strdata.replace('月',"-")
-            strdata2=strdata.replace('日',"-")
-            unit.date=strdata2
-        except:
-            messages='此紀錄不存在'
-    return render(request,'editErecord.html',locals())
+
+
 def registe(request):
     if request.method =='POST':
         registerform=registF(request.POST)
