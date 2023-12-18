@@ -56,18 +56,19 @@ body {
   }
 
   .button-link-del {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%);
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    display: inline-block; /* 設置元素為行內區塊，使其在同一行內顯示，同時保留區塊元素的特性 */
+    padding: 6px 14px; /* 設置內容區域的內邊距，上下為 10 像素，左右為 20 像素 */
+    font-size: 12px; /* 設置字體大小為 16 像素 */
+    color: #fff; /* 設置文字顏色為白色 */
+    text-align: center; /* 將文字置中對齊 */
+    text-decoration: none; /* 移除文字下劃線效果 */
+    border-radius: 5px; /* 設置圓角半徑為 5 像素，使元素具有圓角效果 */
+    border: none; /* 移除邊框 */
+    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%); /* 使用漸變色作為背景，由上到下漸變從 #1863e2 到 #04a7ff */
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1); /* 添加陰影效果，水平偏移為 0 像素，垂直偏移為 4 像素，模糊半徑為 5 像素，顏色為黑色透明度 0.1 */
+    transition: all 0.3s ease; /* 添加動畫過渡效果，持續時間為 0.3 秒，使用 ease 函數實現平滑過渡 */
   }
+  
   
   .button-link-del:hover {
     background: linear-gradient(to bottom, #f00707 0%, #d30423 100%);

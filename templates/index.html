@@ -50,7 +50,7 @@
               <td>{{ record.cash }}</td>
              
               <td><a href="{% url 'editEr' record.id %}">編輯</a></td>
-              <td><a href="{% url 'delEr' record.id %}">刪除</a></td>
+              <td><a href="{% url 'delEr' record.id %}" class="button-link-del">刪除</a></td>
             </tr>
             {% endfor %}
               </table>

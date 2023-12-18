@@ -1,7 +1,7 @@
 .confirm-button, .cancel-button {
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 22px;
+    font-size: 18px;
     color: #fff;
     text-align: center;
     text-decoration: none;
@@ -26,8 +26,8 @@
   }
   .button-link {
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 22px;
+    font-size: 18px;
     color: #fff;
     text-align: center;
     text-decoration: none;
@@ -52,7 +52,7 @@
   }
   .box{
     width: 500px;
-    height: 300px;
+    height: 350px;
     background-color: #ede4e4;
     border-radius: 10px;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
