@@ -19,16 +19,12 @@ from django.urls import path
 from projectapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/',views.recordall_and_cashflow),
+    path('index/',views.recordall_and_cashflow,name='index'),
     path('addcategory/',views.addcategory),
     path('delcategory/',views.delcategory),
     path('addErecord/',views.addErecord),
     path('addRrecord/',views.addRrecord),
     path('',views.loginpage,name='login'),
-    path('delRrecord/<int:c_id>/',views.delRrecord),
-    path('delRrecord/<int:c_id>/<str:mode>',views.delRrecord),
-    path('delErecord/<int:c_id>/',views.delErecord),
-    path('delErecord/<int:c_id>/<str:mode>',views.delErecord),
     path('editRrecord/<int:c_id>/',views.editRrecord),
     path('editRrecord/<int:c_id>/<str:mode>',views.editRrecord),
     path('registe/',views.registe),
@@ -36,7 +32,8 @@ urlpatterns = [
     path('editErecord/<int:c_id>/<str:mode>',views.editErecord),
 
 
-    path('deltest/<str:pk>',views.deltest,name='deltest'),
+    path('delRr/<int:pk>',views.delRr,name='delRr'), #刪除收入紀錄
+    path('delEr/<int:pk>',views.delEr,name='delEr'), #刪除支出紀錄
 
 
 ]

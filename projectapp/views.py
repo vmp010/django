@@ -101,58 +101,7 @@ def loginpage(request):
         messages='請輸入帳號密碼'
     return render(request,'login.html',locals())
 
-def delRrecord(request,mode=None,c_id=None):
-    if mode=='del': #按按鈕
-        if request.method =='POST':
-            unit=Record_R.objects.get(id=c_id)
-            delF=delrecordRF(request.POST,instance=unit)
-            if delF.is_valid():
-                unit.date=delF.cleaned_data['date']
-                unit.description=delF.cleaned_data['description']
-                unit.categoryR=delF.cleaned_data['categoryR']
-                unit.cash=delF.cleaned_data['cash']
-                unit.delete()
-                return redirect('/index')
-            else:
-                delF=delrecordRF()
-                messages='未接收資料'
-    else:   #網址
-        try:
-            unit=Record_E.objects.get(id=c_id)
-            strdata=str(unit.date)
-            strdata2=strdata.replace("年","-")
-            strdata2=strdata.replace('月',"-")
-            strdata2=strdata.replace('日',"-")
-            unit.date=strdata2
-        except:
-            messages='此紀錄不存在'
-    return render(request,'delRrecord.html',locals())
 
-def delErecord(request,mode=None,c_id=None):
-    if mode=='del': #按按鈕
-        if request.method =='POST':
-            unit=Record_E.objects.get(id=c_id)
-            delF=delrecordEF(request.POST,instance=unit)
-            if delF.is_valid():
-                unit.date=delF.cleaned_data['date']
-                unit.description=delF.cleaned_data['description']
-                unit.categoryE=delF.cleaned_data['categoryE']
-                unit.cash=delF.cleaned_data['cash']
-                unit.delete()
-                return redirect('/index')
-            else:
-                delF=delrecordEF()
-                messages='未接收資料'
-        try:
-            unit=Record_E.objects.get(id=c_id)
-            strdata=str(unit.date)
-            strdata2=strdata.replace("年","-")
-            strdata2=strdata.replace('月',"-")
-            strdata2=strdata.replace('日',"-")
-            unit.date=strdata2
-        except:
-            messages='此紀錄不存在'
-    return render(request,'delErecord.html',locals())
 
 def editRrecord(request,mode=None,c_id=None):
     if mode=='editR': #按按鈕
@@ -229,13 +178,20 @@ def registe(request):
         messages='請輸入帳號密碼'
     return render(request,'regist.html',locals())
 
-def deltest(request,pk):
+def delRr(request,pk=None):
+    revenue=Record_R.objects.get(id=pk)
+    if request.method =='POST':
+        revenue.delete()
+        return redirect('/index')
+    context={'revenue':revenue}
+    return render(request,'delRr.html',context)
+def delEr(request,pk=None):
     expense=Record_E.objects.get(id=pk)
     if request.method =='POST':
         expense.delete()
         return redirect('/index')
     context={'expense':expense}
-    return render(request,'deltest.html',context)
+    return render(request,'delEr.html',context)
 
   
 

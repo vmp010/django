@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/delR.css">
+    <title>刪除收入紀錄</title>
+</head>
+<body>
+    <h3>是否確定刪除{{ revenue.description }}?</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="confirm-button" type="submit" value="確定" />
+    <a class="button-link" href="{% url 'index' %}">取消</a>
+</form>
+</body>
+</html>

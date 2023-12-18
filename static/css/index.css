@@ -35,3 +35,42 @@ body {
     display:flex;
     justify-content: space-around; /*左右放 但沒有很完美*/
   }
+  .button-link-submit {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .button-link-submit:hover {
+    background: linear-gradient(to bottom, #12ea70 0%, #027c23 100%);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.2);
+  }
+
+  .button-link-del {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .button-link-del:hover {
+    background: linear-gradient(to bottom, #f00707 0%, #d30423 100%);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.2);
+  }

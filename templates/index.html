@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/index.css"> 
+    <link rel="stylesheet" href="/static/css/index.css"> 
     <title>帳務總覽</title> 
 </head>
 <body>
@@ -51,8 +51,9 @@
               <td>{{ record.description }}</td>
               <td>{{ record.categoryE }}</td>
               <td>{{ record.cash }}</td>
-              <td><a href="/delErecord/{{record.id}}/">刪除</a></td>
+             
               <td><a href="/editErecord/{{record.id}}/">編輯</a></td>
+              <td><a href="{% url 'delEr' record.id %}">刪除</a></td>
             </tr>
             {% endfor %}
               </table>
@@ -69,9 +70,9 @@
                 <td>{{ record.description }}</td>
                 <td>{{ record.categoryR }}</td>
                 <td>{{ record.cash }}</td>
-                <td><a href="/delRrecord/{{record.id}}/">刪除</a></td>
-                <td><a href="/editRrecord/{{record.id}}/">編輯</a></td>
-                <!-- <td><a href="{% url 'deletetest' record.id %}">刪除測試</a></td> -->
+                
+                <td><a  class="button-link-submit" href="/editRrecord/{{record.id}}/">編輯</a></td>
+                <td><a class="button-link-del" href="{% url 'delRr' record.id %}" >刪除</a></td>
                 </tr>
                 {% endfor %}
         </table>
