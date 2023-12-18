@@ -64,5 +64,8 @@
     align-items: center;
     flex-direction: column;
   }
+  body{
+    background-color: #f5f5f5;
+  }
   
   
