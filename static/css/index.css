@@ -122,3 +122,6 @@ body {
     color: purple;
     font-size: 40px;
   }
+  .thousand-separator {
+    text-align: right;
+  }

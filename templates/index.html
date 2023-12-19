@@ -34,34 +34,12 @@
 
           <h2>帳務紀錄</h2>
             <div class="table">
-              
-              
-              <table>
-                <caption class="table-label">支出</caption>
-                <th>日期</th>
-                <th>描述</th>
-                <th>種類</th>
-                <th>金額</th>
-    
-            {% for record in recordE %}
-            <tr>
-              <td hidden="hidden">{{record.id}}</td>
-              <td>{{ record.date }}</td>
-              <td>{{ record.description }}</td>
-              <td>{{ record.categoryE }}</td>
-              <td>{{ record.cash }}</td>
-             
-              <td><a class="button-change" href="{% url 'editEr' record.id %}">編輯</a></td>
-              <td><a href="{% url 'delEr' record.id %}" class="button-link-del">刪除</a></td>
-            </tr>
-            {% endfor %}
-              </table>
               <table>
                 <caption class="table-label">收入</caption>
                 <th>日期</th>
                 <th>描述</th>
                 <th>種類</th>
-                <th>金額</th>
+                <th style="text-align: right;">金額</th>
                 {% for record in recordR %}
                 <tr>
     
@@ -69,7 +47,7 @@
                 <td>{{ record.date }}</td>
                 <td>{{ record.description }}</td>
                 <td>{{ record.categoryR }}</td>
-                <td>{{ record.cash }}</td>
+                <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
 
                 <td><a class="button-change" href="{% url 'editRr' record.id %}">編輯</a></td>
                 <td><a class="button-link-del" href="{% url 'delRr' record.id %}" >刪除</a></td>
@@ -77,6 +55,35 @@
                 </tr>
                 {% endfor %}
         </table>
+            <table>
+              <caption class="table-label">支出</caption>
+                <th>日期</th>
+                <th>描述</th>
+                <th>種類</th>
+                <th style="text-align: right;">金額</th>
+    
+            {% for record in recordE %}
+          <tr>
+            <td hidden="hidden">{{record.id}}</td>
+            <td>{{ record.date }}</td>
+            <td>{{ record.description }}</td>
+            <td>{{ record.categoryE }}</td>
+            <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
+             
+              <td><a class="button-change" href="{% url 'editEr' record.id %}">編輯</a></td>
+              <td><a href="{% url 'delEr' record.id %}" class="button-link-del">刪除</a></td>
+            </tr>
+            {% endfor %}
+            </table>
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var cells = document.querySelectorAll('.thousand-separator');
+                cells.forEach(function(cell) {
+                  var number = parseFloat(cell.textContent.replace(/,/g, ''));
+                  cell.textContent = number.toLocaleString(); // 使用toLocaleString()添加千位分隔符
+                });
+              });
+            </script> 
       </div>
     </div>
   </div> <!-- containter-->
