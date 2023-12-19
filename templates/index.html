@@ -10,7 +10,7 @@
   <!--主要-->
     <div class="container">
       <div class="left-box">
-        
+        <div>ww</div>
         <div>
        <p>fuck you</p>
         <p>回到葉面</p>
@@ -36,7 +36,10 @@
 
           <h2>帳務紀錄</h2>
             <div class="table">
+              
+              
               <table>
+                <caption class="table-label">支出</caption>
                 <th>日期</th>
                 <th>描述</th>
                 <th>種類</th>
@@ -50,12 +53,13 @@
               <td>{{ record.categoryE }}</td>
               <td>{{ record.cash }}</td>
              
-              <td><a href="{% url 'editEr' record.id %}">編輯</a></td>
+              <td><a class="button-change" href="{% url 'editEr' record.id %}">編輯</a></td>
               <td><a href="{% url 'delEr' record.id %}" class="button-link-del">刪除</a></td>
             </tr>
             {% endfor %}
               </table>
               <table>
+                <caption class="table-label">收入</caption>
                 <th>日期</th>
                 <th>描述</th>
                 <th>種類</th>
@@ -69,7 +73,7 @@
                 <td>{{ record.categoryR }}</td>
                 <td>{{ record.cash }}</td>
 
-                <td><a href="{% url 'editRr' record.id %}">編輯</a></td>
+                <td><a class="button-change" href="{% url 'editRr' record.id %}">編輯</a></td>
                 <td><a class="button-link-del" href="{% url 'delRr' record.id %}" >刪除</a></td>
                 
                 </tr>
