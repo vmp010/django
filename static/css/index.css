@@ -11,7 +11,7 @@ body {
   /*左邊的框框*/
   .left-box {
     display: flex;
-    width: 30%; /* 调整左侧框的宽度 */
+    width: 25%; /* 调整左侧框的宽度 */
     flex-direction:column;
 
     background-color: #fff5f5; /* 设置左侧框的背景颜色 */
@@ -20,7 +20,7 @@ body {
   }
   
   .right-text {
-    width: 70%; /* 调整右侧文字区域的宽度 */
+    width: 75%; /* 调整右侧文字区域的宽度 */
     padding: 20px; /* 添加一些内边距，使文字内容不紧贴边缘 */
     overflow-y: auto; /*這也不知道可以幹嘛*/
   }
@@ -49,11 +49,11 @@ body {
     transition: all 0.3s ease;
   }
   
-  .button-link-submit:hover {
+  /*.button-link-submit:hover {
     background: linear-gradient(to bottom, #12ea70 0%, #027c23 100%);
     transform: translateY(-2px);
     box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.2);
-  }
+  }*/
 
   .button-link-del {
     display: inline-block; /* 設置元素為行內區塊，使其在同一行內顯示，同時保留區塊元素的特性 */
@@ -64,14 +64,54 @@ body {
     text-decoration: none; /* 移除文字下劃線效果 */
     border-radius: 5px; /* 設置圓角半徑為 5 像素，使元素具有圓角效果 */
     border: none; /* 移除邊框 */
-    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%); /* 使用漸變色作為背景，由上到下漸變從 #1863e2 到 #04a7ff */
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1); /* 添加陰影效果，水平偏移為 0 像素，垂直偏移為 4 像素，模糊半徑為 5 像素，顏色為黑色透明度 0.1 */
+    background: linear-gradient(to bottom, #f00707 0%, #d30423 100%);    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1); /* 添加陰影效果，水平偏移為 0 像素，垂直偏移為 4 像素，模糊半徑為 5 像素，顏色為黑色透明度 0.1 */
     transition: all 0.3s ease; /* 添加動畫過渡效果，持續時間為 0.3 秒，使用 ease 函數實現平滑過渡 */
   }
   
   
   .button-link-del:hover {
-    background: linear-gradient(to bottom, #f00707 0%, #d30423 100%);
     transform: translateY(-2px);
     box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.2);
+  }
+  .button-change{
+    display: inline-block; /* 設置元素為行內區塊，使其在同一行內顯示，同時保留區塊元素的特性 */
+    padding: 6px 14px; /* 設置內容區域的內邊距，上下為 10 像素，左右為 20 像素 */
+    font-size: 12px; /* 設置字體大小為 16 像素 */
+    color: white; /* 設置文字顏色為白色 */
+    text-align: center; /* 將文字置中對齊 */
+    text-decoration: none; /* 移除文字下劃線效果 */
+    border-radius: 5px; /* 設置圓角半徑為 5 像素，使元素具有圓角效果 */
+    border: none; /* 移除邊框 */
+    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1); /* 添加陰影效果，水平偏移為 0 像素，垂直偏移為 4 像素，模糊半徑為 5 像素，顏色為黑色透明度 0.1 */
+    transition: all 0.3s ease; /* 添加動畫過渡效果，持續時間為 0.3 秒，使用 ease 函數實現平滑過渡 */
+  }
+  .button-change:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.2);
+  }
+  .table caption {
+    font-size: 18px; /* 设置字体大小 */
+    font-weight: bold; /* 设置字体加粗 */
+    color: #333; /* 设置字体颜色，根据需要调整 */
+    margin-bottom: 10px; /* 设置标题与表格内容之间的下边距 */
+  }
+  
+  /* 表格样式 */
+  .table {
+    width: 100%; /* 表格宽度占据父容器的100% */
+    border-collapse: collapse; /* 合并边框，让表格看起来更整齐 */
+    margin-top: 20px; /* 上边距，根据需要调整 */
+  }
+  
+  .table th, .table td {
+    /*border: 1px solid #ddd; /* 设置单元格边框 */
+    padding: 8px; /* 设置单元格内边距 */
+    text-align: left; /* 左对齐文本 */
+  }
+  .table a.button-change,
+  .table a.button-link-del {
+    text-decoration: none; /* 移除链接的下划线效果 */
+    border: none; /* 移除链接的外框 */
   }
