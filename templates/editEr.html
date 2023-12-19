@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>編輯支出紀錄</title>
+    <link rel="stylesheet" href="../static/css/editEr.css">
     {% load crispy_forms_tags %}
 
 </head>
 <body>
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form.date|as_crispy_field }}
-        {{ form.description|as_crispy_field }}
-        {{ form.categoryE|as_crispy_field }}
-        {{ form.cash|as_crispy_field }}
+        {{form.date.label_tag}}
+        {{form.date|as_crispy_field}}
+        {{form.description.label_tag}}
+        {{form.description|as_crispy_field}}
+        {{form.categoryE.label_tag}}
+        {{form.categoryE|as_crispy_field}}
         
-        <input type="submit" value="確定" />
-        <a href="{% url 'index' %}">取消</a>
+        {{form.cash.label_tag}}
+        {{form.cash|as_crispy_field}}
+        
+    
+        <p><input type="submit" value="確定" />
+            <a class="cancel" href="{% url 'index' %}">取消</a></p>
     </form>
 </body>
 </html>
