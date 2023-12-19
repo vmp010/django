@@ -19,10 +19,11 @@
     <div>
     <form action="." method="post" name="form1">
         {% csrf_token %} <!--啟動csrf防護，否則會error -->
-        <h2>添加種類-收入：</h2></td><td><input type="text" id="addcategoryR" name="addcategoryR">
+        <h2>添加種類-收入：</h2></td><td><input type="text" id="addcategoryR" name="addcategoryR"> <input type="submit" value="送出" name="buttom1" id="buttom1">
+            <a href="{% url 'index' %}">取消</a>
         <h2>添加種類-支出：</h2></td><td><input type="text" id="addcategoryE" name="addcategoryE">
         <input type="submit" value="送出" name="buttom1" id="buttom1">
-        <input type="reset" value="重設" name="buttom2" id="buttom2">
+        <a href="{% url 'index' %}">取消</a>
     </form>
 </div>
 </body>
