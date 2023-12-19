@@ -6,7 +6,8 @@ body{
 .confirm-button, .cancel-button {
     display: inline-block;
     padding: 12px 22px;
-    font-size: 18px;
+    font-size: 24px;
+    font-family: "微軟正黑體";
     color: #fff;
     text-align: center;
     text-decoration: none;
@@ -18,11 +19,11 @@ body{
   }
   
   .confirm-button {
-    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    background-color:#28a745 ;
   }
   
   .cancel-button {
-    background: linear-gradient(to bottom, #ff5c5c 0%, #e63946 100%);
+    background-color: #dc3545;
   }
   
   .confirm-button:hover, .cancel-button:hover {
@@ -32,7 +33,7 @@ body{
   .button-link {
     display: inline-block;
     padding: 12px 22px;
-    font-size: 18px;
+    font-size: 24px;
     color: #fff;
     text-align: center;
     text-decoration: none;
