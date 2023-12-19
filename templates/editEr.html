@@ -11,14 +11,9 @@
 <body>
     <form action="" method="POST">
         {% csrf_token %}
-        {{form.date.label_tag}}
         {{form.date|as_crispy_field}}
-        {{form.description.label_tag}}
         {{form.description|as_crispy_field}}
-        {{form.categoryE.label_tag}}
         {{form.categoryE|as_crispy_field}}
-        
-        {{form.cash.label_tag}}
         {{form.cash|as_crispy_field}}
         
     
