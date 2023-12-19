@@ -27,9 +27,7 @@ body {
   /*帳務總攬*/
   .incomeEP{
     color:black;
-    background-color: lightblue;
     /*可能還要加東西 讓他更好看*/
-    
   }
   .table{
     display:flex;
@@ -114,4 +112,13 @@ body {
   .table a.button-link-del {
     text-decoration: none; /* 移除链接的下划线效果 */
     border: none; /* 移除链接的外框 */
+  }
+  .list{
+    color: purple;
+    text-decoration: none; /* 移除链接的下划线效果 */
+     
+  }
+  .listtitle{
+    color: purple;
+    font-size: 40px;
   }

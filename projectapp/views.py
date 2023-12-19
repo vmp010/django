@@ -1,5 +1,13 @@
 from django.shortcuts import render,redirect
-from projectapp.models import Record_E,Record_R,CategoryE,CategoryR,login_1
+from django_pandas import io
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+
+
+from .models import Record_E,Record_R,CategoryE,CategoryR,login_1
 from projectapp.forms import addcategoryF,delselect,loginF,addrecordF,delrecordEF,registF,delrecordRF,editRrecordF,editErecordF
 # Create your views here.
 def recordall_and_cashflow(request):
@@ -161,6 +169,20 @@ def editEr(request,pk=None):
     context={'form':form}
     return render(request,'editEr.html',context)
 
+def analysisE(request):
+    qs=Record_E.objects.all()
+    df=io.read_frame(qs,fieldnames=['date','description','categoryE','cash'])
+    df.set_index('categoryE',inplace=True)
+    pd.to_datetime(df['date'])
+    fig,ax=plt.subplots(figsize=(10,5))
+    ax.plot(df['cash'],marker='o',linestyle='--',color='r')
+    ax.set_xlabel('categoryE')
+    ax.set_ylabel('cash')
+    plt.title('expense')
+    plt.grid(axis='y')
+    x=plt.show()
+    return render(request,'analysisE.html',locals())
+    
   
 
 

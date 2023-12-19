@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'projectapp',
     'crispy_forms',
     'crispy_bootstrap4',
+    'django_pandas',
+    'django_matplotlib',
+    'matplotlib',
 ]
 
 MIDDLEWARE = [
