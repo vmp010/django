@@ -13,8 +13,11 @@
             {% for cR in categoryR %}
             <option value="{{cR}}" >{{cR}}</option>
             {% endfor %}
+            tr><td><input type="submit" value="送出" name="buttomR" id="buttomR"></td>
+        <td><input type="reset" value="重設" name="buttomR2" id="buttomR2"></td></tr>
         </select></td></tr>
         <tr><td><h2>刪除種類-支出：</h2></td><td><select  id="delcategoryE" name="delE">
+
             {% for cE in categoryE  %}
             <option value="{{cE}}">{{cE}}</option>
             {% endfor %}
