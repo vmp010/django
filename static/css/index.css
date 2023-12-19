@@ -27,6 +27,7 @@ body {
   /*帳務總攬*/
   .incomeEP{
     color:black;
+    font-size: 20px;
     /*可能還要加東西 讓他更好看*/
   }
   .table{
