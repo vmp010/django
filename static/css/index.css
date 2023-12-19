@@ -49,11 +49,11 @@ body {
     transition: all 0.3s ease;
   }
   
-  .button-link-submit:hover {
+  /*.button-link-submit:hover {
     background: linear-gradient(to bottom, #12ea70 0%, #027c23 100%);
     transform: translateY(-2px);
     box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.2);
-  }
+  }*/
 
   .button-link-del {
     display: inline-block; /* 設置元素為行內區塊，使其在同一行內顯示，同時保留區塊元素的特性 */
@@ -74,4 +74,17 @@ body {
     background: linear-gradient(to bottom, #f00707 0%, #d30423 100%);
     transform: translateY(-2px);
     box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.2);
+  }
+  .button-change{
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
   }
