@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django_pandas import io
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 
@@ -169,19 +169,19 @@ def editEr(request,pk=None):
     context={'form':form}
     return render(request,'editEr.html',context)
 
-def analysisE(request):
-    qs=Record_E.objects.all()
-    df=io.read_frame(qs,fieldnames=['date','description','categoryE','cash'])
-    df.set_index('categoryE',inplace=True)
-    pd.to_datetime(df['date'])
-    fig,ax=plt.subplots(figsize=(10,5))
-    ax.plot(df['cash'],marker='o',linestyle='--',color='r')
-    ax.set_xlabel('categoryE')
-    ax.set_ylabel('cash')
-    plt.title('expense')
-    plt.grid(axis='y')
-    x=plt.show()
-    return render(request,'analysisE.html',locals())
+# def analysisE(request):
+#     qs=Record_E.objects.all()
+#     df=io.read_frame(qs,fieldnames=['date','description','categoryE','cash'])
+#     df.set_index('categoryE',inplace=True)
+#     pd.to_datetime(df['date'])
+#     fig,ax=plt.subplots(figsize=(10,5))
+#     ax.plot(df['cash'],marker='o',linestyle='--',color='r')
+#     ax.set_xlabel('categoryE')
+#     ax.set_ylabel('cash')
+#     plt.title('expense')
+#     plt.grid(axis='y')
+#     x=plt.show()
+#     return render(request,'analysisE.html',locals())
     
   
 
