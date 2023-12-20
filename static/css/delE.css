@@ -1,7 +1,13 @@
+body{
+  border: 2px solid rgb(255,255,255);
+  background-color: rgba(255,255 ,255,.4);
+
+}
 .confirm-button, .cancel-button {
     display: inline-block;
     padding: 12px 22px;
-    font-size: 18px;
+    font-size: 24px;
+    font-family: "微軟正黑體";
     color: #fff;
     text-align: center;
     text-decoration: none;
@@ -9,15 +15,15 @@
     border: none;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    margin-right: 10px; /* 可以根據需要調整按鈕之間的間距 */
+    margin-right: 20px; /* 可以根據需要調整按鈕之間的間距 */
   }
   
   .confirm-button {
-    background: linear-gradient(to bottom, #4eb5f1 0%, #2b8fe6 100%);
+    background-color:#28a745 ;
   }
   
   .cancel-button {
-    background: linear-gradient(to bottom, #ff5c5c 0%, #e63946 100%);
+    background-color: #dc3545;
   }
   
   .confirm-button:hover, .cancel-button:hover {
@@ -27,7 +33,7 @@
   .button-link {
     display: inline-block;
     padding: 12px 22px;
-    font-size: 18px;
+    font-size: 24px;
     color: #fff;
     text-align: center;
     text-decoration: none;
@@ -53,7 +59,7 @@
   .box{
     width: 500px;
     height: 350px;
-    background-color: #ede4e4;
+    background-color: rgb(238, 230, 230) ;
     border-radius: 10px;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid black;
@@ -62,6 +68,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
+  
+  }
+  .box h2{
+    font-weight: bold;
+    padding: 20px;
+    font-size: 30px;
+    color: #344648;
+    font-family: "微軟正黑體";
   }
   body{
     background-color: #f5f5f5;

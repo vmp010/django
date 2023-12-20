@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>編輯收入紀錄</title>
+    <link rel="stylesheet" href="../static/css/editEr.css">
     {% load crispy_forms_tags %}
 </head>
 <body>
@@ -13,8 +14,8 @@
         {{ form.description|as_crispy_field }}
         {{ form.categoryR|as_crispy_field }}
         {{ form.cash|as_crispy_field }}
-        <input type="submit" value="確定" />
-        <a href="{% url 'index' %}">取消</a>
+        <p><input type="submit" value="確定" />
+            <a class="cancel" href="{% url 'index' %}">取消</a></p>
     </form>
 </body>
 </html>
