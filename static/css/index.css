@@ -98,23 +98,23 @@ body {
   }
   
   /* 表格样式 */
-  .table table {
-    width: 100%;
-}
-
-.table th, .table td {
-    border: 1px solid black;
-    text-align: left;
-    padding: 8px;
-}
-
-.table th {
-    background-color: #f2f2f2;
-}
-
-.table a.button-change, .table a.button-link-del {
-    border: none; /* 移除按钮的边框样式 */
-}
+  table {
+    border-spacing: 5px;
+    border-collapse: collapse;
+  }
+  
+  table th, table td {
+      border: 1px solid black;
+      text-align: left;
+      padding: 8px;
+  }
+  table td a{
+    border-style:none;
+  }
+  .table td.no-border {
+              border: none;
+          }
+  
   .list
   {
     color: purple;
