@@ -98,22 +98,23 @@ body {
   }
   
   /* 表格样式 */
-  .table {
-    width: 100%; /* 表格宽度占据父容器的100% */
-    border-collapse: collapse; /* 合并边框，让表格看起来更整齐 */
-    margin-top: 20px; /* 上边距，根据需要调整 */
-  }
-  
-  .table th, .table td {
-    /*border: 1px solid #ddd; /* 设置单元格边框 */
-    padding: 8px; /* 设置单元格内边距 */
-    text-align: left; /* 左对齐文本 */
-  }
-  .table a.button-change,
-  .table a.button-link-del {
-    text-decoration: none; /* 移除链接的下划线效果 */
-    border: none; /* 移除链接的外框 */
-  }
+  .table table {
+    width: 100%;
+}
+
+.table th, .table td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+.table a.button-change, .table a.button-link-del {
+    border: none; /* 移除按钮的边框样式 */
+}
   .list
   {
     color: purple;

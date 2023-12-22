@@ -1,3 +1,4 @@
+/*介面*/
 *
 {
     margin: 0;
@@ -12,6 +13,30 @@ body
     min-height: 100vh;
     background-color: #FBE0C3;
 }
+/*右上角的x*/
+.dialog{
+    position:relative;
+}
+.dialog button{
+    position: absolute;
+    top:0;
+    right: 0;
+    transform: translate(-50%,-50%);
+    font-size: 30px;
+    padding: 2px;
+    background-color: transparent;
+    border:none;
+}
+.dialog button:hover{
+    cursor: pointer;
+}
+.dialog a{
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+}
+
+/*框框*/
 .box
 {
     display: flex;
@@ -34,14 +59,6 @@ form {
     justify-content: center;
     margin:20px;
 }
-/*form
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin:20px;
-    
-}*/
 form select
 {
     margin-bottom: 10px;
@@ -53,4 +70,9 @@ form input
     margin-bottom: 10px;
     font-size: 16px;
     padding: 2px;
+}
+form a{
+    text-decoration: none;
+    color: red;
+    text-align: center;
 }

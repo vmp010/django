@@ -7,24 +7,28 @@
     <title>新增收入紀錄</title>
 </head>
 <body>
+    
     <div class="box">
+        <div class="dialog">
+            <button><a href="{% url 'index' %}">X</a></button>
+        </div>
     <h1>新增收入紀錄</h1>
+    
     <form action="." method="post" name="form1">
         {% csrf_token %}
-            日期
+            <span>日期</span>
             <input type="date" name="date" id="date">
-            備註
+            <span>備註</span>
             <input type="text" name="description" id="description">
-            種類
+            <span>種類</span>
             <select name="categoryR" id="categoryR">
                 {% for aCR in cRselect %}
                     <option value="{{aCR}}">{{aCR}}</option>
                         {% endfor %}
             </select>
-            金額
+            <span>金額</span>
             <input type="number" name="cash" id="cash">
                 <input type="submit" value="送出" name="button" id="button">
-                <a href="{% url 'index' %}">取消</a>
             {{messages}}
     </form>
 </div>
