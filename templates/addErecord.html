@@ -4,35 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新增支出紀錄</title>
+    <link rel="stylesheet" href="/static/css/addRrecord.css">
 </head>
 <body>
+
+    <div class="box">
+        <div class="dialog">
+            <button><a href="{% url 'index' %}">X</a></button>
+        </div>
     <h1>新增支出紀錄</h1>
     <form action="."method='post' name="form1">
         {% csrf_token %}
-        <table>
-        <tr>
-            <th>日期</th><td><input type="date" name="date" id="date"></td>
-        </tr>
-        <tr>
-            <th>備註</th><td><input type="text" name="description" id="description"></td>
-        </tr>
-        <tr>
-            <th>種類</th><td><select name="categoryE" id="categoryE">
-            {% for aCE in cEselect %}
-            <option value="{{aCE}}">{{aCE}}</option>
-            {% endfor %}
-            </select></td>
-        </tr>
-        <tr>
-            <th>金額</th><td><input type="number" name="cash" id="cash"></td>
-        </tr>
-        <tr>
-            <th colspan="2" align="center">
-            <input type="submit" value="送出" name="buttom" id="buttom">
-            <a href="{% url 'index' %}">取消</a>
-        </th>
-        </tr>
-        <tr><td>{{messages}}</td></tr>
+        <span>日期</span>
+        <input type="date" name="date" id="date">
+        <span>備註</span>
+        <input type="text" name="description" id="description">
+        <span>種類</span>
+        <select name="categoryE" id="categoryE">
+        {% for aCE in cEselect %}
+        <option value="{{aCE}}">{{aCE}}</option>
+        {% endfor %}
+        </select>
+        <span>金額</span>
+        <input type="number" name="cash" id="cash">
+        <input type="submit" value="送出" name="buttom" id="buttom">
+        
+        {{messages}}
     </table>
     </form>
 </body>
