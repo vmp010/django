@@ -47,9 +47,11 @@
                 <td>{{ record.date }}</td>
                 <td>{{ record.description }}</td>
                 <td>{{ record.categoryR }}</td>
-                <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
-
-                <td class="no-border"><a class="button-change" href="{% url 'editRr' record.id %}">編輯</a></td>
+                <td class="thousand-separator" style="text-align: right;">{{ record.cash }} 
+                  <span class="no-border"><a href="{% url 'editRr' record.id %}"><img src="/static/img/edit.svg" alt=""></a></span> 
+                </td>
+                <td class="no-border"><a href="{% url 'editRr' record.id %}"><img src="/static/img/edit.svg" alt=""></a></td>
+                <!--<td class="no-border"><a class="button-change" href="{% url 'editRr' record.id %}">編輯</a></td>-->
                 <td class="no-border"><a class="button-link-del" href="{% url 'delRr' record.id %}" >刪除</a></td>
                 
                 </tr>

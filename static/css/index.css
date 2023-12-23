@@ -101,18 +101,18 @@ body {
   table {
     border-spacing: 5px;
     border-collapse: collapse;
+    
   }
   
   table th, table td {
       border: 1px solid black;
       text-align: left;
-      padding: 8px;
+      padding: 12px;
   }
-  table td a{
-    border-style:none;
-  }
+
   .table td.no-border {
               border: none;
+              background-color: white;
           }
   
   .list
