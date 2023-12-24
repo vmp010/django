@@ -21,14 +21,16 @@ class CategoryR(models.Model):
     def __str__(self) :
         return self.category
 
-class Record_E(models.Model):
+class Record_E1(models.Model):
+    user=ForeignKey('login_1',on_delete=models.CASCADE,null=True)
     date 	= DateField()
     description = CharField(max_length=300,null=True)
     categoryE 	= CharField(max_length=50)	
     cash 	= IntegerField()
     def __str__(self) :
             return self.description
-class Record_R(models.Model):
+class Record_R1(models.Model):
+    user=ForeignKey('login_1',on_delete=models.CASCADE,null=True)
     date 	= DateField()
     description = CharField(max_length=300,null=True)
     categoryR 	= CharField(max_length=50)

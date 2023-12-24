@@ -1,5 +1,5 @@
 from django import forms
-from projectapp.models import CategoryE,CategoryR,Record_E,Record_R,login_1
+from projectapp.models import CategoryE,CategoryR,Record_E1,Record_R1,login_1
 class addcategoryF(forms.Form):
     addcategoryR=forms.CharField(max_length=20,required=True)
     addcategoryE=forms.CharField(max_length=20,required=True)
@@ -19,7 +19,7 @@ class addrecordF(forms.Form):
 
 class delrecordRF(forms.ModelForm):
     class Meta:
-        model=Record_R
+        model=Record_R1
         fields='date','description','categoryR','cash'
         wigits={'date':forms.TextInput(attrs={'class':'form-control'}),
                 'description':forms.TextInput(attrs={'class':'form-control'}),
@@ -30,7 +30,7 @@ class delrecordRF(forms.ModelForm):
 
 class delrecordEF(forms.ModelForm):
     class Meta:
-        model=Record_E
+        model=Record_E1
         fields='date','description','categoryE','cash'
         wigits={'date':forms.TextInput(attrs={'class':'form-control'}),
                 'description':forms.TextInput(attrs={'class':'form-control'}),
@@ -39,7 +39,7 @@ class delrecordEF(forms.ModelForm):
         labels={'date':'日期','description':'說明','categoryE':'類別','cash':'金額'}
 class editRrecordF(forms.ModelForm): 
     class Meta:
-        model=Record_R
+        model=Record_R1
         fields='date','description','categoryR','cash'
         wigits={'date':forms.TextInput(attrs={'class':'form-control'}),
                 'description':forms.TextInput(attrs={'class':'form-control'}),
@@ -49,7 +49,7 @@ class editRrecordF(forms.ModelForm):
 class editErecordF(forms.ModelForm):
     class Meta:
         Choice=CategoryE.objects.all()
-        model=Record_E
+        model=Record_E1
         fields='date','description','categoryE','cash'
         wigits={'date':forms.TextInput(attrs={'class':'form-control'}),
                 'description':forms.TextInput(attrs={'class':'form-control'}),
