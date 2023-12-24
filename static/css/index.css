@@ -107,7 +107,7 @@ body {
   table th, table td {
       border: 1px solid black;
       text-align: left;
-      padding: 12px;
+      padding: 8px;
   }
 
   .table td.no-border {
