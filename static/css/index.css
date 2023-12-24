@@ -14,9 +14,23 @@ body {
     width: 25%; /* 调整左侧框的宽度 */
     flex-direction:column;
 
-    background-color: rgba(255, 245, 245); /* 设置左侧框的背景颜色 */
-    align-items: center; /*不知道可以幹嘛*/
+    background-color: rgb(0, 0, 0); /* 设置左侧框的背景颜色 */
     justify-content: space-between;
+  }
+  .list
+  {
+    color: white;
+    text-decoration: none; /* 移除链接的下划线效果 */
+    font-size:20px;
+  }
+  .list:hover{
+    color: rgba(255, 0, 0,0.5);
+    
+  }
+  .listtitle{
+    color: white;
+    font-size: 60px;
+    text-align: left;
   }
   
   .right-text {
@@ -30,24 +44,11 @@ body {
     font-size: 20px;
     /*可能還要加東西 讓他更好看*/
   }
-  .table{
+  .table-all{
     display:flex;
     justify-content: space-around; /*左右放 但沒有很完美*/
   }
-  .button-link-submit {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    background: linear-gradient(to bottom, #1863e2 0%, #04a7ff 100%);
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  .table caption {
+  .table-all caption {
     font-size: 26px; /* 设置字体大小 */
     font-weight: bold; /* 设置字体加粗 */
     color: #333; /* 设置字体颜色，根据需要调整 */
@@ -55,58 +56,57 @@ body {
   }
   
   /* 表格样式 */
+  /*
    table {
     border-spacing: 5px;
+    border: 6px solid #948473;
     border-collapse: collapse;
-    
+    background-color: #FFE3C6;
+    width: 100%;
+    font-size: 20px;
+    min-height: 400px;
   }
-  
-  table th, table td {
+  */
+  /*table th, table td {
       border: 1px solid black;
       text-align: left;
       padding: 8px;
-  }
+  }*/
 
-  .table td.no-border {
-              border: none;
-              background-color: white;
-          } 
-  /* Basic table styles */
-/* .styled-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: Arial, sans-serif;
-}
-
-/* Header styles */
-/* .styled-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-} */
-
-/* Row styles */
-/* .styled-table td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-} */
-  .list
-  {
-    color: purple;
-    text-decoration: none; /* 移除链接的下划线效果 */
-    font-size:20px;
-  }
-  .list:hover{
-    color: rgba(255, 0, 0,0.5);
-    
-  }
-  .listtitle{
-    color: purple;
-    font-size: 60px;
-    
-  }
   .thousand-separator {
     text-align: right;
   }
+
+  /* 新增的*/
+  table.cinereousTable {
+    border: 6px solid #948473;
+    background-color: #FFE3C6;
+    width: 100%;    
+  }
+  table.cinereousTable td, table.cinereousTable th {
+    border: 1px solid #948473;
+    padding: 4px 4px;
+    
+  }
+  table.cinereousTable tbody td {
+    font-size: 20px;
+    padding: 4px;
+  }
+  table.cinereousTable thead {
+    background: #948473;
+    background: -moz-linear-gradient(top, #afa396 0%, #9e9081 66%, #948473 100%);
+    background: -webkit-linear-gradient(top, #afa396 0%, #9e9081 66%, #948473 100%);
+    background: linear-gradient(to bottom, #afa396 0%, #9e9081 66%, #948473 100%);
+  }
+  table.cinereousTable thead th {
+    font-size: 17px;
+    font-weight: bold;
+    color: #F0F0F0;
+    text-align: left;
+    border-left: 2px solid #948473;
+  }
+  table.cinereousTable thead th:first-child {
+    border-left: none;
+  }
+  
+  
