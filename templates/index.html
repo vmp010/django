@@ -43,14 +43,20 @@
       </div>
 
       <h2>帳務紀錄</h2>
-      <div class="table">
-        <div class="table-left">
-        <table>
+      <div class="table-all">
+        <div>
+        <table class="cinereousTable">
           <caption>收入</caption>
+          <thead>
+            <tr>
           <th>日期</th>
           <th>描述</th>
           <th>種類</th>
           <th style="text-align: right;">金額</th>
+          <th></th>
+        </tr>
+        </thead>
+        
           {% for record in recordR %}
           <tr>
 
@@ -59,7 +65,7 @@
             <td>{{ record.description }}</td>
             <td>{{ record.categoryR }}</td>
             <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
-            <td class="no-border">
+            <td>
               <a href="{% url 'editRr' record.id %}"><img src="/static/img/edit.svg" alt="編輯"></a>
               <a href="{% url 'delRr' record.id %}"><img src="/static/img/cancel-svgrepo-com.svg" alt="刪除"></a>
             </td>
@@ -69,30 +75,31 @@
             <!--舊的刪除-->
             
           </tr>
-          
           {% endfor %}
         </table>
         <a class="list" href="/addRrecord">
           <p>新增收入紀錄</p>
         </a>
       </div> <!-- 左邊的表格-->
-      <div class="table-right">
-        <table>
-          <caption class="table-label">支出</caption>
+      <div>
+        <table class="cinereousTable">
+          <caption>支出</caption>
+          <thead>
           <th>日期</th>
           <th>描述</th>
           <th>種類</th>
           <th style="text-align: right;">金額</th>
-          <th style="border: none;"></th>
-
+          <th style="text-align: center;">控制</th>
+        
           {% for record in recordE %}
           <tr>
+          </thead>
             <td hidden="hidden">{{record.id}}</td>
             <td>{{ record.date }}</td>
             <td>{{ record.description }}</td>
             <td>{{ record.categoryE }}</td>
             <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
-            <td class="no-border">
+            <td>
               <a href="{% url 'editRr' record.id %}"><img src="/static/img/edit.svg" alt="編輯"></a>
               <a href="{% url 'delRr' record.id %}"><img src="/static/img/cancel-svgrepo-com.svg" alt="刪除"></a>
             </td>
