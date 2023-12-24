@@ -44,6 +44,7 @@
 
       <h2>帳務紀錄</h2>
       <div class="table">
+        <div class="table-left">
         <table>
           <caption>收入</caption>
           <th>日期</th>
@@ -71,6 +72,11 @@
           
           {% endfor %}
         </table>
+        <a class="list" href="/addRrecord">
+          <p>新增收入紀錄</p>
+        </a>
+      </div> <!-- 左邊的表格-->
+      <div class="table-right">
         <table>
           <caption class="table-label">支出</caption>
           <th>日期</th>
@@ -96,6 +102,10 @@
 
           {% endfor %}
         </table>
+        <a class="list" href="/addErecord">
+          <p>新增支出紀錄</p>
+        </a>
+      </div>
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             var cells = document.querySelectorAll('.thousand-separator');
