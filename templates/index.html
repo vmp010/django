@@ -14,21 +14,23 @@
     <div class="left-box">
       <div class="listtitle">雲記帳</div>
       <div>
-        <a class="list" href="/addRrecord">
+        <!--<a class="list" href="/addRrecord">
           <p>新增收入紀錄</p>
         </a>
         <a class="list" href="/addErecord">
           <p>新增支出紀錄</p>
         </a>
+         -->
         <a class="list" href="/addcategory">
-          <p>新增種類</p>
+          <img src="/static/img/playlist_add_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+          <span style="text-align: center;">新增種類</span>
         </a>
         <a class="list" href="/delcategory">
           <p>刪除種類</p>
         </a>
         <p class="list">圖表分析</p>
       </div>
-      <div style="margin-bottom:20px;">
+      <div style="margin-bottom:20px; color:white">
         聯繫我們:0912-xxx-xxx
         Gmail:xxx@gmai.com
       </div>
@@ -45,55 +47,55 @@
       <h2>帳務紀錄</h2>
       <div class="table-all">
         <div>
-        <table class="cinereousTable">
-          <caption>收入</caption>
-          <thead>
-            <tr>
-          <th>日期</th>
-          <th>描述</th>
-          <th>種類</th>
-          <th style="text-align: right;">金額</th>
-          <th></th>
-        </tr>
-        </thead>
-        
-          {% for record in recordR %}
-          <tr>
+          <table class="cinereousTable">
+            <caption>收入</caption>
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>描述</th>
+                <th>種類</th>
+                <th style="text-align: right;">金額</th>
+                <th></th>
+              </tr>
+            </thead>
 
-            <td hidden="hidden">{{record.id}}</td>
-            <td>{{ record.date }}</td>
-            <td>{{ record.description }}</td>
-            <td>{{ record.categoryR }}</td>
-            <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
-            <td>
-              <a href="{% url 'editRr' record.id %}"><img src="/static/img/edit.svg" alt="編輯"></a>
-              <a href="{% url 'delRr' record.id %}"><img src="/static/img/cancel-svgrepo-com.svg" alt="刪除"></a>
-            </td>
-            <!--<td class="no-border"><a class="button-change" href="{% url 'editRr' record.id %}">編輯</a></td>-->
-            <!--舊的編輯-->
-            <!--<td class="no-border"><a class="button-link-del" href="{% url 'delRr' record.id %}" >刪除</a></td>-->
-            <!--舊的刪除-->
-            
-          </tr>
-          {% endfor %}
-        </table>
-        <a class="list" href="/addRrecord">
-          <p>新增收入紀錄</p>
-        </a>
-      </div> <!-- 左邊的表格-->
-      <div>
-        <table class="cinereousTable">
-          <caption>支出</caption>
-          <thead>
-          <th>日期</th>
-          <th>描述</th>
-          <th>種類</th>
-          <th style="text-align: right;">金額</th>
-          <th style="text-align: center;">控制</th>
-        
-          {% for record in recordE %}
-          <tr>
-          </thead>
+            {% for record in recordR %}
+            <tr>
+
+              <td hidden="hidden">{{record.id}}</td>
+              <td>{{ record.date }}</td>
+              <td>{{ record.description }}</td>
+              <td>{{ record.categoryR }}</td>
+              <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
+              <td>
+                <a href="{% url 'editRr' record.id %}"><img src="/static/img/edit.svg" alt="編輯"></a>
+                <a href="{% url 'delRr' record.id %}"><img src="/static/img/cancel-svgrepo-com.svg" alt="刪除"></a>
+              </td>
+              <!--<td class="no-border"><a class="button-change" href="{% url 'editRr' record.id %}">編輯</a></td>-->
+              <!--舊的編輯-->
+              <!--<td class="no-border"><a class="button-link-del" href="{% url 'delRr' record.id %}" >刪除</a></td>-->
+              <!--舊的刪除-->
+
+            </tr>
+            {% endfor %}
+          </table>
+          <a class="list" href="/addRrecord">
+            <p>新增收入紀錄</p>
+          </a>
+        </div> <!-- 左邊的表格-->
+        <div>
+          <table class="cinereousTable">
+            <caption>支出</caption>
+            <thead>
+              <th>日期</th>
+              <th>描述</th>
+              <th>種類</th>
+              <th style="text-align: right;">金額</th>
+              <th style="text-align: center;">控制</th>
+
+              {% for record in recordE %}
+              <tr>
+            </thead>
             <td hidden="hidden">{{record.id}}</td>
             <td>{{ record.date }}</td>
             <td>{{ record.description }}</td>
@@ -105,14 +107,14 @@
             </td>
             <!--<td class="no-border"><a class="button-change" href="{% url 'editEr' record.id %}">編輯</a></td>-->
             <!--<td class="no-border"><a href="{% url 'delEr' record.id %}" class="button-link-del">刪除</a></td>-->
-          </tr>
+            </tr>
 
-          {% endfor %}
-        </table>
-        <a class="list" href="/addErecord">
-          <p>新增支出紀錄</p>
-        </a>
-      </div>
+            {% endfor %}
+          </table>
+          <a class="list" href="/addErecord"> <!-- 新增 要加圖案-->
+            <p>新增支出紀錄</p>
+          </a>
+        </div>
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             var cells = document.querySelectorAll('.thousand-separator');

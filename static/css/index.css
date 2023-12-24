@@ -14,9 +14,23 @@ body {
     width: 25%; /* 调整左侧框的宽度 */
     flex-direction:column;
 
-    background-color: rgba(255, 245, 245); /* 设置左侧框的背景颜色 */
-    align-items: center; /*不知道可以幹嘛*/
+    background-color: rgb(0, 0, 0); /* 设置左侧框的背景颜色 */
     justify-content: space-between;
+  }
+  .list
+  {
+    color: white;
+    text-decoration: none; /* 移除链接的下划线效果 */
+    font-size:20px;
+  }
+  .list:hover{
+    color: rgba(255, 0, 0,0.5);
+    
+  }
+  .listtitle{
+    color: white;
+    font-size: 60px;
+    text-align: left;
   }
   
   .right-text {
@@ -58,21 +72,7 @@ body {
       text-align: left;
       padding: 8px;
   }*/
-  .list
-  {
-    color: purple;
-    text-decoration: none; /* 移除链接的下划线效果 */
-    font-size:20px;
-  }
-  .list:hover{
-    color: rgba(255, 0, 0,0.5);
-    
-  }
-  .listtitle{
-    color: purple;
-    font-size: 60px;
-    
-  }
+
   .thousand-separator {
     text-align: right;
   }
