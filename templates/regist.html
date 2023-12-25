@@ -1,62 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登入</title>
+    <title>註冊</title>
     <style>
-    
-    body{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: Arial, Helvetica, sans-serif;
-        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    .box 
-    {
-    width: 600px;
-    min-height: 400px;
-    margin: 10px auto;
-    text-align: center;
-    padding-bottom: 20px;
-    background-color: transparent;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-    form{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'poppins', sans-serif;
+        }
 
-    }      
-    form input{
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-    form .submit{
-        margin-top: 20px;
-        padding-right: 10px;
-    }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url(/static/img/img.jpg);
+            flex-direction: column;
+        }
+        .box{
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            height: 50%;
+            text-align: center;
+        }
+        .inputbox {
+            position: relative;
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .inputbox input {
+            width: 100%;
+            padding: 10px;
+            height: 50px;
+            border-radius: 40px;
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            outline: none;
+            color: #fff;
+            font-size: 1em;
+            transition:0.5s;
+        }
+
+        .inputbox span {
+            position: absolute;
+            left: 0px;
+            padding: 10px;
+            pointer-events: none;
+            color: #fff;
+            transition:0.5s;
+            text-transform:capitalize;
+        }
+        .inputbox input:valid~span,
+        .inputbox input:focus~span        
+        {
+        transform:translateX(10px) translateY(-7px);
+        font-size:0.8em;
+        padding: 0 10px;
+        letter-spacing: .2em;
+        color:#00dfc4;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-left:1px solid #00dfc4;
+        border-right: 1px solid #00dfc4;
+        }
+        .inputbox input:valid,
+        .inputbox input:focus       
+        {
+            border:1px solid #00dfc4;
+        }
     </style>
 </head>
+
 <body>
     <div class="box">
-        <h1>註冊</h1>
+    <h1 style="color: white;text-align: center;">註冊</h1>
     <form action="." method="post" name="form1">
         {% csrf_token %}
-        
-        
-            <span><input type="text" name="cName" id="cName" placeholder="請輸入用戶名"></span>
-            <span><input type="email" name="cEmail" id="cEmail" placeholder="請輸入email"></span>
-            <span><input type="password" name="password" id="password" placeholder="請輸入密碼" ></span>
-            <span class="submit"><input type="submit" value="確認送出"><input type="reset" value="重設"></span>
-            {{messages}}
-        
+        <div class="inputbox">
+            <input type="text" name="cName" id="cName" required="required">
+            <span>username</span>
+        </div>
+        <div class="inputbox">
+            <input type="email" name="cEmail" id="cEmail" required="required">
+            <span>gmail</span>
+        </div>
+        <div class="inputbox">
+            <input type="password" name="password" id="password" required="required">
+            <span>password</span>
+        </div>
+        <span class="submit"><input type="submit" value="確認送出"><input type="reset" value="重設"></span>
+    
+
     </form>
-    </div>
+</div>
 </body>
+
 </html>
