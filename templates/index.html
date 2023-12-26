@@ -13,24 +13,18 @@
   <div class="container">
     <div class="left-box">
       <div class="listtitle">雲記帳</div>
-      <div>
-        <!--<a class="list" href="/addRrecord">
-          <p>新增收入紀錄</p>
-        </a>
-        <a class="list" href="/addErecord">
-          <p>新增支出紀錄</p>
-        </a>
-         -->
-        <a class="list" href="/addcategory">
+      <div class="list">
+        <a href="/addcategory">
           <img src="/static/img/playlist_add_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-          <span style="text-align: center;">新增種類</span>
+          <span>新增種類</span>
         </a>
-        <a class="list" href="/delcategory">
-          <p>刪除種類</p>
+        <a href="/delcategory">
+          <img src="/static/img/playlist_remove_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+          <span>刪除種類</span>
         </a>
         <p class="list">圖表分析</p>
       </div>
-      <div style="margin-bottom:20px; color:white">
+      <div style="margin-bottom:20px; color:#4b0082">
         聯繫我們:0912-xxx-xxx
         Gmail:xxx@gmai.com
       </div>
@@ -79,7 +73,7 @@
             </tr>
             {% endfor %}
           </table>
-          <a class="list" href="/addRrecord">
+          <a style="color:black;text-decoration: none;" href="/addRrecord">
             <p>新增收入紀錄</p>
           </a>
         </div> <!-- 左邊的表格-->
@@ -111,7 +105,7 @@
 
             {% endfor %}
           </table>
-          <a class="list" href="/addErecord"> <!-- 新增 要加圖案-->
+          <a style="color:black;text-decoration: none;" href="/addErecord"> <!-- 新增 要加圖案-->
             <p>新增支出紀錄</p>
           </a>
         </div>
