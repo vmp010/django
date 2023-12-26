@@ -27,6 +27,7 @@ class Record_E1(models.Model):
     description = CharField(max_length=300,null=True)
     categoryE 	= CharField(max_length=50)	
     cash 	= IntegerField()
+    is_settled = models.BooleanField(default=False)  # 新增用來標記是否已經結算的欄位
     def __str__(self) :
             return self.description
 
@@ -42,5 +43,6 @@ class Record_R1(models.Model):
     description = CharField(max_length=300,null=True)
     categoryR 	= CharField(max_length=50)
     cash 	= IntegerField()
+    is_settled = models.BooleanField(default=False)  # 新增用來標記是否已經結算的欄位
     def __str__(self) :
             return self.description
