@@ -1,30 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>刪除種類</title>
-</head>
-<body>
-    <form action="." method="post" name="form1">
-        {% csrf_token %} <!--啟動csrf防護，否則會error -->
-        <table cellspacing="1">
-        <tr><td><h2>刪除種類-收入：</h2></td><td><select  id="delcategoryR" name="delR">
-            {% for cR in categoryR %}
-            <option value="{{cR}}" >{{cR}}</option>
-            {% endfor %}
-            <tr><td><input type="submit" value="送出" name="buttomR" id="buttomR"></td>
-        <td><input type="reset" value="重設" name="buttomR2" id="buttomR2"></td></tr>
-        </select></td></tr>
-        <tr><td><h2>刪除種類-支出：</h2></td><td><select  id="delcategoryE" name="delE">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'poppins', sans-serif;
+        }
 
-            {% for cE in categoryE  %}
-            <option value="{{cE}}">{{cE}}</option>
-            {% endfor %}
-        </select></td></tr>
-        <tr><td><input type="submit" value="送出" name="buttom1" id="buttom1"></td>
-        <td><input type="reset" value="重設" name="buttom2" id="buttom2"></td></tr>
-        
-    </form>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /*background-color: rgba(100, 100, 225, 0.719);*/
+            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        form{
+            text-align: center;
+
+        }
+        select {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            width: 100px;
+        }
+
+        .box {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            height: 300px;
+            margin: 10px;
+        }
+
+        .box h2 {
+            color: white;
+        }
+
+        .box input {
+            font-size: 16px;
+        }
+        .dialog{
+            font-size: 40px;
+            padding: 2px;
+            background-color: transparent;
+            border: none;
+        }
+
+        .dialog a {
+            text-decoration: none;
+            color: black;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="dialog">
+            <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com.svg" alt=""></a>
+        </div>
+
+        <form action="." method="post" name="form1">
+            {% csrf_token %} <!--啟動csrf防護，否則會error -->
+            <h2>刪除種類-收入：</h2>
+            <select id="delcategoryR" name="delR">
+                {% for cR in categoryR %}
+                <option value="{{cR}}">{{cR}}</option>
+                {% endfor %}
+                <input type="submit" value="送出" name="buttomR" id="buttomR">
+                <input type="reset" value="重設" name="buttomR2" id="buttomR2">
+            </select>
+            <h2>刪除種類-支出：</h2>
+            <select id="delcategoryE" name="delE">
+
+                {% for cE in categoryE %}
+                <option value="{{cE}}">{{cE}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="送出" name="buttom1" id="buttom1">
+            <input type="reset" value="重設" name="buttom2" id="buttom2">
+
+        </form>
+    </div>
 </body>
+
 </html>
