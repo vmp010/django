@@ -4,7 +4,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import fontManager
-
+from django.shortcuts import render
+import json
 
 
 
@@ -194,7 +195,10 @@ def analysisE(request):
      plt.grid(axis='y')
      x=plt.show()
      return render(request,'analysisE.html',locals())
-    
+def chart_data(request):
+    data = [5, 10, 15, 20, 25]
+    context = {'data': json.dumps(data)}
+    return render(request, 'chart.html', context)    
   
 
 

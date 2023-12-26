@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .views import chart_data
 from projectapp import views
+
 urlpatterns = [
+    path('chart/', chart_data, name='chart_data'),
     path('admin/', admin.site.urls),
     path('index/',views.recordall_and_cashflow,name='index'),
     path('addcategory/',views.addcategory),
