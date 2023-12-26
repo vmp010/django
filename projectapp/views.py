@@ -11,7 +11,10 @@ from matplotlib.font_manager import fontManager
 
 from .models import Record_E1,Record_R1,CategoryE,CategoryR,login_1
 from projectapp.forms import addcategoryF,delselect,loginF,addrecordF,delrecordEF,registF,delrecordRF,editRrecordF,editErecordF
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+@login_required
 def recordall_and_cashflow(request,pk=None):
     recordE=Record_E1.objects.filter(user=pk).order_by('date')
     recordR=Record_R1.objects.filter(user=pk).order_by('date')
@@ -24,7 +27,9 @@ def recordall_and_cashflow(request,pk=None):
     outcome=sum(outcome_list) if len(outcome_list)!=0 else 0
 
     net = income -outcome
+   
     return render(request,'index.html',locals())
+@login_required
 def addcategory(request):
     if request.method == 'POST':
         addform=addcategoryF(request.POST)
@@ -42,7 +47,7 @@ def get_category_option(request):
     categoryR=CategoryR.objects.all()
     categoryE=CategoryE.objects.all()
     # return render(request,'delcategory.html',locals())
-        
+@login_required    
 def delcategory(request):
     categoryR=CategoryR.objects.all()
     categoryE=CategoryE.objects.all()
@@ -58,7 +63,7 @@ def delcategory(request):
     except:
         messange='未接收資料'
     return render(request,'delcategory.html',locals())
-
+@login_required
 def addErecord(request):
     cEselect=CategoryE.objects.all()
     if request.method=='POST':
@@ -75,7 +80,7 @@ def addErecord(request):
         addrecord=addrecordF()
         messages='新增收入紀錄'
     return render(request,'addErecord.html',locals())
-
+@login_required
 def addRrecord(request):
     cRselect=CategoryR.objects.all()
     if request.method=='POST':
@@ -134,7 +139,7 @@ def registe(request):
         registerform=registF()
         messages='請輸入帳號密碼'
     return render(request,'regist.html',locals())
-
+@login_required
 def delRr(request,pk=None):
     revenue=Record_R1.objects.get(id=pk)
     if request.method =='POST':
@@ -142,6 +147,7 @@ def delRr(request,pk=None):
         return redirect('/index')
     context={'revenue':revenue}
     return render(request,'delRr.html',context)
+@login_required
 def delEr(request,pk=None):
     expense=Record_E1.objects.get(id=pk)
     if request.method =='POST':
@@ -149,7 +155,7 @@ def delEr(request,pk=None):
         return redirect('/index')
     context={'expense':expense}
     return render(request,'delEr.html',context)
-
+@login_required
 def editRr(request,pk=None):
     revenue=Record_R1.objects.get(id=pk)
     form=editRrecordF(instance=revenue)
@@ -160,6 +166,7 @@ def editRr(request,pk=None):
             return redirect('/index')
     context={'form':form}
     return render(request,'editRr.html',context)
+@login_required
 def editEr(request,pk=None):
     expense=Record_E1.objects.get(id=pk)
     form=editErecordF(instance=expense)
@@ -171,6 +178,7 @@ def editEr(request,pk=None):
     context={'form':form}
     return render(request,'editEr.html',context)
 
+@login_required
 def analysisE(request):
      qs=Record_E1.objects.all()
      df=io.read_frame(qs,fieldnames=['date','description','categoryE','cash'])
