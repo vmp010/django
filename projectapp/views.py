@@ -9,15 +9,15 @@ from matplotlib.font_manager import fontManager
 
 
 
-from .models import Record_E,Record_R,CategoryE,CategoryR,login_1
+from .models import Record_E1,Record_R1,CategoryE,CategoryR,login_1
 from projectapp.forms import addcategoryF,delselect,loginF,addrecordF,delrecordEF,registF,delrecordRF,editRrecordF,editErecordF
 # Create your views here.
-def recordall_and_cashflow(request):
-    recordE=Record_E.objects.all().order_by('date')
-    recordR=Record_R.objects.all().order_by('date')
+def recordall_and_cashflow(request,pk=None):
+    recordE=Record_E1.objects.filter(user=pk).order_by('date')
+    recordR=Record_R1.objects.filter(user=pk).order_by('date')
     
-    recordAllE=Record_E.objects.filter()
-    recordAllR=Record_R.objects.filter()
+    recordAllE=Record_E1.objects.filter(user=pk)
+    recordAllR=Record_R1.objects.filter(user=pk)
     income_list=[record.cash for record in recordAllR]
     outcome_list=[record.cash for record in recordAllE]
     income=sum(income_list) if len(income_list)!=0 else 0
@@ -68,7 +68,7 @@ def addErecord(request):
             description=request.POST['description']
             categoryE=request.POST['categoryE']
             cash=request.POST['cash']
-            unit=Record_E.objects.create(date=date,description=description,categoryE=categoryE,cash=cash)
+            unit=Record_E1.objects.create(date=date,description=description,categoryE=categoryE,cash=cash)
             unit.save()#寫入資料庫
             return redirect('/index')
     else:
@@ -85,7 +85,7 @@ def addRrecord(request):
             description=request.POST['description']
             categoryR=request.POST['categoryR']
             cash=request.POST['cash']
-            unit=Record_R.objects.create(date=date,description=description,categoryR=categoryR,cash=cash)
+            unit=Record_R1.objects.create(date=date,description=description,categoryR=categoryR,cash=cash)
             unit.save()#寫入資料庫
             return redirect('/index')
     else:
@@ -136,14 +136,14 @@ def registe(request):
     return render(request,'regist.html',locals())
 
 def delRr(request,pk=None):
-    revenue=Record_R.objects.get(id=pk)
+    revenue=Record_R1.objects.get(id=pk)
     if request.method =='POST':
         revenue.delete()
         return redirect('/index')
     context={'revenue':revenue}
     return render(request,'delRr.html',context)
 def delEr(request,pk=None):
-    expense=Record_E.objects.get(id=pk)
+    expense=Record_E1.objects.get(id=pk)
     if request.method =='POST':
         expense.delete()
         return redirect('/index')
@@ -151,7 +151,7 @@ def delEr(request,pk=None):
     return render(request,'delEr.html',context)
 
 def editRr(request,pk=None):
-    revenue=Record_R.objects.get(id=pk)
+    revenue=Record_R1.objects.get(id=pk)
     form=editRrecordF(instance=revenue)
     if request.method =='POST':
         form=editRrecordF(request.POST,instance=revenue)
@@ -161,7 +161,7 @@ def editRr(request,pk=None):
     context={'form':form}
     return render(request,'editRr.html',context)
 def editEr(request,pk=None):
-    expense=Record_E.objects.get(id=pk)
+    expense=Record_E1.objects.get(id=pk)
     form=editErecordF(instance=expense)
     if request.method =='POST':
         form=editErecordF(request.POST,instance=expense)
@@ -172,7 +172,7 @@ def editEr(request,pk=None):
     return render(request,'editEr.html',context)
 
 def analysisE(request):
-     qs=Record_E.objects.all()
+     qs=Record_E1.objects.all()
      df=io.read_frame(qs,fieldnames=['date','description','categoryE','cash'])
      plt.rc('font', family='Microsoft JhengHei')
 
