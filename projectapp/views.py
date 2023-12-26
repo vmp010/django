@@ -1,9 +1,7 @@
 from django.shortcuts import render,redirect
 from django_pandas import io
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.font_manager import fontManager
 from django.shortcuts import render
 import json
 
@@ -11,10 +9,50 @@ import json
 
 
 from .models import Record_E1,Record_R1,CategoryE,CategoryR,login_1
-from projectapp.forms import addcategoryF,delselect,loginF,addrecordF,delrecordEF,registF,delrecordRF,editRrecordF,editErecordF
+from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth import authenticate, login
+
+
 # Create your views here.
+def registe(request):
+    if request.method =='POST':
+        registerform=registF(request.POST)
+        if registerform.is_valid():
+            cName=registerform.cleaned_data['cName']
+            password=registerform.cleaned_data['password']
+            cEmail=registerform.cleaned_data['cEmail']
+            if login_1.objects.filter(cName=cName).exists():
+                messages='已註冊過帳號'
+            elif login_1.objects.filter(cEmail=cEmail).exists():
+                messages='已註冊過此email'
+            else:   
+                unit=login_1.objects.create(cName=cName,cEmail=cEmail,password=password)
+                unit.save()
+                return redirect('login')
+    else:
+        registerform=registF()
+        messages='請輸入帳號密碼'
+    return render(request,'regist.html',locals())
+def loginpage(request):
+    getdatabase=login_1.objects.all()
+    if request.method =='POST':
+        loginform=loginF(request.POST)
+        if loginform.is_valid():
+            cName=loginform.cleaned_data['cName']
+            password=loginform.cleaned_data['password']
+            for check in getdatabase:
+                if check.cName == cName and check.password == password:
+                    messages='帳號密碼正確'
+                    return redirect('/index')
+                else:
+                    messages='帳號密碼錯誤'
+    else:
+        loginform=loginF()
+        messages='請輸入帳號密碼'
+    return render(request,'login.html',locals())
+
 @login_required
 def recordall_and_cashflow(request,pk=None):
     recordE=Record_E1.objects.filter(user=pk).order_by('date')
@@ -99,47 +137,13 @@ def addRrecord(request):
         messages='新增收入紀錄'
     return render(request,'addRrecord.html',locals())
 
-def loginpage(request):
-    getdatabase=login_1.objects.all()
-    if request.method =='POST':
-        loginform=loginF(request.POST)
-        if loginform.is_valid():
-            cName=loginform.cleaned_data['cName']
-            password=loginform.cleaned_data['password']
-            for check in getdatabase:
-                if check.cName == cName and check.password == password:
-                    messages='帳號密碼正確'
-                    return redirect('/index')
-                else:
-                    messages='帳號密碼錯誤'
-    else:
-        loginform=loginF()
-        messages='請輸入帳號密碼'
-    return render(request,'login.html',locals())
 
 
 
 
 
-def registe(request):
-    if request.method =='POST':
-        registerform=registF(request.POST)
-        if registerform.is_valid():
-            cName=registerform.cleaned_data['cName']
-            password=registerform.cleaned_data['password']
-            cEmail=registerform.cleaned_data['cEmail']
-            if login_1.objects.filter(cName=cName).exists():
-                messages='已註冊過帳號'
-            elif login_1.objects.filter(cEmail=cEmail).exists():
-                messages='已註冊過此email'
-            else:   
-                unit=login_1.objects.create(cName=cName,cEmail=cEmail,password=password)
-                unit.save()
-                return redirect('login')
-    else:
-        registerform=registF()
-        messages='請輸入帳號密碼'
-    return render(request,'regist.html',locals())
+
+
 @login_required
 def delRr(request,pk=None):
     revenue=Record_R1.objects.get(id=pk)
