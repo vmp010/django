@@ -71,11 +71,9 @@ def recordall_and_cashflow(request):
     #     return redirect('login')
 @login_required
 def addcategory(request):
-    if request.method == 'POST':
-        addform=addcategoryF(request.POST)
-        if addform.is_valid():   
-            categoryR=addform.cleaned_data['addcategoryR']
-            categoryE=addform.cleaned_data['addcategoryE']
+    if request.method == 'POST':   
+            categoryR=request.POST['addcategoryR']
+            categoryE=request.POST['addcategoryE']
             unitR=CategoryR.objects.get_or_create(category=categoryR)
             # unitR.save() get_otcreate 會自動儲存
             unitE=CategoryE.objects.get_or_create(category=categoryE)
