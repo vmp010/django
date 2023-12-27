@@ -14,7 +14,6 @@
             /*background-color: rgba(100, 100, 225, 0.719);*/
             background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-<<<<<<< HEAD
         form{
             text-align: center;
 
@@ -63,13 +62,14 @@
         input[type='text']{
             font-size:20px;
         }
-=======
->>>>>>> 1647eb586019799ffdd29992957b52618a9c5975
     </style>
 </head>
 
 <body>
-    <div>
+    <div class="box">
+        <div class="dialog">
+            <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com.svg" alt=""></a>
+        </div>
         <form action="." method="post" name="form1">
             {% csrf_token %} <!--啟動csrf防護，否則會error -->
             <h2>添加種類-收入：</h2>
