@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Record_E1, CategoryE,Record_R1,CategoryR,login_1
+from .models import Record_E1, CategoryE,Record_R1,CategoryR
 
 
 # Register your models here.
@@ -28,5 +28,5 @@ admin.site.register(Record_E1,RecordEAdmin)
 admin.site.register(CategoryE)
 admin.site.register(Record_R1,RecordRAdmin)
 admin.site.register(CategoryR)
-admin.site.register(login_1,loginAdmin)
+
 

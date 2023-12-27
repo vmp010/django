@@ -1,5 +1,5 @@
 from django import forms
-from projectapp.models import CategoryE,CategoryR,Record_E1,Record_R1,login_1
+from projectapp.models import CategoryE,CategoryR,Record_E1,Record_R1
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 class addcategoryF(forms.Form):
