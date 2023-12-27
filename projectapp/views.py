@@ -116,7 +116,7 @@ def addErecord(request):
             return redirect('/index')
     else:
         addrecord=addrecordF()
-        messages='新增收入紀錄'
+        messages='新增支出紀錄'
     return render(request,'addErecord.html',locals())
 @login_required
 def addRrecord(request):

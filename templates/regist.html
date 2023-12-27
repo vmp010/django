@@ -28,7 +28,7 @@
             padding: 20px;
             border-radius: 10px;
             width: 30%;
-            height: 50%;
+            height: 65%;
             text-align: center;
         }
 
@@ -51,7 +51,7 @@
             transition: 0.5s;
         }
 
-        .inputbox span {
+        /* .inputbox span {
             position: absolute;
             left: 0px;
             padding: 15px;
@@ -59,9 +59,9 @@
             color: #fff;
             transition: 0.5s;
             text-transform: capitalize;
-        }
+        } */
 
-        .inputbox input:valid~span,
+        /* .inputbox input:valid~span,
         .inputbox input:focus~span {
             transform: translateX(10px) translateY(-7px);
             font-size: 0.8em;
@@ -71,7 +71,7 @@
             background-color: rgba(0, 0, 0, 0.8);
             border-left: 1px solid #00dfc4;
             border-right: 1px solid #00dfc4;
-        }
+        } */
 
         .inputbox input:valid,
         .inputbox input:focus {
@@ -90,11 +90,14 @@
         }
 
         .submit input {
-            font-size: 16px;
-            min-width: 80px;
-            border-radius: 10px;
+            font-size: 20px;
+            min-width: 90px;
+            border-radius: 6px;
             margin-right: 10px;
             margin-left: 10px;
+        }
+        .regiset{
+            font-size:20px;
         }
     </style>
 </head>
@@ -102,27 +105,10 @@
 <body>
     <div class="box">
         <div class="dialog">
-            <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com (1).svg" alt=""></a>
-        <!-- </div>
-        <h1 style="color: white;text-align: center;">註冊</h1>
-        <form action="." method="post" name="form1">
-            {% csrf_token %}
-            <div class="inputbox">
-                <input type="text" name="cName" id="cName" required="required">
-                <span>username</span>
-            </div>
-            <div class="inputbox">
-                <input type="email" name="cEmail" id="cEmail" required="required">
-                <span>gmail</span>
-            </div>
-            <div class="inputbox">
-                <input type="password" name="password" id="password" required="required">
-                <span>password</span>
-            </div>
-            <span class="submit"><input type="submit" value="確認送出"><input type="reset" value="重設"></span>
-
-
-        </form> -->
+            <a href="{% url 'login' %}"><img src="/static/img/back-svgrepo-com (1).svg" alt=""></a>
+        </div>
+        <h1>註冊</h1>
+        <div class="regiset">
         {% load crispy_forms_tags %}
         <form action="." method="post" name="form1">
             {% csrf_token %}
@@ -136,7 +122,8 @@
             <div class="inputbox">
                 {{ registerform.password|as_crispy_field }}
             </div>
-            <span class="submit"><input type="submit" value="確認送出"><input type="reset" value="重設"></span>
+            <span class="submit"><input type="submit" value="確認"><input type="reset" value="重設"></span>
+        </div>
     </div>
 </body>
 
