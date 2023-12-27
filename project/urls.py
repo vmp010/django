@@ -37,7 +37,7 @@ urlpatterns = [
     path('editRr/<int:pk>',views.editRr,name='editRr'), #編輯收入紀錄
     path('editEr/<int:pk>',views.editEr,name='editEr'), #編輯支出紀錄
 
-    path('analysisE/',views.analysisE,name='analysisE'), #分析
-
+    # path('analysisE/',views.analysisE,name='analysisE'), #分析
+    path('charts/',views.chart_data,name='charts'), #分析
 
 ]

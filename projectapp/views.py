@@ -56,24 +56,23 @@ def loginpage(request):
 
 @login_required
 def recordall_and_cashflow(request):
-    if request.user.is_authenticated:
-         user=request.user
-         user_data = User.objects.filter(id=user.id)
-    # recordE=Record_E1.objects.filter(user=pk).order_by('date')
-    # recordR=Record_R1.objects.filter(user=pk).order_by('date')
+    # if request.user.is_authenticated:
+    #      user=request.user
+    #      user_data = User.objects.filter(id=user.id)
+    recordE=Record_E1.objects.filter().order_by('date')
+    recordR=Record_R1.objects.filter().order_by('date')
     
-    # recordAllE=Record_E1.objects.filter(user=pk)
-    # recordAllR=Record_R1.objects.filter(user=pk)
-         income_list=[record.cash for record in user_data]
-         outcome_list=[record.cash for record in user_data]
-         income=sum(income_list) if len(income_list)!=0 else 0
-         outcome=sum(outcome_list) if len(outcome_list)!=0 else 0
+    recordAllE=Record_E1.objects.filter()
+    recordAllR=Record_R1.objects.filter()
+    income_list=[record.cash for record in recordAllR]
+    outcome_list=[record.cash for record in recordAllE]
+    income=sum(income_list) if len(income_list)!=0 else 0
+    outcome=sum(outcome_list) if len(outcome_list)!=0 else 0
 
-         net = income -outcome
-   
-         return render(request,'index.html',locals())
-    else:
-        return redirect('login')
+    net = income -outcome
+    return render(request,'index.html',locals())
+    # else:
+    #     return redirect('login')
 @login_required
 def addcategory(request):
     if request.method == 'POST':
@@ -208,7 +207,7 @@ def analysisE(request):
 def chart_data(request):
     data = [5, 10, 15, 20, 25]
     context = {'data': json.dumps(data)}
-    return render(request, 'chart.html', context)    
+    return render(request, 'charts.html', context)    
   
 
 
