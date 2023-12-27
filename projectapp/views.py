@@ -189,7 +189,7 @@ def chart_data(request):
     dataR = [record.cash for record in recordAllR]
     contextE = {'data': json.dumps(dataE)}
     contextR = {'data': json.dumps(dataR)}
-    return render(request, 'charts.html', locals())    
+    return render(request, 'charts.html', contextE,contextR)    
   
 
 
