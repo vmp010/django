@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 
 
-from .models import Record_E1,Record_R1,CategoryE,CategoryR,login_1
+from .models import Record_E1,Record_R1,CategoryE,CategoryR
 from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF
 from django.contrib.auth.decorators import login_required
 
