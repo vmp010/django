@@ -39,19 +39,14 @@ def registe(request):
 def loginpage(request):
     getdatabase=User.objects.all()
     if request.method =='POST':
-        loginform=loginF(request.POST)
-        if loginform.is_valid():
-            cName=loginform.cleaned_data['cName']
-            password=loginform.cleaned_data['password']
-            for check in getdatabase:
-                if check.username == cName and check.password == password:
-                    messages='帳號密碼正確'
-                    return redirect('/index')
-                else:
-                    messages='帳號密碼錯誤'
-    else:
-        loginform=loginF()
-        messages='請輸入帳號密碼'
+        cName=request.POST['cName']
+        password=request.POST['password']
+        user=authenticate(request,username=cName,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('/index')
+            
+            
     return render(request,'login.html',locals())
 
 @login_required
@@ -59,11 +54,12 @@ def recordall_and_cashflow(request):
     # if request.user.is_authenticated:
     #      user=request.user
     #      user_data = User.objects.filter(id=user.id)
-    recordE=Record_E1.objects.filter().order_by('date')
-    recordR=Record_R1.objects.filter().order_by('date')
+    corrent_user=request.user
+    # recordE=Record_E1.objects.filter().order_by('date')
+    # recordR=Record_R1.objects.filter().order_by('date')
     
-    recordAllE=Record_E1.objects.filter()
-    recordAllR=Record_R1.objects.filter()
+    recordAllE=Record_E1.objects.filter(user=corrent_user).order_by('date')
+    recordAllR=Record_R1.objects.filter(user=corrent_user).order_by('date')
     income_list=[record.cash for record in recordAllR]
     outcome_list=[record.cash for record in recordAllE]
     income=sum(income_list) if len(income_list)!=0 else 0
@@ -110,11 +106,12 @@ def addErecord(request):
     if request.method=='POST':
         addrecord=addrecordF(request.POST)
         if addrecord.is_valid():
+            user=request.user
             date=request.POST['date']
             description=request.POST['description']
             categoryE=request.POST['categoryE']
             cash=request.POST['cash']
-            unit=Record_E1.objects.create(date=date,description=description,categoryE=categoryE,cash=cash)
+            unit=Record_E1.objects.create(user=user,date=date,description=description,categoryE=categoryE,cash=cash)
             unit.save()#寫入資料庫
             return redirect('/index')
     else:
@@ -125,12 +122,12 @@ def addErecord(request):
 def addRrecord(request):
     cRselect=CategoryR.objects.all()
     if request.method=='POST':
-            username=request.POST['username']
+            user=request.user
             date=request.POST['date']
             description=request.POST['description']
             categoryR=request.POST['categoryR']
             cash=request.POST['cash']
-            unit=Record_R1.objects.create(date=date,description=description,categoryR=categoryR,cash=cash)
+            unit=Record_R1.objects.create(user=user,date=date,description=description,categoryR=categoryR,cash=cash)
             unit.save()#寫入資料庫
             return redirect('/index')
     else:

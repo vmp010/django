@@ -23,8 +23,13 @@
             </div>
 
             <input type="submit" value="login" class="button">
+            {% if user.is_authenticated %}
             <div class="text">
-                {{messages}}
+                請輸入帳號密碼
+            {% else %}
+            <div class="text">
+                請輸入正確的帳號密碼
+            {% endif %}
                 <a href="/registe" style="text-align: right;">註冊</a>
             </div>
 
