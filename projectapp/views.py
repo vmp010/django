@@ -182,6 +182,8 @@ def editEr(request,pk=None):
 
 @login_required
 def chart_data(request):
+    #  recordAllE=Record_E1.objects.filter(user=corrent_user).order_by('date')
+    
     data = [5, 10, 15, 20, 25]
     context = {'data': json.dumps(data)}
     return render(request, 'charts.html', context)    
