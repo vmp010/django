@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from projectapp.views import chart_data  # 修改這一行的 import 語句
 from projectapp import views
 
 urlpatterns = [
