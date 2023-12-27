@@ -10,7 +10,7 @@
 <body>
     <canvas id="myChart"></canvas>
     <script>
-        var data = {{ data|safe }};
+        var data = "{{ data|safe }}";
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
