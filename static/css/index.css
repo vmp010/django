@@ -64,6 +64,9 @@ body {
     color: #333; /* 设置字体颜色，根据需要调整 */
     margin-bottom: 10px; /* 设置标题与表格内容之间的下边距 */
   }
+  .table-all img{
+    text-align: center;
+  }
   
 
   .thousand-separator {
