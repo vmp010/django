@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/login.css">
     <title>登入</title>
-  
+
 </head>
+
 <body>
     <div class="box">
         <form action="." method="post" name="form1">
@@ -17,16 +19,18 @@
                 <input type="text" name="cName" id="cName" placeholder="username">
             </div>
             <div class="input-box">
-                <input type="password" name="password" id="password" placeholder="password" >
+                <input type="password" name="password" id="password" placeholder="password">
             </div>
 
             <input type="submit" value="login" class="button">
+            <div class="text">
+                {{messages}}
+                <a href="/registe" style="text-align: right;">註冊</a>
+            </div>
 
-            {{messages}}
-            <a href="/registe">註冊</a>
-            
 
         </form>
     </div>
 </body>
+
 </html>
