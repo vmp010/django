@@ -1,5 +1,7 @@
 from django import forms
 from projectapp.models import CategoryE,CategoryR,Record_E1,Record_R1,login_1
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 class addcategoryF(forms.Form):
     addcategoryR=forms.CharField(max_length=20,required=True)
     addcategoryE=forms.CharField(max_length=20,required=True)
@@ -56,10 +58,10 @@ class editErecordF(forms.ModelForm):
                 'categoryE':forms.Select(choices=Choice,attrs={'class':'form-select'}),
                 'cash':forms.NumberInput(attrs={'class':'form-control'})}
         labels={'date':'日期','description':'說明','categoryE':'類別','cash':'金額'}
-class registF(forms.Form):
-    cName=forms.CharField(max_length=20,required=True)
-    password=forms.CharField(max_length=32, widget=forms.PasswordInput())
-    cEmail=forms.EmailField(max_length=100,required=True)
+class registF(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','email' ,'password']  # 定义表单中包含的字段
     
 
    

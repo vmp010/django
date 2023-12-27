@@ -4,7 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from django.shortcuts import render
 import json
-
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 
@@ -20,15 +21,15 @@ def registe(request):
     if request.method =='POST':
         registerform=registF(request.POST)
         if registerform.is_valid():
-            cName=registerform.cleaned_data['cName']
+            cName=registerform.cleaned_data['username']
             password=registerform.cleaned_data['password']
-            cEmail=registerform.cleaned_data['cEmail']
-            if login_1.objects.filter(cName=cName).exists():
+            cEmail=registerform.cleaned_data['email']
+            if User.objects.filter(username=cName).exists():
                 messages='已註冊過帳號'
-            elif login_1.objects.filter(cEmail=cEmail).exists():
+            elif User.objects.filter(email=cEmail).exists():
                 messages='已註冊過此email'
             else:   
-                unit=login_1.objects.create(cName=cName,cEmail=cEmail,password=password)
+                unit=User.objects.create(username=cName,email=cEmail,password=password)
                 unit.save()
                 return redirect('login')
     else:
@@ -36,14 +37,14 @@ def registe(request):
         messages='請輸入帳號密碼'
     return render(request,'regist.html',locals())
 def loginpage(request):
-    getdatabase=login_1.objects.all()
+    getdatabase=User.objects.all()
     if request.method =='POST':
         loginform=loginF(request.POST)
         if loginform.is_valid():
             cName=loginform.cleaned_data['cName']
             password=loginform.cleaned_data['password']
             for check in getdatabase:
-                if check.cName == cName and check.password == password:
+                if check.username == cName and check.password == password:
                     messages='帳號密碼正確'
                     return redirect('/index')
                 else:
@@ -54,20 +55,25 @@ def loginpage(request):
     return render(request,'login.html',locals())
 
 @login_required
-def recordall_and_cashflow(request,pk=None):
-    recordE=Record_E1.objects.filter(user=pk).order_by('date')
-    recordR=Record_R1.objects.filter(user=pk).order_by('date')
+def recordall_and_cashflow(request):
+    if request.user.is_authenticated:
+         user=request.user
+         user_data = User.objects.filter(id=user.id)
+    # recordE=Record_E1.objects.filter(user=pk).order_by('date')
+    # recordR=Record_R1.objects.filter(user=pk).order_by('date')
     
-    recordAllE=Record_E1.objects.filter(user=pk)
-    recordAllR=Record_R1.objects.filter(user=pk)
-    income_list=[record.cash for record in recordAllR]
-    outcome_list=[record.cash for record in recordAllE]
-    income=sum(income_list) if len(income_list)!=0 else 0
-    outcome=sum(outcome_list) if len(outcome_list)!=0 else 0
+    # recordAllE=Record_E1.objects.filter(user=pk)
+    # recordAllR=Record_R1.objects.filter(user=pk)
+         income_list=[record.cash for record in user_data]
+         outcome_list=[record.cash for record in user_data]
+         income=sum(income_list) if len(income_list)!=0 else 0
+         outcome=sum(outcome_list) if len(outcome_list)!=0 else 0
 
-    net = income -outcome
+         net = income -outcome
    
-    return render(request,'index.html',locals())
+         return render(request,'index.html',locals())
+    else:
+        return redirect('login')
 @login_required
 def addcategory(request):
     if request.method == 'POST':
