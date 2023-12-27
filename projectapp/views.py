@@ -185,12 +185,11 @@ def chart_data(request):
     corrent_user=request.user
     recordAllE=Record_E1.objects.filter(user=corrent_user).order_by('date')
     recordAllR=Record_R1.objects.filter(user=corrent_user).order_by('date')
-    # dataE = [record.cash for record in recordAllE]
-    # dataR = [record.cash for record in recordAllR]
-    data=[5,10,15,20,25]
-    context = {'data': json.dumps(data)}
-
-    return render(request, 'charts.html', context)    
+    dataE = [record.cash for record in recordAllE]
+    dataR = [record.cash for record in recordAllR]
+    contextE = {'data': json.dumps(dataE)}
+    contextR = {'data': json.dumps(dataR)}
+    return render(request, 'charts.html', locals())    
   
 
 
