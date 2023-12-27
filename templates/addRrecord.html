@@ -16,6 +16,7 @@
     
     <form action="." method="post" name="form1">
         {% csrf_token %}
+             <input type="hidden" name="username" value="{{ request.user.username}}">
             <span>日期</span>
             <input type="date" name="date" id="date">
             <span>備註</span>

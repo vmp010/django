@@ -5,7 +5,7 @@ from django.db import models
 
 from django.db.models import CharField,DateField,ForeignKey,IntegerField,EmailField
 from datetime import datetime,timedelta
-
+from django.contrib.auth.models import User
 # Create your models here.
 # BALANCE_TYPE = ((u'收入',u'收入'),(u'支出',u'支出'))	#元組 tuple：可以視為不可改變的串列 ((key,value),(key,value))
 
@@ -23,7 +23,7 @@ class CategoryR(models.Model):
         return self.category
 
 class Record_E1(models.Model):
-    user=ForeignKey('login_1',on_delete=models.CASCADE,null=True)
+    user=ForeignKey(User,on_delete=models.CASCADE,null=True)
     date 	= DateField()
     description = CharField(max_length=300,null=True)
     categoryE 	= CharField(max_length=50)	
@@ -53,14 +53,14 @@ class Record_E1(models.Model):
         else:
             return cls.objects.none()  # 如果不是每月的第一天，返回空查詢集合
 
-class login_1(models.Model):
-     cName= CharField(max_length=8,null=False)
-     password=CharField(max_length=50,null=False)
-     cEmail=EmailField(max_length=100)
-     def __str__(self):
-          return self.cName
+# class login_1(models.Model):
+#      cName= CharField(max_length=8,null=False)
+#      password=CharField(max_length=50,null=False)
+#      cEmail=EmailField(max_length=100)
+#      def __str__(self):
+#           return self.cName
 class Record_R1(models.Model):
-    user=ForeignKey(login_1,on_delete=models.CASCADE,null=True)
+    user=ForeignKey(User,on_delete=models.CASCADE,null=True)
     date 	= DateField()
     description = CharField(max_length=300,null=True)
     categoryR 	= CharField(max_length=50)

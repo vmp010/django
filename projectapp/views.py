@@ -87,10 +87,7 @@ def addcategory(request):
             return redirect('/index')
     return render(request,'addcategory.html',locals())
 
-def get_category_option(request):
-    categoryR=CategoryR.objects.all()
-    categoryE=CategoryE.objects.all()
-    # return render(request,'delcategory.html',locals())
+
 @login_required    
 def delcategory(request):
     categoryR=CategoryR.objects.all()
@@ -128,8 +125,7 @@ def addErecord(request):
 def addRrecord(request):
     cRselect=CategoryR.objects.all()
     if request.method=='POST':
-        addrecord=addrecordF(request.POST)
-        if addrecord.is_valid():
+            username=request.POST['username']
             date=request.POST['date']
             description=request.POST['description']
             categoryR=request.POST['categoryR']
@@ -138,7 +134,6 @@ def addRrecord(request):
             unit.save()#寫入資料庫
             return redirect('/index')
     else:
-        addrecord=addrecordF()
         messages='新增收入紀錄'
     return render(request,'addRrecord.html',locals())
 
@@ -189,21 +184,6 @@ def editEr(request,pk=None):
     return render(request,'editEr.html',context)
 
 @login_required
-def analysisE(request):
-     qs=Record_E1.objects.all()
-     df=io.read_frame(qs,fieldnames=['date','description','categoryE','cash'])
-     plt.rc('font', family='Microsoft JhengHei')
-
-     df.set_index('categoryE',inplace=True)
-     pd.to_datetime(df['date'])
-     fig,ax=plt.subplots(figsize=(10,5))
-     ax.plot(df['cash'],marker='o',linestyle='--',color='r')
-     ax.set_xlabel('categoryE')
-     ax.set_ylabel('cash')
-     plt.title('expense')
-     plt.grid(axis='y')
-     x=plt.show()
-     return render(request,'analysisE.html',locals())
 def chart_data(request):
     data = [5, 10, 15, 20, 25]
     context = {'data': json.dumps(data)}
