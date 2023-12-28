@@ -89,7 +89,14 @@ class Record_R1(models.Model):
             return unsettled_transactions
         else:
             return cls.objects.none()  # 如果不是每月的第一天，返回空查詢集合
-    
+
+class DepositGoal(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    goal_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    deadline = models.DateField()
+
+    def __str__(self):
+        return f"{self.user.username}'s Deposit Goal"
 
 
 

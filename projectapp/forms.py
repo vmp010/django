@@ -1,5 +1,5 @@
 from django import forms
-from projectapp.models import CategoryE,CategoryR,Record_E1,Record_R1
+from projectapp.models import CategoryE,CategoryR,Record_E1,Record_R1,DepositGoal
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError 
@@ -95,4 +95,7 @@ class registF(UserCreationForm):
         )  
             return user  
 
-   
+class DepositGoalForm(forms.ModelForm):
+    class Meta:
+        model = DepositGoal
+        fields = ['goal_amount', 'deadline']
