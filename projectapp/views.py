@@ -250,3 +250,15 @@ def confirm_logout(request):
             return redirect('index')  # 取消登出后重定向到首页或其他页面
     return render(request, 'confirm_logout.html')
 
+@login_required
+def set_deposit_goal(request):
+    if request.method == 'POST':
+        form = DepositGoalForm(request.POST)
+        if form.is_valid():
+            deposit_goal = form.save(commit=False)
+            deposit_goal.user = request.user
+            deposit_goal.save()
+            return redirect('home')  # 设置存款目标成功后重定向到首页或其他页面
+    else:
+        form = DepositGoalForm()
+    return render(request, 'set_deposit_goal.html', {'form': form})
