@@ -182,14 +182,37 @@ def editEr(request,pk=None):
 
 @login_required
 def chart_data(request):
-    corrent_user=request.user
-    recordAllE=Record_E1.objects.filter(user=corrent_user).order_by('date')
-    recordAllR=Record_R1.objects.filter(user=corrent_user).order_by('date')
+    corrent_user = request.user
+    recordAllE = Record_E1.objects.filter(user=corrent_user).order_by('date')
+    recordAllR = Record_R1.objects.filter(user=corrent_user).order_by('date')
     dataE = [record.cash for record in recordAllE]
     dataR = [record.cash for record in recordAllR]
-    contextE = {'data': json.dumps(dataE)}
-    contextR = {'data': json.dumps(dataR)}
-    return render(request, 'charts.html', locals())    
-  
+    context = {
+    'dataE': [{'label': record.categoryE, 'value': record.cash} for record in recordAllE],
+    'dataR': [{'label': record.categoryR, 'value': record.cash} for record in recordAllR],
+}
+
+    return render(request, 'charts.html', context)
+ 
+# def chart_data(request):
+#     # 從資料庫檢索特定使用者的數據
+#     queryset = Record_R1.objects.all()
+
+#     # 初始化一個字典來保存每個類別的總和
+#     category_totals = {}
+
+#     # 將數據按照類別分組，計算每個類別的總和
+#     for item in queryset:
+#         category = item.categoryR
+#         cash = item.cash
+#         category_totals[category] = category_totals.get(category, 0) + cash
+
+#     # 將字典轉換為字典列表，用於圓餅圖
+#     data = [{'label': category, 'value': total} for category, total in category_totals.items()]
+
+#     # 將數據轉換為 JSON 字符串
+#     context = {'data': json.dumps(data)}
+
+#     return render(request, 'charts.html', context)
 
 

@@ -4,24 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Income Data Pie Chart</title>
+    <title>Income and Expense Pie Charts</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% load static %}
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
-
         }
-        body{
 
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0; /* 移除默认的 body 边距 */
         }
-        .container{
+
+        .container {
             width: 50%;
-            display:flex;
+            display: flex;
             justify-content: space-around;
         }
     </style>
@@ -33,19 +34,16 @@
         <canvas id="expensePieChart" width="200" height="200"></canvas>
     </div>
     <script>
-        function generatePieChart(canvasId, inputData, chartTitle) {
-            var groupedData = inputData.reduce(function (acc, item) {
-                if (!acc[item.category]) {
-                    acc[item.category] = 0;
-                }
-                acc[item.category] += item.amount;
-                return acc;
-            }, {});
+        
+        // 將 Django 視圖中的數據傳遞到 JavaScript
+        var dataE = {{ dataE|safe }}; // safe 過濾器用於禁用 HTML 轉義
+        var dataR = {{ dataR|safe }}; // safe 過濾器用於禁用 HTML 轉義
 
+        function generatePieChart(canvasId, inputData, chartTitle) {
             var data = {
-                labels: Object.keys(groupedData),
+                labels: Object.keys(inputData),
                 datasets: [{
-                    data: Object.values(groupedData),
+                    data: Object.values(inputData),
                     backgroundColor: ['red', 'green', 'blue', 'orange', 'purple']
                 }]
             };
@@ -59,7 +57,6 @@
                 aspectRatio: 1, // 圓餅圖寬高比為 1
             };
 
-
             var ctx = document.getElementById(canvasId).getContext('2d');
             new Chart(ctx, {
                 type: 'pie',
@@ -67,23 +64,11 @@
                 options: options
             });
         }
-        var incomeData = [
-            { time: '2023-01-05', amount: 1000, category: '薪水' },
-            { time: '2023-02-12', amount: 500, category: '獎金' },
-            { time: '2023-03-20', amount: 300, category: '獎學金' },
-            // 其他收入資料
-        ];
-        // 第一個圖表
-        generatePieChart('incomePieChart', incomeData, '收入分類圓餅圖');
 
-        // 第二個圖表
-        var expenseData = [
-            { time: '2023-01-05', amount: 1000, category: '食物' },
-            { time: '2023-02-12', amount: 500, category: '房租' },
-            { time: '2023-03-20', amount: 300, category: '娛樂' },
-            // 其他支出資料
-        ];
-        generatePieChart('expensePieChart', expenseData, '支出分類圓餅圖');
+        // 使用 Django 視圖中的數據
+        generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
+        generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
+        window.alert(inputData);
     </script>
 
 </body>
