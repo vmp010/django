@@ -12,7 +12,7 @@ body {
   .left-box {
     width: 25%; /* 调整左侧框的宽度 */
     background-color: #fff5f5;
-  }
+  }  
   .left-box .list span{
     color: #4b0082;
   }
@@ -26,6 +26,10 @@ body {
     display: flex;
     align-items: center;
   }
+  .left-box .list .logout{
+    position: relative;
+    bottom:0;
+  }
   .left-box .list a:hover{
     color: rgba(255, 0, 0,0.5);
     
@@ -35,14 +39,30 @@ body {
     font-size: 60px;
     text-align: left;
   }
-  .content{
+
+
+   .content{  /*左下角的框框 */
     position: absolute;
     color:#4b0082;
     bottom:0;
+    display: flex;
+    flex-direction: column;
   }
-  .left-box hr{
+  .content a{
+    color: #4b0082;
+    text-decoration: none; /* 移除链接的下划线效果 */
+    font-size:30px;
+    display: flex;
+    align-items: center;
+  }
+  .content span:hover{
+    color: rgba(255, 0, 0,0.5);
+  }
+  .left-box hr{ /*左邊上面分隔線*/
     border: 1px solid #4b0082; 
   }
+
+  /*右邊的框框*/
   .right-text {
     width: 75%; /* 调整右侧文字区域的宽度 */
     padding: 20px; /* 添加一些内边距，使文字内容不紧贴边缘 */
