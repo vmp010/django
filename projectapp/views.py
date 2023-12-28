@@ -10,8 +10,8 @@ from django.contrib.auth import logout
 
 
 
-from .models import Record_E1,Record_R1,CategoryE,CategoryR
-from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF
+from .models import Record_E1,Record_R1,CategoryE,CategoryR,DepositGoal
+from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF,DepositGoalForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login
@@ -261,3 +261,15 @@ def confirm_logout(request):
 #             )
 #             return redirect('password_reset_done')  # 重定向到重置密码成功页面
 #     return render(request, 'forgot_password.html')
+@login_required
+def set_deposit_goal(request):
+    if request.method == 'POST':
+        form = DepositGoalForm(request.POST)
+        if form.is_valid():
+            deposit_goal = form.save(commit=False)
+            deposit_goal.user = request.user
+            deposit_goal.save()
+            return redirect('home')  # 设置存款目标成功后重定向到首页或其他页面
+    else:
+        form = DepositGoalForm()
+    return render(request, 'set_deposit_goal.html', {'form': form})
