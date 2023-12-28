@@ -4,28 +4,40 @@
 <head>
     <title>設置存款目標</title>
     <style>
+        body{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            
+        }
         .box {
-            width: 500px;
+            width: 600px;
             margin: 0 auto;
             border: 1px solid #ccc;
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: #f0c5c5;
             padding: 20px;
+            border-radius: 20px;
+            height: 30%;
         }
 
         /*右上角的x*/
         .dialog{
-            font-size: 40px;
-            padding: 2px;
+            font-size: 20px;
             background-color: transparent;
             border: none;
         }
-
-        .dialog a {
-            text-decoration: none;
-            color: black;
-            font-weight: bolder;
+        form{
+            margin-top:60px;
+            text-align: center;
+            font-size: 20px;
         }
-        
+        form input{
+            font-size: 16px;
+        }
+        form button{
+            background-color: #fff5f5;
+        }
     </style>
 </head>
 
@@ -36,8 +48,7 @@
                 <img src="/static/img/back-svgrepo-com.svg" alt="">
             </a>
         </div>
-        <h2 style="text-align: center;">設置存款目標</h2>
-
+        <h1 style="text-align: center;">設置存款目標</h1>
         <form method="post">
             {% csrf_token %}
             {{ form }}
