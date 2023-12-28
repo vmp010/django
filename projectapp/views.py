@@ -32,17 +32,6 @@ def registe(request):
          if registerform.is_valid():
             registerform.save()
             return redirect('login')
-        #     cName=registerform.cleaned_data['username']
-        #     password=registerform.cleaned_data['password']
-        #     cEmail=registerform.cleaned_data['email']
-        #     if User.objects.filter(username=cName).exists():
-        #         messages='已註冊過帳號'
-        #     elif User.objects.filter(email=cEmail).exists():
-        #         messages='已註冊過此email'
-            # else:   
-            #     unit=User.objects.create(username=cName,email=cEmail,password=password)
-            #     unit.save()
-            #     return redirect('login')
     else:
         registerform=registF()
     context={'registerform':registerform}    
@@ -65,10 +54,8 @@ def recordall_and_cashflow(request):
     # if request.user.is_authenticated:
     #      user=request.user
     #      user_data = User.objects.filter(id=user.id)
+    deposit_goal = DepositGoal.objects.filter(user=request.user).first()
     corrent_user=request.user
-    # recordE=Record_E1.objects.filter().order_by('date')
-    # recordR=Record_R1.objects.filter().order_by('date')
-    
     recordAllE=Record_E1.objects.filter(user=corrent_user).order_by('date')
     recordAllR=Record_R1.objects.filter(user=corrent_user).order_by('date')
     income_list=[record.cash for record in recordAllR]
@@ -143,13 +130,6 @@ def addRrecord(request):
         messages='新增收入紀錄'
     return render(request,'addRrecord.html',locals())
 
-
-
-
-
-
-
-
 @login_required
 def delRr(request,pk=None):
     revenue=Record_R1.objects.get(id=pk)
@@ -214,27 +194,6 @@ def chart_data(request):
     }
     return render(request, 'charts.html', chart_data)
 
- 
-# def chart_data(request):
-#     # 從資料庫檢索特定使用者的數據
-#     queryset = Record_R1.objects.all()
-
-#     # 初始化一個字典來保存每個類別的總和
-#     category_totals = {}
-
-#     # 將數據按照類別分組，計算每個類別的總和
-#     for item in queryset:
-#         category = item.categoryR
-#         cash = item.cash
-#         category_totals[category] = category_totals.get(category, 0) + cash
-
-#     # 將字典轉換為字典列表，用於圓餅圖
-#     data = [{'label': category, 'value': total} for category, total in category_totals.items()]
-
-#     # 將數據轉換為 JSON 字符串
-#     context = {'data': json.dumps(data)}
-
-#     return render(request, 'charts.html', context)
 
 
 @login_required
@@ -252,13 +211,23 @@ def confirm_logout(request):
 
 @login_required
 def set_deposit_goal(request):
+    deposit_goal = DepositGoal.objects.filter(user=request.user).first()
+
     if request.method == 'POST':
         form = DepositGoalForm(request.POST)
         if form.is_valid():
-            deposit_goal = form.save(commit=False)
-            deposit_goal.user = request.user
+            new_goal_amount = form.cleaned_data['goal_amount']
+            if deposit_goal:
+                deposit_goal.goal_amount = new_goal_amount
+            else:
+                # 如果存款目标不存在，创建一个新的存款目标
+                deposit_goal = DepositGoal(user=request.user, goal_amount=new_goal_amount)
             deposit_goal.save()
-            return redirect('home')  # 设置存款目标成功后重定向到首页或其他页面
+            return redirect('index')  # 设置存款目标成功后重定向到首页或其他页面
     else:
         form = DepositGoalForm()
-    return render(request, 'set_deposit_goal.html', {'form': form})
+    context = {
+        'deposit_goal': deposit_goal,
+        'form': form,
+    }
+    return render(request, 'set_deposit_goal.html', context)

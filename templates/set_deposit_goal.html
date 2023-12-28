@@ -9,9 +9,9 @@
 
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form }}
     <button type="submit">保存目標</button>
-    <a href="{% url index %}">取消</a>
+    <a href="{% url 'index' %}">取消</a>
 </form>
 
 </body>
