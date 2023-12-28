@@ -15,6 +15,14 @@ from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+from django.conf import settings
+
+
+
 
 
 # Create your views here.
@@ -221,3 +229,26 @@ def chart_data(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+# def forgot_password(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         user = User.objects.filter(email=email).first()
+#         if user:
+#             # 生成重置令牌
+#             uid = urlsafe_base64_encode(force_bytes(user.pk))
+#             token = default_token_generator.make_token(user)
+
+#             # 构建重置密码链接
+#             reset_link = f"{settings.BASE_URL}/reset_password/{uid}/{token}"
+
+#             # 发送包含重置链接的邮件
+#             send_mail(
+#                 '重置密码',
+#                 f'请点击以下链接重置密码： {reset_link}',
+#                 settings.EMAIL_HOST_USER,
+#                 [email],
+#                 fail_silently=False,
+#             )
+#             return redirect('password_reset_done')  # 重定向到重置密码成功页面
+#     return render(request, 'forgot_password.html')
