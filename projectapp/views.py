@@ -193,6 +193,7 @@ def chart_data(request):
 }
 
     return render(request, 'charts.html', context)
+
  
 # def chart_data(request):
 #     # 從資料庫檢索特定使用者的數據
