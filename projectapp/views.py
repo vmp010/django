@@ -6,6 +6,7 @@ from django.shortcuts import render
 import json
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 
 
 
@@ -216,4 +217,7 @@ def chart_data(request):
 
 #     return render(request, 'charts.html', context)
 
-
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('login')

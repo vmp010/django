@@ -39,5 +39,6 @@ urlpatterns = [
 
     # path('analysisE/',views.analysisE,name='analysisE'), #分析
     path('charts/',views.chart_data,name='charts'), #分析
+    path('logout/', views.logout_view, name='logout'), #登出
 
 ]
