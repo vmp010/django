@@ -28,7 +28,7 @@
             padding: 20px;
             border-radius: 10px;
             width: 30%;
-            height: 65%;
+            height: 90%;
             text-align: center;
         }
 
@@ -123,7 +123,10 @@
                 {{ registerform.email|as_crispy_field }}
             </div>
             <div class="inputbox">
-                {{ registerform.password|as_crispy_field }}
+                {{ registerform.password1|as_crispy_field }}
+            </div>
+            <div class="inputbox">
+                {{ registerform.password2|as_crispy_field }}
             </div>
             <span class="submit"><input type="submit" value="確認"><input type="reset" value="重設"></span>
         </div>

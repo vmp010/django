@@ -19,23 +19,25 @@ from django.contrib.auth import authenticate, login
 # Create your views here.
 def registe(request):
     if request.method =='POST':
-        registerform=registF(request.POST)
-        if registerform.is_valid():
-            cName=registerform.cleaned_data['username']
-            password=registerform.cleaned_data['password']
-            cEmail=registerform.cleaned_data['email']
-            if User.objects.filter(username=cName).exists():
-                messages='已註冊過帳號'
-            elif User.objects.filter(email=cEmail).exists():
-                messages='已註冊過此email'
-            else:   
-                unit=User.objects.create(username=cName,email=cEmail,password=password)
-                unit.save()
-                return redirect('login')
+         registerform=registF(request.POST)
+         if registerform.is_valid():
+            registerform.save()
+            return redirect('login')
+        #     cName=registerform.cleaned_data['username']
+        #     password=registerform.cleaned_data['password']
+        #     cEmail=registerform.cleaned_data['email']
+        #     if User.objects.filter(username=cName).exists():
+        #         messages='已註冊過帳號'
+        #     elif User.objects.filter(email=cEmail).exists():
+        #         messages='已註冊過此email'
+            # else:   
+            #     unit=User.objects.create(username=cName,email=cEmail,password=password)
+            #     unit.save()
+            #     return redirect('login')
     else:
         registerform=registF()
-        messages='請輸入帳號密碼'
-    return render(request,'regist.html',locals())
+    context={'registerform':registerform}    
+    return render(request,'regist.html',context)
 def loginpage(request):
     getdatabase=User.objects.all()
     if request.method =='POST':
