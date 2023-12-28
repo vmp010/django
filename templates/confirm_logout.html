@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>确认登出</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登出</title>
+    <link rel="stylesheet" href="/static/css/delE.css">
 </head>
 <body>
+    <div class="wrapper">
+        <div class="box">
+    <h2>是否登出?</h2>
 
-<h2>確認登出</h2>
-
-<p>您确定要登出嗎？</p>
-
-<form method="post">
-    {% csrf_token %}
-    <input type="submit" name="confirm_logout" value="是">
-    <a href="{% url 'index' %}">取消</a>
-</form>
-
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input class="confirm-button" type="submit" value="確定" name="confirm_logout"/>
+        <a class="button-link" href="{% url 'index' %}">取消</a>
+    </form>
+</div>
+    </div>
 </body>
 </html>
