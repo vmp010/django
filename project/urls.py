@@ -40,5 +40,6 @@ urlpatterns = [
     # path('analysisE/',views.analysisE,name='analysisE'), #分析
     path('charts/',views.chart_data,name='charts'), #分析
     path('logout/', views.logout_view, name='logout'), #登出
+    # path('forgot_password/', views.forgot_password, name='forgot_password'), #忘記密碼
 
 ]
