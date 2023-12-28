@@ -98,4 +98,4 @@ class registF(UserCreationForm):
 class DepositGoalForm(forms.ModelForm):
     class Meta:
         model = DepositGoal
-        fields = ['goal_amount', 'deadline']
+        fields = ['goal_amount']

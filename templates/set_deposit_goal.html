@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>設置存款目標</title>
+</head>
+<body>
+
+<h2>設置存款目標</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">保存目標</button>
+    <a href="{% url index %}">取消</a>
+</form>
+
+</body>
+</html>
