@@ -17,7 +17,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0; /* 移除默认的 body 边距 */
+            margin: 0;
+            /* 移除默认的 body 边距 */
         }
 
         .container {
@@ -30,16 +31,18 @@
 
 <body>
     <div class="container">
-        <canvas id="incomePieChart" width="200" height="200"></canvas>
-        <canvas id="expensePieChart" width="200" height="200"></canvas>
+        <canvas id="incomePieChart" width="400" height="400"></canvas>
+        <canvas id="expensePieChart" width="400" height="400"></canvas>
     </div>
     <script>
-        
-        // 將 Django 視圖中的數據傳遞到 JavaScript
-        var dataE = {{ dataE|safe }}; // safe 過濾器用於禁用 HTML 轉義
-        var dataR = {{ dataR|safe }}; // safe 過濾器用於禁用 HTML 轉義
 
+        // 將 Django 視圖中的數據傳遞到 JavaScript
+        var dataE = {{ dataE| safe }}; // safe 過濾器用於禁用 HTML 轉義
+        var dataR = {{ dataR| safe }}; // safe 過濾器用於禁用 HTML 轉義
         function generatePieChart(canvasId, inputData, chartTitle) {
+            console.log("CanvasId:", canvasId);
+            console.log("InputData:", inputData);
+            console.log("ChartTitle:", chartTitle);
             var data = {
                 labels: Object.keys(inputData),
                 datasets: [{
@@ -68,7 +71,6 @@
         // 使用 Django 視圖中的數據
         generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
         generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
-        window.alert(inputData);
     </script>
 
 </body>
