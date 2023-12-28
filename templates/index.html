@@ -47,10 +47,10 @@
         支出：<span class="thousand-separator">{{ outcome }} </span>&nbsp;&nbsp;
         淨額：<span class="thousand-separator">{{ net }}</span>
         {% if deposit_goal %}
-        <p>當前目標金额：{{ deposit_goal.goal_amount }}
-        <a href="{% url 'set_deposit_goal' %}">修改存款目標</a>
+        <p>當前目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span>
+        <a href="{% url 'set_deposit_goal' %}"><span class="button-link">修改存款目標</span></a>
         {% else %}
-        <p>您还没有设置存款目标。</p>
+        <p>您還沒有設定存款目標。
         <a href="{% url 'set_deposit_goal' %}">設置存款目標</a>
         {% endif %}
       </div>

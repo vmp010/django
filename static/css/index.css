@@ -125,5 +125,17 @@ body {
   table.cinereousTable thead th:first-child {
     border-left: none;
   }
-  
+  .button-link {
+    display: inline-block;
+    padding: 12px 22px;
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    background: linear-gradient(to bottom, #eb2626 0%, #ff1104 100%);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
   
