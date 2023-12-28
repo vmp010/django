@@ -1,30 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Data Pie Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Chart.js Example</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        body{
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0; /* 移除默认的 body 边距 */
+        }
+        .container{
+            width: 50%;
+            display:flex;
+            justify-content: space-around;
+        }
+    </style>
 </head>
+
 <body>
-    <canvas id="myChart"></canvas>
+    <div class="container">
+        <canvas id="incomePieChart" width="200" height="200"></canvas>
+        <canvas id="expensePieChart" width="200" height="200"></canvas>
+    </div>
     <script>
-        var data = "{{ data|safe }}";
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+        function generatePieChart(canvasId, inputData, chartTitle) {
+            var groupedData = inputData.reduce(function (acc, item) {
+                if (!acc[item.category]) {
+                    acc[item.category] = 0;
+                }
+                acc[item.category] += item.amount;
+                return acc;
+            }, {});
+
+            var data = {
+                labels: Object.keys(groupedData),
                 datasets: [{
-                    label: 'Chart Data',
-                    data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
+                    data: Object.values(groupedData),
+                    backgroundColor: ['red', 'green', 'blue', 'orange', 'purple']
                 }]
-            }
-        });
+            };
+
+            var options = {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: chartTitle
+                },
+                aspectRatio: 1, // 圓餅圖寬高比為 1
+            };
+
+
+            var ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: data,
+                options: options
+            });
+        }
+        var incomeData = [
+            { time: '2023-01-05', amount: 1000, category: '薪水' },
+            { time: '2023-02-12', amount: 500, category: '獎金' },
+            { time: '2023-03-20', amount: 300, category: '獎學金' },
+            // 其他收入資料
+        ];
+        // 第一個圖表
+        generatePieChart('incomePieChart', incomeData, '收入分類圓餅圖');
+
+        // 第二個圖表
+        var expenseData = [
+            { time: '2023-01-05', amount: 1000, category: '食物' },
+            { time: '2023-02-12', amount: 500, category: '房租' },
+            { time: '2023-03-20', amount: 300, category: '娛樂' },
+            // 其他支出資料
+        ];
+        generatePieChart('expensePieChart', expenseData, '支出分類圓餅圖');
     </script>
+
 </body>
+
 </html>
