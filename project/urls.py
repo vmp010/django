@@ -39,7 +39,7 @@ urlpatterns = [
 
     # path('analysisE/',views.analysisE,name='analysisE'), #分析
     path('charts/',views.chart_data,name='charts'), #分析
-    path('logout/', views.logout_view, name='logout'), #登出
-    # path('forgot_password/', views.forgot_password, name='forgot_password'), #忘記密碼
+    path('confirm_logout/',views.confirm_logout,name='confirm_logout'), #登出
+    path('set_deposit_goal/',views.set_deposit_goal,name='set_deposit_goal'), #設定存款目標
 
 ]

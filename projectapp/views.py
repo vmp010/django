@@ -225,10 +225,19 @@ def chart_data(request):
 
 #     return render(request, 'charts.html', context)
 
+
 @login_required
-def logout_view(request):
-    logout(request)
-    return redirect('login')
+def confirm_logout(request):
+    if request.method == 'POST':
+        if 'confirm_logout' in request.POST:
+            # 如果用户确认登出，则执行登出操作
+            from django.contrib.auth import logout
+            logout(request)
+            return redirect('login')  # 登出后重定向到首页或其他页面
+        else:
+            # 用户取消登出，重定向到某个页面或显示其他信息
+            return redirect('index')  # 取消登出后重定向到首页或其他页面
+    return render(request, 'confirm_logout.html')
 
 # def forgot_password(request):
 #     if request.method == 'POST':

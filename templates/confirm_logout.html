@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>确认登出</title>
+</head>
+<body>
+
+<h2>確認登出</h2>
+
+<p>您确定要登出嗎？</p>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" name="confirm_logout" value="是">
+    <a href="{% url 'index' %}">取消</a>
+</form>
+
+</body>
+</html>
