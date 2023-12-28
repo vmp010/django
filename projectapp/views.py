@@ -192,16 +192,27 @@ def editEr(request,pk=None):
 @login_required
 def chart_data(request):
     corrent_user = request.user
-    recordAllE = Record_E1.objects.filter(user=corrent_user).order_by('date')
-    recordAllR = Record_R1.objects.filter(user=corrent_user).order_by('date')
-    dataE = [record.cash for record in recordAllE]
-    dataR = [record.cash for record in recordAllR]
-    context = {
-    'dataE': [{'label': record.categoryE, 'value': record.cash} for record in recordAllE],
-    'dataR': [{'label': record.categoryR, 'value': record.cash} for record in recordAllR],
-}
+    recordAllE = Record_E1.objects.filter(user=corrent_user)
+    recordAllR = Record_R1.objects.filter(user=corrent_user)
+    categoryR_totals = {}
+    categoryE_totals = {}
+    for item in recordAllR:
+        category = item.categoryR
+        cash = item.cash
+        categoryE_totals[category] = categoryR_totals.get(category, 0) + cash
+    for i in recordAllE:
+        category = i.categoryE
+        cash = i.cash
+        categoryE_totals[category] = categoryE_totals.get(category, 0) + cash
+    # 打印数据，检查是否正确获取
+    print("RecordAllE:", recordAllE)
+    print("RecordAllR:", recordAllR)
 
-    return render(request, 'charts.html', context)
+    chart_data = {
+        'dataE': [{'label': record.categoryE, 'value': record.cash} for record in recordAllE],
+        'dataR': [{'label': record.categoryR, 'value': record.cash} for record in recordAllR],
+    }
+    return render(request, 'charts.html', chart_data)
 
  
 # def chart_data(request):
@@ -239,6 +250,8 @@ def confirm_logout(request):
             return redirect('index')  # 取消登出后重定向到首页或其他页面
     return render(request, 'confirm_logout.html')
 
+<<<<<<< HEAD
+=======
 # def forgot_password(request):
 #     if request.method == 'POST':
 #         email = request.POST.get('email')
@@ -273,3 +286,4 @@ def set_deposit_goal(request):
     else:
         form = DepositGoalForm()
     return render(request, 'set_deposit_goal.html', {'form': form})
+>>>>>>> 9bff5274f2a61aa591fbc8b5a004f0d8ab39f9d6
