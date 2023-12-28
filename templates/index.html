@@ -47,11 +47,12 @@
         支出：<span class="thousand-separator">{{ outcome }} </span>&nbsp;&nbsp;
         淨額：<span class="thousand-separator">{{ net }}</span>
         {% if deposit_goal %}
-        <p>當前目標金额：{{ deposit_goal.goal_amount }}
-        <a href="{% url 'set_deposit_goal' %}">修改存款目標</a>
+        <!-- /static/img/edit.svg -->
+        <p>存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span>
+        <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/edit.svg" alt="" style="transform: translateY(10px);"></a>
         {% else %}
-        <p>您还没有设置存款目标。</p>
-        <a href="{% url 'set_deposit_goal' %}">設置存款目標</a>
+        <p>您還沒有設定存款目標。
+        <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/plus-circle-svgrepo-com copy.svg" alt=""></a>
         {% endif %}
       </div>
 
