@@ -10,8 +10,8 @@ from django.contrib.auth import logout
 
 
 
-from .models import Record_E1,Record_R1,CategoryE,CategoryR
-from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF
+from .models import Record_E1,Record_R1,CategoryE,CategoryR,DepositGoal
+from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF,DepositGoalForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login
@@ -250,3 +250,40 @@ def confirm_logout(request):
             return redirect('index')  # 取消登出后重定向到首页或其他页面
     return render(request, 'confirm_logout.html')
 
+<<<<<<< HEAD
+=======
+# def forgot_password(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         user = User.objects.filter(email=email).first()
+#         if user:
+#             # 生成重置令牌
+#             uid = urlsafe_base64_encode(force_bytes(user.pk))
+#             token = default_token_generator.make_token(user)
+
+#             # 构建重置密码链接
+#             reset_link = f"{settings.BASE_URL}/reset_password/{uid}/{token}"
+
+#             # 发送包含重置链接的邮件
+#             send_mail(
+#                 '重置密码',
+#                 f'请点击以下链接重置密码： {reset_link}',
+#                 settings.EMAIL_HOST_USER,
+#                 [email],
+#                 fail_silently=False,
+#             )
+#             return redirect('password_reset_done')  # 重定向到重置密码成功页面
+#     return render(request, 'forgot_password.html')
+@login_required
+def set_deposit_goal(request):
+    if request.method == 'POST':
+        form = DepositGoalForm(request.POST)
+        if form.is_valid():
+            deposit_goal = form.save(commit=False)
+            deposit_goal.user = request.user
+            deposit_goal.save()
+            return redirect('home')  # 设置存款目标成功后重定向到首页或其他页面
+    else:
+        form = DepositGoalForm()
+    return render(request, 'set_deposit_goal.html', {'form': form})
+>>>>>>> 9bff5274f2a61aa591fbc8b5a004f0d8ab39f9d6
