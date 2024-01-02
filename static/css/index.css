@@ -37,7 +37,18 @@ body {
   .listtitle{
     color: #4b0082;
     font-size: 60px;
-    text-align: left;
+    text-align: center;
+  }
+  .listtitle a{
+    color: #4b0082;
+    text-decoration: none; /* 移除链接的下划线效果 */
+    font-size:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logout{
+    text-align: center;
   }
 
 
