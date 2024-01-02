@@ -37,8 +37,8 @@
     <script>
 
         // 將 Django 視圖中的數據傳遞到 JavaScript
-        var dataE = {{ dataE| safe }}; // safe 過濾器用於禁用 HTML 轉義
-        var dataR = {{ dataR| safe }}; // safe 過濾器用於禁用 HTML 轉義
+        var dataE = {{ categoryR_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
+        var dataR = {{ categoryE_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
         function generatePieChart(canvasId, inputData, chartTitle) {
             console.log("CanvasId:", canvasId);
             console.log("InputData:", inputData);

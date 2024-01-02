@@ -179,18 +179,18 @@ def chart_data(request):
     for item in recordAllR:
         category = item.categoryR
         cash = item.cash
-        categoryE_totals[category] = categoryR_totals.get(category, 0) + cash
+        categoryR_totals[category] = categoryR_totals.get(category, 0) + cash
     for i in recordAllE:
         category = i.categoryE
         cash = i.cash
         categoryE_totals[category] = categoryE_totals.get(category, 0) + cash
     # 打印数据，检查是否正确获取
-    print("RecordAllE:", recordAllE)
-    print("RecordAllR:", recordAllR)
 
     chart_data = {
-        'dataE': [{'label': record.categoryE, 'value': record.cash} for record in recordAllE],
-        'dataR': [{'label': record.categoryR, 'value': record.cash} for record in recordAllR],
+        # 'dataE': [{'label': record.categoryE, 'value': record.cash} for record in recordAllE],
+        # 'dataR': [{'label': record.categoryR, 'value': record.cash} for record in recordAllR],
+        'categoryR_totals': categoryR_totals,
+        'categoryE_totals': categoryE_totals,
     }
     return render(request, 'charts.html', chart_data)
 
