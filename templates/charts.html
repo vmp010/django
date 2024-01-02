@@ -16,62 +16,172 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            /* 將項目對齊到頂部 */
             margin: 0;
-            /* 移除默认的 body 边距 */
+            /* 刪除默認的 body 邊距 */
         }
 
         .container {
-            width: 50%;
+            width: 100%;
             display: flex;
-            justify-content: space-around;
+            height: 100vh;
+        }
+
+        .left {
+            width: 20%;
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+
+        .right {
+            width: 80%;
+        }
+
+        .classification {
+            position: absolute;
+            display: flex;
+            background-color: black;
+            color: white;
+            padding: 10px;
+            right: 0;
+        }
+
+        canvas {
+            height: 600px;
+            width: 600px;
+        }
+
+        .left-box {
+            width: 25%;
+            background-color: #fff5f5;
+        }
+
+        .graph {
+            display: flex;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #f5f5ff;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <canvas id="incomePieChart" width="400" height="400"></canvas>
-        <canvas id="expensePieChart" width="400" height="400"></canvas>
-    </div>
-    <script>
+        <div class="left-box">
+            <div class="listtitle">雲記帳</div>
+            <hr>
+            <div class="list">
+                <a href="/addcategory">
+                    <img src="/static/img/playlist_add_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                    <span>新增種類</span>
+                </a>
+                <a href="/delcategory">
+                    <img src="/static/img/playlist_remove_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                    <span>刪除種類</span>
+                </a>
+                <a href="/charts">
+                    <img src="/static/img/bar_chart_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                    <span>圖表分析</span>
+                </a>
 
-        // 將 Django 視圖中的數據傳遞到 JavaScript
-        var dataE = {{ categoryR_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
-        var dataR = {{ categoryE_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
-        function generatePieChart(canvasId, inputData, chartTitle) {
-            console.log("CanvasId:", canvasId);
-            console.log("InputData:", inputData);
-            console.log("ChartTitle:", chartTitle);
-            var data = {
-                labels: Object.keys(inputData),
-                datasets: [{
-                    data: Object.values(inputData),
-                    backgroundColor: ['red', 'green', 'blue', 'orange', 'purple']
-                }]
-            };
+            </div>
 
-            var options = {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: chartTitle
-                },
-                aspectRatio: 1, // 圓餅圖寬高比為 1
-            };
+            <div class="content">
+                <a href="/confirm_logout" class="logout">
+                    <img src="/static/img/logout-2-svgrepo-com (1).svg" alt="">
+                    <span>登出</span>
+                </a>
+                聯繫我們:0912-xxx-xxx
+                Gmail:xxx@gmai.com
+            </div>
+        </div>
 
-            var ctx = document.getElementById(canvasId).getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: data,
-                options: options
-            });
-        }
+        <div class="right">
+            <div class="classification">
+                <div>
+                    <h1>收入分類</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>種類</th>
+                                <th>金額</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category, total in categoryR_totals.items %}
+                            <tr>
+                                <td>{{ category }}</td>
+                                <td>{{ total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h1>支出分類</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>種類</th>
+                                <th>金額</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category, total in categoryE_totals.items %}
+                            <tr>
+                                <td>{{ category }}</td>
+                                <td>{{ total }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="graph">
+                <div><canvas id="incomePieChart" ></canvas></div>
+                <div><canvas id="expensePieChart"></canvas></div>
+            </div>
+        </div>
+        <script>
 
-        // 使用 Django 視圖中的數據
-        generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
-        generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
-    </script>
+            // 將 Django 視圖中的數據傳遞到 JavaScript
+            var dataE = {{ categoryR_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
+            var dataR = {{ categoryE_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
+            function generatePieChart(canvasId, inputData, chartTitle) {
+                console.log("CanvasId:", canvasId);
+                console.log("InputData:", inputData);
+                console.log("ChartTitle:", chartTitle);
+                var data = {
+                    labels: Object.keys(inputData),
+                    datasets: [{
+                        data: Object.values(inputData),
+                        backgroundColor: ['red', 'green', 'blue', 'orange', 'purple']
+                    }]
+                };
+
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: chartTitle
+                    },
+                    aspectRatio: 1, // 圓餅圖寬高比為 1
+                };
+
+                var ctx = document.getElementById(canvasId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: options
+                });
+            }
+
+            // 使用 Django 視圖中的數據
+            generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
+            generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
+        </script>
 
 </body>
 
