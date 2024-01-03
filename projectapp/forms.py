@@ -3,6 +3,8 @@ from projectapp.models import CategoryE,CategoryR,Record_E1,Record_R1,DepositGoa
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 class addcategoryF(forms.Form):
     addcategoryR=forms.CharField(max_length=20,required=True)
     addcategoryE=forms.CharField(max_length=20,required=True)
@@ -99,3 +101,11 @@ class DepositGoalForm(forms.ModelForm):
     class Meta:
         model = DepositGoal
         fields = ['goal_amount']
+class DateFilterForm(forms.Form):
+    start_date = forms.DateField(label='起始日期', required=False,widget=forms.DateInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(label='結束日期', required=False,widget=forms.DateInput(attrs={'type': 'date'}) )
+    def __init__(self, *args, **kwargs):
+        super(DateFilterForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'GET'  # 使用 GET 方法提交表单
+        self.helper.add_input(Submit('submit', '筛选'))

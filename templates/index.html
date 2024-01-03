@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/css/index.css">
   <title>帳務總覽</title>
+  {% load crispy_forms_tags %}
 </head>
 
 <body>
@@ -58,6 +59,11 @@
         <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/plus-circle-svgrepo-com copy.svg" alt="" style="transform: translateY(4px);"></a>
 
         {% endif %}
+        <form action="." method="get">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="button-change">篩選</button>
+      </form>
       </div>
       <h2>帳務紀錄</h2>
       <div class="table-all">
@@ -122,7 +128,7 @@
               <th style="text-align: right;">金額</th>
               <th style="text-align: center;">控制</th>
 
-              {% for record in recordAllE %}
+              {% for record in dataE %}
               <tr>
             </thead>
             <td hidden="hidden">{{record.id}}</td>

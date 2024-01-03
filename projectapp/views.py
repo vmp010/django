@@ -11,7 +11,7 @@ from django.contrib.auth import logout
 
 
 from .models import Record_E1,Record_R1,CategoryE,CategoryR,DepositGoal
-from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF,DepositGoalForm
+from projectapp.forms import addcategoryF,loginF,addrecordF,registF,editRrecordF,editErecordF,DepositGoalForm,DateFilterForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login
@@ -62,12 +62,27 @@ def recordall_and_cashflow(request):
     outcome_list=[record.cash for record in recordAllE]
     income=sum(income_list) if len(income_list)!=0 else 0
     outcome=sum(outcome_list) if len(outcome_list)!=0 else 0
-
     net = income -outcome
+    form = DateFilterForm(request.GET or None)
+    dataE=None
+    if form.is_valid():
+        start_date = form.cleaned_data['start_date']
+        end_date = form.cleaned_data['end_date']
+        if start_date and end_date:
+            dataE = recordAllE.filter(date__range=(start_date, end_date))
+        elif start_date:
+            dataE = recordAllE.filter(date__gte=start_date) # gte:大於等於
+        elif end_date:
+            dataE = recordAllE.filter(date__lte=end_date) # lte:小於等於
+    else:
+        dataE = recordAllE
     if deposit_goal:
         goal_amount = deposit_goal.goal_amount
-        goal_percent = net / (goal_amount * 100)
-        goal_percent = round(goal_percent, 2)
+        if goal_amount == 0:
+            goal_percent = 0
+        else:
+            goal_percent = net / (goal_amount * 100)
+            goal_percent = round(goal_percent, 2)
     else:
         goal_amount = 0
         goal_percent = 0
