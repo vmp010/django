@@ -92,7 +92,7 @@ class Record_R1(models.Model):
 
 class DepositGoal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    goal_amount = models.IntegerField(default=0)
+    goal_amount = models.IntegerField()
 
     def __str__(self):
         return f"{self.user.username}'s Deposit Goal"

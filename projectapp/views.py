@@ -64,6 +64,13 @@ def recordall_and_cashflow(request):
     outcome=sum(outcome_list) if len(outcome_list)!=0 else 0
 
     net = income -outcome
+    if deposit_goal:
+        goal_amount = deposit_goal.goal_amount
+        goal_percent = net / (goal_amount * 100)
+        goal_percent = round(goal_percent, 2)
+    else:
+        goal_amount = 0
+        goal_percent = 0
     return render(request,'index.html',locals())
     # else:
     #     return redirect('login')

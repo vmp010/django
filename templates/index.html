@@ -48,7 +48,7 @@
         淨額：<span class="thousand-separator">{{ net }}</span>
         {% if deposit_goal %}
         <!-- /static/img/edit.svg -->
-        <p>存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span>
+        <p>存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span> &nbsp;&nbsp; 存款淨額率: {{ goal_percent }}
         <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/edit.svg" alt="" style="transform: translateY(10px);"></a>
         {% else %}
         <p>存款目標金额：<span class="thousand-separator">0</span>
