@@ -16,62 +16,94 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            /* 將項目對齊到頂部 */
             margin: 0;
-            /* 移除默认的 body 边距 */
+            /* 刪除默認的 body 邊距 */
         }
 
         .container {
-            width: 50%;
+            width: 100%;
+            display: flex;
+            height: 100vh;
+        }
+
+        .right {
+            width: 75%;
+            height: 100vh;
             display: flex;
             justify-content: space-around;
+            background-color: #c9c9da;
+        }
+
+        .left-box {
+            width: 25%;
+            background-color: #fff5f5;
+        }
+        canvas{
+            width: 400px;
+            height: 400px;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <canvas id="incomePieChart" width="400" height="400"></canvas>
-        <canvas id="expensePieChart" width="400" height="400"></canvas>
-    </div>
-    <script>
+        <div class="left-box">
+            <div class="dialog">
+                <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com.svg" alt=""></a>
+            </div>
+        </div>
 
-        // 將 Django 視圖中的數據傳遞到 JavaScript
-        var dataE = {{ dataE| safe }}; // safe 過濾器用於禁用 HTML 轉義
-        var dataR = {{ dataR| safe }}; // safe 過濾器用於禁用 HTML 轉義
-        function generatePieChart(canvasId, inputData, chartTitle) {
-            console.log("CanvasId:", canvasId);
-            console.log("InputData:", inputData);
-            console.log("ChartTitle:", chartTitle);
-            var data = {
-                labels: Object.keys(inputData),
-                datasets: [{
-                    data: Object.values(inputData),
-                    backgroundColor: ['red', 'green', 'blue', 'orange', 'purple']
-                }]
-            };
+        <div class="right">
+            <div>
+                <h1 style="text-align: center;">收入</h1>
+                <canvas id="incomePieChart"></canvas>
+            </div>
+            <div>
+                <h1 style="text-align: center;">支出</h1>
+                <canvas id="expensePieChart"></canvas>
+            </div>
 
-            var options = {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: chartTitle
-                },
-                aspectRatio: 1, // 圓餅圖寬高比為 1
-            };
+        </div>
+        <script>
 
-            var ctx = document.getElementById(canvasId).getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: data,
-                options: options
-            });
-        }
+            // 將 Django 視圖中的數據傳遞到 JavaScript
+            var dataE = {{ categoryR_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
+            var dataR = {{ categoryE_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
+            function generatePieChart(canvasId, inputData, chartTitle) {
+                console.log("CanvasId:", canvasId);
+                console.log("InputData:", inputData);
+                console.log("ChartTitle:", chartTitle);
+                var data = {
+                    labels: Object.keys(inputData),
+                    datasets: [{
+                        data: Object.values(inputData),
+                        backgroundColor: ['red', 'green', 'blue', 'orange', 'purple']
+                    }]
+                };
 
-        // 使用 Django 視圖中的數據
-        generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
-        generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
-    </script>
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: chartTitle
+                    },
+                    aspectRatio: 1, // 圓餅圖寬高比為 1
+                };
+
+                var ctx = document.getElementById(canvasId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: options
+                });
+            }
+
+            // 使用 Django 視圖中的數據
+            generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
+            generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
+        </script>
 
 </body>
 
