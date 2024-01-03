@@ -5,44 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Income and Expense Pie Charts</title>
+    <!-- 引入 Chart.js 库 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {% load static %}
     <style>
+        /* 设置全局样式 */
         * {
             margin: 0;
             padding: 0;
         }
 
         body {
+            /* Flex 布局，使内容水平居中，顶部对齐 */
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            /* 將項目對齊到頂部 */
             margin: 0;
-            /* 刪除默認的 body 邊距 */
         }
 
         .container {
+            /* 设置容器宽度为 100%，使用 Flex 布局 */
             width: 100%;
             display: flex;
             height: 100vh;
+            /* 视口高度，使得内容占据整个视口高度 */
         }
 
         .right {
+            /* 设置右侧内容宽度为 75%，使用 Flex 布局 */
             width: 75%;
             height: 100vh;
             display: flex;
             justify-content: space-around;
+            /* 在容器内均匀分布子元素 */
             background-color: #c9c9da;
+            /* 设置背景颜色 */
         }
 
         .left-box {
+            /* 设置左侧内容宽度为 25%，设置背景颜色 */
             width: 25%;
             background-color: #fff5f5;
         }
-        canvas{
-            width: 400px;
-            height: 400px;
+
+        canvas {
+            /* 设置图表的宽度和高度 */
+            width: 600px;
+            height: 600px;
+        }
+
+        button {
+            /* 设置按钮的样式 */
+            width: 100px;
+            height: 50px;
+            background-color: #fff5f5;
+            border: 1px solid #c9c9da;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        a {
+            /* 设置链接的样式 */
+            text-decoration: none;
+        }
+
+        button,
+        button:focus {
+            position: relative;
+            min-width: 100px;
+            border: none;
+            border-radius: 2px;
+            background-position: center;
+            background-color: #2196f3;
+            color: #FFFFFF;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background 0.8s;
+            padding: 10px 20px;
+            box-shadow: 0 0 4px #999;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            color: #FFFFFF;
+            background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+        }
+
+        button:active {
+            background-color: #6eb9f7;
+            background-size: 100%;
+            transition: background 0s;
         }
     </style>
 </head>
@@ -51,30 +107,39 @@
     <div class="container">
         <div class="left-box">
             <div class="dialog">
-                <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com.svg" alt=""></a>
+                <!-- 链接返回到 'index' 的页面 -->
+                <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com.svg" alt="">
+                    <span style="font-size: 40px;text-decoration: none;">返回主畫面</span></a>
+
             </div>
         </div>
 
         <div class="right">
             <div>
+                <!-- 按钮触发显示/隐藏收入和支出图表 -->
+                <button id="showIncomeBtn">收入</button>
+                <button id="showExpenseBtn">支出</button>
+            </div>
+            <div>
+                <!-- 收入图表的标题和画布 -->
                 <h1 style="text-align: center;">收入</h1>
                 <canvas id="incomePieChart"></canvas>
             </div>
             <div>
+                <!-- 支出图表的标题和画布 -->
                 <h1 style="text-align: center;">支出</h1>
                 <canvas id="expensePieChart"></canvas>
             </div>
-
         </div>
         <script>
 
-            // 將 Django 視圖中的數據傳遞到 JavaScript
-            var dataE = {{ categoryR_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
-            var dataR = {{ categoryE_totals| safe }}; // safe 過濾器用於禁用 HTML 轉義
+            var dataE = {{ categoryE_totals| safe }};
+            var dataR = {{ categoryR_totals| safe }};
+            var isIncomeChartVisible = false;
+            var isExpenseChartVisible = false;
+
             function generatePieChart(canvasId, inputData, chartTitle) {
-                console.log("CanvasId:", canvasId);
-                console.log("InputData:", inputData);
-                console.log("ChartTitle:", chartTitle);
+                // 准备图表的数据和配置
                 var data = {
                     labels: Object.keys(inputData),
                     datasets: [{
@@ -89,10 +154,14 @@
                         display: true,
                         text: chartTitle
                     },
-                    aspectRatio: 1, // 圓餅圖寬高比為 1
+                    aspectRatio: 1,
                 };
 
                 var ctx = document.getElementById(canvasId).getContext('2d');
+                // 先销毁旧的图表实例，避免重复创建
+                Chart.getChart(ctx)?.destroy();
+
+                // 创建新的图表实例
                 new Chart(ctx, {
                     type: 'pie',
                     data: data,
@@ -100,11 +169,37 @@
                 });
             }
 
-            // 使用 Django 視圖中的數據
-            generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
-            generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
-        </script>
+            // 添加点击"收入"按钮的事件监听器
+            document.getElementById('showIncomeBtn').addEventListener('click', function () {
+                // 当点击"收入"按钮时的逻辑
+                if (!isIncomeChartVisible) {
+                    // 如果收入图表当前不可见
+                    generatePieChart('incomePieChart', dataR, '收入分類圓餅圖');
+                    isIncomeChartVisible = true;
+                    // isExpenseChartVisible = false;
+                } else {
+                    // 如果收入图表当前可见
+                    document.getElementById('incomePieChart').getContext('2d').clearRect(0, 0, 600, 600);
+                    isIncomeChartVisible = false;
+                }
+            });
 
+            // 添加点击"支出"按钮的事件监听器
+            document.getElementById('showExpenseBtn').addEventListener('click', function () {
+                // 当点击"支出"按钮时的逻辑
+                if (!isExpenseChartVisible) {
+                    // 如果支出图表当前不可见
+                    generatePieChart('expensePieChart', dataE, '支出分類圓餅圖');
+                    isExpenseChartVisible = true;
+                    // isIncomeChartVisible = false;
+                } else {
+                    // 如果支出图表当前可见
+                    document.getElementById('expensePieChart').getContext('2d').clearRect(0, 0, 600, 600);
+                    isExpenseChartVisible = false;
+                }
+            });
+
+        </script>
 </body>
 
 </html>
