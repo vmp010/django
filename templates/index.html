@@ -33,17 +33,17 @@
           <img src="/static/img/bar_chart_FILL0_wght400_GRAD0_opsz24.svg" alt="">
           <span>圖表分析</span>
         </a>
-        
+
       </div>
-      
+
       <div class="content">
-        
+
         聯繫我們:0912-xxx-xxx
         Gmail:xxx@gmai.com
       </div>
     </div>
     <div class="right-text">
-      <h1>帳務總覽</h1>
+      <h1 style="font-size: 40px;text-align: center;">帳務總覽</h1>
       <hr>
       <div class="incomeEP">
         收入：<span class="thousand-separator">{{ income }}</span> &nbsp;&nbsp;
@@ -51,29 +51,33 @@
         淨額：<span class="thousand-separator">{{ net }}</span>
         {% if deposit_goal %}
         <!-- /static/img/edit.svg -->
-        <p>存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span> &nbsp;&nbsp; 存款淨額率: {{ goal_percent }}
-        <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/edit.svg" alt="" style="transform: translateY(10px);"></a>
-        {% else %}
+        <p>存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span> &nbsp;&nbsp;
+          <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/edit.svg" alt=""
+              style="transform: translateY(10px);"></a>
+          存款淨額率: {{ goal_percent }}
+
+          {% else %}
         <p>存款目標金额：<span class="thousand-separator">0</span>
 
-        <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/plus-circle-svgrepo-com copy.svg" alt="" style="transform: translateY(4px);"></a>
+          <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/plus-circle-svgrepo-com copy.svg" alt=""
+              style="transform: translateY(4px);"></a>
 
-        {% endif %}
-        <form action="." method="get">
-          {% csrf_token %}
-          {{ form|crispy }}
-          <button type="submit" class="button-change">篩選</button>
-      </form>
+          {% endif %}
+          <form action="." method="get">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="button-change">篩選</button>
+          </form>
       </div>
       <h2>帳務紀錄</h2>
       <div class="table-all">
         <div>
           <table class="cinereousTable">
             <caption>收入</caption>
-            
+
             <thead>
               <tr>
-                
+
                 <th>日期</th>
                 <th>描述</th>
                 <th>種類</th>
@@ -81,9 +85,9 @@
                 <th style="text-align: center;">控制</th>
               </tr>
             </thead>
-              <thead>
+            <thead>
               <tr>
-                
+
                 <th hidden="hidden">日期</th>
                 <th hidden="hidden">描述</th>
                 <th hidden="hidden">種類</th>
@@ -113,10 +117,10 @@
             {% endfor %}
           </table>
           <div style="text-align: center;margin-top:10px">
-          <a style="margin-top:10px;" href="/addRrecord">
-            <img src="/static/img/plus-circle-svgrepo-com.svg" alt="">
-          </a>
-        </div>
+            <a style="margin-top:10px;" href="/addRrecord">
+              <img src="/static/img/plus-circle-svgrepo-com.svg" alt="">
+            </a>
+          </div>
         </div> <!-- 左邊的表格-->
         <div>
           <table class="cinereousTable">
@@ -147,10 +151,10 @@
             {% endfor %}
           </table>
           <div style="text-align: center; margin-top:10px">
-          <a style="color:black;text-decoration: none;" href="/addErecord"> <!-- 新增 要加圖案-->
-            <img src="/static/img/plus-circle-svgrepo-com.svg" alt="">
-          </a>
-        </div>
+            <a style="color:black;text-decoration: none;" href="/addErecord"> <!-- 新增 要加圖案-->
+              <img src="/static/img/plus-circle-svgrepo-com.svg" alt="">
+            </a>
+          </div>
         </div>
         <script>
           document.addEventListener('DOMContentLoaded', function () {

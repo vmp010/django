@@ -55,19 +55,11 @@ body {
    .content{  /*左下角的框框 */
     position: absolute;
     color:#4b0082;
+    font-size: 40px;
     bottom:0;
     display: flex;
     flex-direction: column;
-  }
-  .content a{
-    color: #4b0082;
-    text-decoration: none; /* 移除链接的下划线效果 */
-    font-size:30px;
-    display: flex;
-    align-items: center;
-  }
-  .content span:hover{
-    color: rgba(255, 0, 0,0.5);
+    
   }
   .left-box hr{ /*左邊上面分隔線*/
     border: 1px solid #4b0082; 
@@ -84,6 +76,11 @@ body {
     color:black;
     font-size: 20px;
     /*可能還要加東西 讓他更好看*/
+
+  }
+  .filter form{
+    display :flex;
+    background-color: black;
   }
   .table-all{
     display:flex;
