@@ -46,30 +46,37 @@
       <h1 style="font-size: 40px;text-align: center;">帳務總覽</h1>
       <hr>
       <div class="incomeEP">
-        收入：<span class="thousand-separator">{{ income }}</span> &nbsp;&nbsp;
-        支出：<span class="thousand-separator">{{ outcome }} </span>&nbsp;&nbsp;
-        淨額：<span class="thousand-separator">{{ net }}</span>
+        <div class="income">
+          <div class="revenue">收入：<span class="thousand-separator">{{ income }}</span></div> &nbsp;&nbsp;
+          <div class="expense">支出：<span class="thousand-separator">{{ outcome }} </span></div>&nbsp;&nbsp;
+          <div class="net">淨額：<span class="thousand-separator">{{ net }}</span></div>
+        </div>
         {% if deposit_goal %}
-        <!-- /static/img/edit.svg -->
-        <p>存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span> &nbsp;&nbsp;
-          <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/edit.svg" alt=""
-              style="transform: translateY(10px);"></a>
-          存款淨額率: {{ goal_percent }}
+        存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span> &nbsp;&nbsp;
+        <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/edit.svg" alt=""
+            style="transform: translateY(10px);"></a>
+        存款淨額率: {{ goal_percent }}
 
-          {% else %}
-        <p>存款目標金额：<span class="thousand-separator">0</span>
+        {% else %}
+        存款目標金额：<span class="thousand-separator">0</span>
 
-          <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/plus-circle-svgrepo-com copy.svg" alt=""
-              style="transform: translateY(4px);"></a>
-
-          {% endif %}
-          <form action="." method="get">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="button-change">篩選</button>
-          </form>
+        <a href="{% url 'set_deposit_goal' %}">
+          <img src="/static/img/plus-circle-svgrepo-com copy.svg" alt="" style="transform: translateY(4px);"></a>
+        {% endif %}
+        <!-- <form action="." method="get">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="button-change">篩選</button>
+        </form> -->
       </div>
       <h2>帳務紀錄</h2>
+      <form action="." method="get">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="button-change">篩選</button>
+      </form>
+
+      
       <div class="table-all">
         <div>
           <table class="cinereousTable">
