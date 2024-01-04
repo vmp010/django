@@ -65,17 +65,25 @@ def recordall_and_cashflow(request):
     net = income -outcome
     form = DateFilterForm(request.GET or None)
     dataE=None
+    dataR=None
     if form.is_valid():
         start_date = form.cleaned_data['start_date']
         end_date = form.cleaned_data['end_date']
         if start_date and end_date:
             dataE = recordAllE.filter(date__range=(start_date, end_date))
+            dataR = recordAllR.filter(date__range=(start_date, end_date))
+
         elif start_date:
             dataE = recordAllE.filter(date__gte=start_date) # gte:大於等於
+            dataR = recordAllR.filter(date__gte=start_date)
         elif end_date:
             dataE = recordAllE.filter(date__lte=end_date) # lte:小於等於
+            dataR = recordAllR.filter(date__lte=end_date)
     else:
         dataE = recordAllE
+        dataR = recordAllR
+    if 'cancel' in request.GET:
+        return redirect('index')  # 或者重置表单并重新加载页面
     if deposit_goal:
         goal_amount = deposit_goal.goal_amount
         if goal_amount == 0:

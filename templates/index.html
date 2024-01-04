@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/css/index.css">
   <title>帳務總覽</title>
-  {% load crispy_forms_tags %}
+  
 </head>
 
 <body>
@@ -72,8 +72,9 @@
       <h2>帳務紀錄</h2>
       <form action="." method="get">
         {% csrf_token %}
-        {{ form|crispy }}
+        {{ form }}
         <button type="submit" class="button-change">篩選</button>
+        <a href="{% url 'index' %}?cancel" class="cancel-filter">取消</a>
       </form>
 
       
@@ -103,7 +104,7 @@
               </tr>
             </thead>
 
-            {% for record in recordAllR %}
+            {% for record in dataR %}
             <tr>
 
               <td hidden="hidden">{{record.id}}</td>

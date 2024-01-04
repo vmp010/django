@@ -183,3 +183,15 @@ table.cinereousTable thead th {
 table.cinereousTable thead th:first-child {
   border-left: none;
 }
+
+/* CSS 样式设置取消筛选链接成为按钮样式 */
+.cancel-filter {
+  display: inline-block;
+  padding: 1px 1px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #ccc;
+  /* border-radius: 4px; */
+}
