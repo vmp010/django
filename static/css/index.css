@@ -115,6 +115,13 @@ body {
   padding:2px;
   border-radius: 5px;
 }
+.revenue span {
+  
+  color: rgb(12, 143, 23,.9);
+}
+.expense span {
+  color: rgb(179, 10, 10,.9);
+}
 .table-all {
   display: flex;
   justify-content: space-around;
