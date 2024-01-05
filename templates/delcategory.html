@@ -60,13 +60,39 @@
             color: black;
             font-weight: bolder;
         }
+        input[type='submit']{
+            background-color: #2196f3;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.8s;
+            margin-left: 10px;
+            font-size:16px;
+            padding:0px 10px;
+        }
+        input[type='submit']:hover {
+            color: #FFFFFF;
+            cursor: pointer;
+            background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+        }
+
+        input[type='submit']:active {
+            background-color: #6eb9f7;
+            background-size: 100%;
+            transition: background 0s;
+        }
+        select{
+            font-size:20px;
+            width: 150px;
+        }
     </style>
 </head>
 
 <body>
     <div class="box">
         <div class="dialog">
-            <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com.svg" alt=""></a>
+            <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com (1).svg" alt=""></a>
         </div>
 
         <form action="." method="post" name="form1">

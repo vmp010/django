@@ -47,17 +47,27 @@
             background-color: transparent;
             border: none;
         }
-
-        .dialog a {
-            text-decoration: none;
-            color: black;
-            font-weight: bolder;
-        }
         form{
             margin-top:10px ;
         }
         input[type='submit']{
-            background-color:#28a745 ;
+            background-color: #2196f3;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.8s;
+        }
+        input[type='submit']:hover {
+            color: #FFFFFF;
+            cursor: pointer;
+            background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+        }
+
+        input[type='submit']:active {
+            background-color: #6eb9f7;
+            background-size: 100%;
+            transition: background 0s;
         }
         input[type='text']{
             font-size:20px;
@@ -68,7 +78,7 @@
 <body>
     <div class="box">
         <div class="dialog">
-            <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com.svg" alt=""></a>
+            <a href="{% url 'index' %}"><img src="/static/img/back-svgrepo-com (1).svg" alt=""></a>
         </div>
         <form action="." method="post" name="form1">
             {% csrf_token %} <!--啟動csrf防護，否則會error -->
