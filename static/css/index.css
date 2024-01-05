@@ -129,12 +129,13 @@ body {
 }
 
 .table-all caption {
-  font-size: 26px;
+  font-size:30px;
   /* 设置字体大小 */
   font-weight: bold;
   /* 设置字体加粗 */
   color: #333;
   /* 设置字体颜色，根据需要调整 */
+  margin-top:10px;
   margin-bottom: 10px;
   /* 设置标题与表格内容之间的下边距 */
 }
