@@ -45,8 +45,8 @@ body {
 }
 /* 左邊框的標題 */
 .listtitle {
+  
   color: #4b0082;
-  font-size: 60px;
   text-align: center;
 }
 
@@ -55,13 +55,9 @@ body {
   text-decoration: none;
   /* 移除链接的下划线效果 */
   font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-
-.logout {
-  text-align: center;
+.listtitle a:hover {
+  color: rgba(255, 0, 0, 0.5);
 }
 
 
@@ -119,6 +115,13 @@ body {
   padding:2px;
   border-radius: 5px;
 }
+.revenue span {
+  
+  color: rgb(12, 143, 23,.9);
+}
+.expense span {
+  color: rgb(179, 10, 10,.9);
+}
 .table-all {
   display: flex;
   justify-content: space-around;
@@ -126,12 +129,13 @@ body {
 }
 
 .table-all caption {
-  font-size: 26px;
+  font-size:30px;
   /* 设置字体大小 */
   font-weight: bold;
   /* 设置字体加粗 */
   color: #333;
   /* 设置字体颜色，根据需要调整 */
+  margin-top:10px;
   margin-bottom: 10px;
   /* 设置标题与表格内容之间的下边距 */
 }
@@ -185,13 +189,20 @@ table.cinereousTable thead th:first-child {
 }
 
 /* CSS 样式设置取消筛选链接成为按钮样式 */
-.cancel-filter {
+.button-link {
   display: inline-block;
-  padding: 1px 1px;
+  padding: 4px 6px;
+  font-size: 14px;
+  color: black;
   text-align: center;
   text-decoration: none;
-  background-color: #f1f1f1;
-  color: #333;
-  border: 1px solid #ccc;
-  /* border-radius: 4px; */
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: rgba(128, 128, 128,0.25);
+  transition: all 0.3s ease;
+}
+
+.button-link:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
 }

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/css/index.css">
   <title>帳務總覽</title>
-  
+
 </head>
 
 <body>
@@ -14,10 +14,12 @@
   <div class="container">
     <div class="left-box">
       <div class="listtitle"><img src="/static/img/user-circle-svgrepo-com.svg" alt="">
-        <a href="/confirm_logout" class="logout">
-          <img src="/static/img/logout-2-svgrepo-com (1).svg" alt="">
-          <span>登出</span>
-        </a>
+        <div>
+          <span style="font-size: 40px;">{{user}}</span>&nbsp;&nbsp;
+          <p></p>
+          <a href="/confirm_logout">登出</a>
+
+        </div>
       </div>
       <hr>
       <div class="list">
@@ -55,7 +57,6 @@
         存款目標金额：<span class="thousand-separator">{{ deposit_goal.goal_amount }}</span> &nbsp;&nbsp;
         <a href="{% url 'set_deposit_goal' %}"><img src="/static/img/edit.svg" alt=""
             style="transform: translateY(10px);"></a>
-        存款淨額率: {{ goal_percent }}
 
         {% else %}
         存款目標金额：<span class="thousand-separator">0</span>
@@ -63,21 +64,17 @@
         <a href="{% url 'set_deposit_goal' %}">
           <img src="/static/img/plus-circle-svgrepo-com copy.svg" alt="" style="transform: translateY(4px);"></a>
         {% endif %}
-        <!-- <form action="." method="get">
-          {% csrf_token %}
-          {{ form|crispy }}
-          <button type="submit" class="button-change">篩選</button>
-        </form> -->
+
       </div>
       <h2>帳務紀錄</h2>
-      <form action="." method="get">
+      <form action="." method="get" style="font-size: 20px;">
         {% csrf_token %}
         {{ form }}
-        <button type="submit" class="button-change">篩選</button>
-        <a href="{% url 'index' %}?cancel" class="cancel-filter">取消</a>
+        <button type="submit" class="button-link">篩選</button>
+        <a href="{% url 'index' %}?cancel" class="button-link">取消</a>
       </form>
 
-      
+
       <div class="table-all">
         <div>
           <table class="cinereousTable">
@@ -111,7 +108,7 @@
               <td>{{ record.date }}</td>
               <td>{{ record.description }}</td>
               <td>{{ record.categoryR }}</td>
-              <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
+              <td class="thousand-separator" style="text-align: right;color: rgb(12, 143, 23,.9);">{{ record.cash }}</td>
               <td>
                 <a href="{% url 'editRr' record.id %}"><img src="/static/img/edit.svg" alt="編輯"></a>
                 <a href="{% url 'delRr' record.id %}"><img src="/static/img/cancel-svgrepo-com.svg" alt="刪除"></a>
@@ -147,7 +144,7 @@
             <td>{{ record.date }}</td>
             <td>{{ record.description }}</td>
             <td>{{ record.categoryE }}</td>
-            <td class="thousand-separator" style="text-align: right;">{{ record.cash }}</td>
+            <td class="thousand-separator" style="text-align: right;color: rgb(179, 10, 10,.9);">{{ record.cash }}</td>
             <td>
               <a href="{% url 'editEr' record.id %}"><img src="/static/img/edit.svg" alt="編輯"></a>
               <a href="{% url 'delEr' record.id %}"><img src="/static/img/cancel-svgrepo-com.svg" alt="刪除"></a>
